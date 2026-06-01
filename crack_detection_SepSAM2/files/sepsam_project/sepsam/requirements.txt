@@ -1,0 +1,14 @@
+# 安裝 torch 時請用對應 CUDA 的輪子，例如：
+#   pip install torch torchvision --index-url https://download.pytorch.org/whl/cu121
+torch>=2.1
+torchvision
+ultralytics>=8.1.0
+opencv-python>=4.8
+scikit-image>=0.22
+numpy>=1.24
+scipy>=1.11
+matplotlib>=3.7
+pyyaml>=6.0
+tqdm>=4.66
+# SAM v1: pip install git+https://github.com/facebookresearch/segment-anything.git
+# SAM2 (可選，附錄 D): pip install "git+https://github.com/facebookresearch/sam2.git"

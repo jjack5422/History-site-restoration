@@ -1,0 +1,9 @@
+# heritage 4-fold panel-grouped CV — fold 2（由 build_heritage_cv.py 產生）
+# val panel: KJTHT-SC-L-A4-4
+# train 216 tiles / val 72 tiles
+path: /home/zzz90/research/crack_detection_SepSAM2/sepsam/datasets/heritage_ft_cv_clahe
+train: /home/zzz90/research/crack_detection_SepSAM2/sepsam/datasets/heritage_ft_cv_clahe/fold2/train.txt
+val: /home/zzz90/research/crack_detection_SepSAM2/sepsam/datasets/heritage_ft_cv_clahe/fold2/val.txt
+nc: 1
+names:
+  - crack

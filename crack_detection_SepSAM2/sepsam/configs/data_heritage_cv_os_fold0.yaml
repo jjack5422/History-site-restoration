@@ -1,0 +1,7 @@
+# oversampled train (Stage 3) fold 0, median_inst=1060
+path: /home/zzz90/research/crack_detection_SepSAM2/sepsam/datasets/heritage_ft_cv
+train: /home/zzz90/research/crack_detection_SepSAM2/sepsam/datasets/heritage_ft_cv/fold0/train_oversampled.txt
+val: /home/zzz90/research/crack_detection_SepSAM2/sepsam/datasets/heritage_ft_cv/fold0/val.txt
+nc: 1
+names:
+  - crack

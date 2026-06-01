@@ -1,0 +1,14 @@
+# craquelure CMC 超參(2026-05-31 起;Stage 2 校準後更新數值)
+# 與 cmc.yaml(crack_seg)/cmc_heritage.yaml(heritage crack)分開維護。
+YOLO_CONF_1: 0.05        # 2026-05-31 YOLO-only conf 掃描:0.25→0.05 使 craquelure F1(排除fold2)0.358→0.536
+YOLO_CONF_2: 0.05         # 2026-05-31 校準(fold0 val, sweep): best CMC F1=0.572
+SAM_THRESH: 0.60         # 校準最佳(SAM2 score range [0.000,0.957],非全拒)
+CONFLICTION_RATIO: 1.00  # 校準最佳
+POINTS_DIVISOR: 50
+agent_ckpt: runs/segment/runs/sepsam_agent_craq_cv_fold0/weights/best.pt
+device: cuda
+sam_backend: sam2
+sam_model_type: vit_h
+sam_ckpt: weights/sam_vit_h_4b8939.pth
+sam2_cfg: configs/sam2.1/sam2.1_hiera_b+.yaml
+sam2_ckpt: weights/sam2.1_hiera_base_plus.pt

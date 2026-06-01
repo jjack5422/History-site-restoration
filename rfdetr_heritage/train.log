@@ -1,0 +1,137 @@
+[2026-05-03 13:05:23] [INFO] rf-detr - File rf-detr-seg-small.pt already exists with correct MD5 hash.
+[2026-05-03 13:05:23] [WARNING] rf-detr - Using a different number of positional encodings than DINOv2, which means we're not loading DINOv2 backbone weights. This is not a problem if finetuning a pretrained RF-DETR model.
+[2026-05-03 13:05:23] [WARNING] rf-detr - Using patch size 12 instead of 14, which means we're not loading DINOv2 backbone weights. This is not a problem if finetuning a pretrained RF-DETR model.
+[2026-05-03 13:05:24] [INFO] rf-detr - File rf-detr-seg-small.pt already exists with correct MD5 hash.
+[2026-05-03 13:05:25] [WARNING] rf-detr - Using a different number of positional encodings than DINOv2, which means we're not loading DINOv2 backbone weights. This is not a problem if finetuning a pretrained RF-DETR model.
+[2026-05-03 13:05:25] [WARNING] rf-detr - Using patch size 12 instead of 14, which means we're not loading DINOv2 backbone weights. This is not a problem if finetuning a pretrained RF-DETR model.
+[2026-05-03 13:05:26] [INFO] rf-detr - File rf-detr-seg-small.pt already exists with correct MD5 hash.
+[2026-05-03 13:05:27] [WARNING] rf-detr - Checkpoint has 90 classes but model is configured for 4. The detection head will be re-initialized to 4 classes.
+Using bfloat16 Automatic Mixed Precision (AMP)
+GPU available: True (cuda), used: True
+TPU available: False, using: 0 TPU cores
+💡 Tip: For seamless cloud logging and experiment tracking, try installing [litlogger](https://pypi.org/project/litlogger/) to enable LitLogger, which logs metrics and artifacts automatically to the Lightning Experiments platform.
+[2026-05-03 13:05:27] [INFO] rf-detr - Building Roboflow train dataset with square resize at resolution 384
+[2026-05-03 13:05:27] [INFO] rf-detr - Using multi-scale training with square resize and scales: [504]
+[2026-05-03 13:05:27] [INFO] rf-detr - Built 1 Albumentations transforms from config
+[2026-05-03 13:05:27] [INFO] rf-detr - Built 1 Albumentations transforms from config
+loading annotations into memory...
+Done (t=0.06s)
+creating index...
+index created!
+[2026-05-03 13:05:27] [INFO] rf-detr - Building Roboflow val dataset with square resize at resolution 384
+[2026-05-03 13:05:27] [INFO] rf-detr - Using multi-scale training with square resize and scales: [504]
+[2026-05-03 13:05:27] [INFO] rf-detr - Built 1 Albumentations transforms from config
+loading annotations into memory...
+Done (t=0.02s)
+creating index...
+index created!
+/home/zzz90/research/rf_detr_env/lib/python3.12/site-packages/pytorch_lightning/callbacks/model_checkpoint.py:881: Checkpoint directory /home/zzz90/research/rfdetr_heritage/runs/seg_small exists and is not empty.
+LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+Loading `train_dataloader` to estimate number of stepping batches.
+[2026-05-03 13:05:27] [INFO] rf-detr - Training with uniform sampler because dataset is too small: 24 < 80
+/home/zzz90/research/rf_detr_env/lib/python3.12/site-packages/pytorch_lightning/utilities/_pytree.py:21: `isinstance(treespec, LeafSpec)` is deprecated, use `isinstance(treespec, TreeSpec) and treespec.is_leaf()` instead.
+/home/zzz90/research/rf_detr_env/lib/python3.12/site-packages/pytorch_lightning/loops/fit_loop.py:317: The number of training batches (40) is smaller than the logging interval Trainer(log_every_n_steps=50). Set a lower value for log_every_n_steps if you want to see logs for the training epoch.
+/home/zzz90/research/rf_detr_env/lib/python3.12/site-packages/pytorch_lightning/utilities/model_summary/model_summary.py:242: Precision bf16-mixed is not supported by the model summary.  Estimated model size in MB will not be accurate. Using 32 bits instead.
+┏━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━━┳━━━━━━━━┳━━━━━━━┳━━━━━━━┓
+┃   ┃ Name        ┃ Type         ┃ Params ┃ Mode  ┃ FLOPs ┃
+┡━━━╇━━━━━━━━━━━━━╇━━━━━━━━━━━━━━╇━━━━━━━━╇━━━━━━━╇━━━━━━━┩
+│ 0 │ model       │ LWDETR       │ 33.4 M │ train │     0 │
+│ 1 │ criterion   │ SetCriterion │      0 │ train │     0 │
+│ 2 │ postprocess │ PostProcess  │      0 │ train │     0 │
+└───┴─────────────┴──────────────┴────────┴───────┴───────┘
+Trainable params: 33.4 M                                                        
+Non-trainable params: 0                                                         
+Total params: 33.4 M                                                            
+Total estimated model params size (MB): 133                                     
+Modules in train mode: 513                                                      
+Modules in eval mode: 0                                                         
+Total FLOPs: 0                                                                  
+[rank: 0] Received SIGTERM: 15
+Traceback (most recent call last):
+  File "/usr/lib/python3.12/threading.py", line 359, in wait
+    gotit = waiter.acquire(True, timeout)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/zzz90/research/rf_detr_env/lib/python3.12/site-packages/torch/utils/data/_utils/signal_handling.py", line 73, in handler
+    _error_if_any_worker_fails()
+RuntimeError: DataLoader worker (pid 3604) is killed by signal: Terminated. 
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/lib/python3.12/queue.py", line 180, in get
+    self.not_empty.wait(remaining)
+  File "/usr/lib/python3.12/threading.py", line 364, in wait
+    self._acquire_restore(saved_state)
+  File "/usr/lib/python3.12/threading.py", line 311, in _acquire_restore
+    def _acquire_restore(self, x):
+
+  File "/home/zzz90/research/rf_detr_env/lib/python3.12/site-packages/torch/utils/data/_utils/signal_handling.py", line 73, in handler
+    _error_if_any_worker_fails()
+RuntimeError: DataLoader worker (pid 3624) is killed by signal: Killed. 
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/zzz90/research/rf_detr_env/lib/python3.12/site-packages/torch/utils/data/dataloader.py", line 1310, in _try_get_data
+    data = self._data_queue.get(timeout=timeout)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/queue.py", line 165, in get
+    with self.not_empty:
+  File "/usr/lib/python3.12/threading.py", line 303, in __exit__
+    return self._lock.__exit__(*args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: release unlocked lock
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/zzz90/research/rfdetr_heritage/train.py", line 44, in <module>
+    main()
+  File "/home/zzz90/research/rfdetr_heritage/train.py", line 28, in main
+    model.train(
+  File "/home/zzz90/research/rf_detr_env/lib/python3.12/site-packages/rfdetr/detr.py", line 635, in train
+    trainer.fit(module, datamodule, ckpt_path=config.resume or None)
+  File "/home/zzz90/research/rf_detr_env/lib/python3.12/site-packages/pytorch_lightning/trainer/trainer.py", line 584, in fit
+    call._call_and_handle_interrupt(
+  File "/home/zzz90/research/rf_detr_env/lib/python3.12/site-packages/pytorch_lightning/trainer/call.py", line 49, in _call_and_handle_interrupt
+    return trainer_fn(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/zzz90/research/rf_detr_env/lib/python3.12/site-packages/pytorch_lightning/trainer/trainer.py", line 630, in _fit_impl
+    self._run(model, ckpt_path=ckpt_path, weights_only=weights_only)
+  File "/home/zzz90/research/rf_detr_env/lib/python3.12/site-packages/pytorch_lightning/trainer/trainer.py", line 1079, in _run
+    results = self._run_stage()
+              ^^^^^^^^^^^^^^^^^
+  File "/home/zzz90/research/rf_detr_env/lib/python3.12/site-packages/pytorch_lightning/trainer/trainer.py", line 1121, in _run_stage
+    self._run_sanity_check()
+  File "/home/zzz90/research/rf_detr_env/lib/python3.12/site-packages/pytorch_lightning/trainer/trainer.py", line 1150, in _run_sanity_check
+    val_loop.run()
+  File "/home/zzz90/research/rf_detr_env/lib/python3.12/site-packages/pytorch_lightning/loops/utilities.py", line 179, in _decorator
+    return loop_run(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/zzz90/research/rf_detr_env/lib/python3.12/site-packages/pytorch_lightning/loops/evaluation_loop.py", line 139, in run
+    batch, batch_idx, dataloader_idx = next(data_fetcher)
+                                       ^^^^^^^^^^^^^^^^^^
+  File "/home/zzz90/research/rf_detr_env/lib/python3.12/site-packages/pytorch_lightning/loops/fetchers.py", line 134, in __next__
+    batch = super().__next__()
+            ^^^^^^^^^^^^^^^^^^
+  File "/home/zzz90/research/rf_detr_env/lib/python3.12/site-packages/pytorch_lightning/loops/fetchers.py", line 61, in __next__
+    batch = next(self.iterator)
+            ^^^^^^^^^^^^^^^^^^^
+  File "/home/zzz90/research/rf_detr_env/lib/python3.12/site-packages/pytorch_lightning/utilities/combined_loader.py", line 341, in __next__
+    out = next(self._iterator)
+          ^^^^^^^^^^^^^^^^^^^^
+  File "/home/zzz90/research/rf_detr_env/lib/python3.12/site-packages/pytorch_lightning/utilities/combined_loader.py", line 142, in __next__
+    out = next(self.iterators[0])
+          ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/zzz90/research/rf_detr_env/lib/python3.12/site-packages/torch/utils/data/dataloader.py", line 741, in __next__
+    data = self._next_data()
+           ^^^^^^^^^^^^^^^^^
+  File "/home/zzz90/research/rf_detr_env/lib/python3.12/site-packages/torch/utils/data/dataloader.py", line 1524, in _next_data
+    idx, data = self._get_data()
+                ^^^^^^^^^^^^^^^^
+  File "/home/zzz90/research/rf_detr_env/lib/python3.12/site-packages/torch/utils/data/dataloader.py", line 1473, in _get_data
+    success, data = self._try_get_data()
+                    ^^^^^^^^^^^^^^^^^^^^
+  File "/home/zzz90/research/rf_detr_env/lib/python3.12/site-packages/torch/utils/data/dataloader.py", line 1323, in _try_get_data
+    raise RuntimeError(
+RuntimeError: DataLoader worker (pid(s) 3624, 3625) exited unexpectedly

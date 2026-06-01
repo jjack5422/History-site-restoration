@@ -1,0 +1,10 @@
+# [正名更正 2026-06-01] 本資料(heritage_ft)的標註實為 craquelure 網狀(前景比例~3.4% ≈ craquelure，非 crack 1%)，原誤標 crack。已改 names: craquelure。真 crack 資料在 labeled32_crack_v3。
+# heritage 4-fold panel-grouped CV — fold 1（由 build_heritage_cv.py 產生）
+# val panel: KJTHT-SC-M-2LB1-2
+# train 216 tiles / val 72 tiles
+path: /home/zzz90/research/crack_detection_SepSAM2/sepsam/datasets/heritage_ft_cv
+train: /home/zzz90/research/crack_detection_SepSAM2/sepsam/datasets/heritage_ft_cv/fold1/train.txt
+val: /home/zzz90/research/crack_detection_SepSAM2/sepsam/datasets/heritage_ft_cv/fold1/val.txt
+nc: 1
+names:
+  - craquelure

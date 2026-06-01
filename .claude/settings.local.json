@@ -1,0 +1,43 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(/home/zzz90/research/rf_detr_env/bin/python *)",
+      "Bash(/home/zzz90/research/rf_detr_env/bin/pip install *)",
+      "Bash(/home/zzz90/research/rf_detr_env/bin/pip list *)",
+      "Bash(/home/zzz90/research/sam2_env/bin/python *)",
+      "Bash(/home/zzz90/research/unet_env/bin/python *)",
+      "Bash(/home/zzz90/research/unet_env/bin/pip install *)",
+      "Bash(python3 *)",
+      "Bash(curl *)",
+      "Bash(nvidia-smi *)",
+      "Bash(nvidia-smi)",
+      "Bash(ps *)",
+      "Bash(git *)",
+      "Bash(claude *)",
+      "Bash(nohup *)",
+      "Bash(tee *)",
+      "Bash(bash *)",
+      "Bash(chmod *)",
+      "mcp__claude_ai_Notion__notion-search",
+      "mcp__claude_ai_Notion__notion-fetch",
+      "mcp__claude_ai_Notion__notion-create-pages",
+      "mcp__claude_ai_Notion__notion-update-page",
+      "WebSearch",
+      "WebFetch(domain:pypi.org)",
+      "WebFetch(domain:github.com)",
+      "Read(//mnt/c/Users/zzz90/Desktop/**)",
+      "Read(//tmp/**)",
+      "Read(//home/zzz90/.claude/**)",
+      "Bash(echo \"pid=$!\")",
+      "Bash(ls -la runs/heritage_cv_summary.json)",
+      "Bash(ls -d runs/segment/runs/sepsam_agent_heritage_cv_fold*)",
+      "Bash(dmesg)",
+      "Bash(swapon --show)",
+      "Read(//proc/**)",
+      "Bash(/mnt/c/Windows/System32/cmd.exe /c \"wmic computersystem get TotalPhysicalMemory\")",
+      "Bash(powershell.exe -Command \"\\(Get-CimInstance Win32_ComputerSystem\\).TotalPhysicalMemory\")",
+      "Bash(powershell.exe -NoProfile -Command \"[math]::Round\\(\\(Get-CimInstance Win32_ComputerSystem\\).TotalPhysicalMemory/1GB,1\\)\")",
+      "Bash(/home/zzz90/research/SepSAM2_env/bin/python -c \"from ultralytics.cfg import get_cfg; c=get_cfg\\(\\); print\\('workers default =', c.workers, '| cache =', c.cache\\)\")"
+    ]
+  }
+}

@@ -1,0 +1,29 @@
+# [正名更正 2026-06-01] agent_ckpt(heritage_ft-2)實為 craquelure agent(heritage_ft 標註為網狀 craquelure，非 crack)。真 crack agent=sepsam_agent_realcrack_cv(labeled32_crack_v3)。
+# ===== CMC 超參數 — heritage domain（KJTHT 1024x1024 砌體裂紋）=====
+# 與 configs/cmc.yaml（crack_seg / Roboflow domain，D.5 校準）分開維護，
+# 因為換 domain 後 SAM2 score 分布會再變，且 heritage Agent 信心普遍偏低。
+#
+# 本檔的 YOLO_CONF_2 / SAM_THRESH / CONFLICTION_RATIO 由
+#   scripts/calibrate_sam_thresh.py --sweep-conf2 --sweep-conflict
+# 在 datasets/heritage_1_31test（32 張）上聯掃選出，見 README/記憶。
+YOLO_CONF_1: 0.02          # 2026-05-31 重新校準(heritage_1_31test, 32張, ft-2 agent):conf 0.05→0.02 使 YOLO-only F1 0.434→0.457、recall 0.419→0.527。conf 再低(0.01)F1 持平但近 NMS-flood 風險。
+YOLO_IOU: 0.5              # NMS iou(傳入 agent.predict);0.5 在低 conf 下略提 recall。預設 0.7。
+# 實測結論（heritage_1_31test 32 張，heritage_ft-2）：
+#   SAM-only F1=0.066（P=0.035，沿中軸正向點讓 SAM2 淹沒砌體紋理）；
+#   在任何門檻下 CMC 採用 SAM=0/32，CMC ≡ YOLO-only。SAM 在此 domain 無益。
+#   唯一有效槓桿是上面的 YOLO_CONF_1=0.05（YOLO-only F1 0.11→0.434）。
+#   下列三參數為校準掃出的「最大化 F1＝盡量拒絕 SAM」組合，等同關閉 SAM 精修。
+YOLO_CONF_2: 0.05          # contour_filter 高信心門檻（SAM 既不採納，此值對結果無影響）
+SAM_THRESH: 0.60           # 校準最佳
+CONFLICTION_RATIO: 1.00    # 校準最佳（SAM 過度分割使 conflict>>1，故恆被拒）
+POINTS_DIVISOR: 50         # 1024 影像 → n_pts = 1024//50 = 20
+
+agent_ckpt: runs/segment/runs/sepsam_agent_heritage_ft-2/weights/best.pt
+device: cuda
+
+# ===== 大模型後端 =====
+sam_backend: sam2
+sam_model_type: vit_h
+sam_ckpt: weights/sam_vit_h_4b8939.pth
+sam2_cfg: configs/sam2.1/sam2.1_hiera_b+.yaml
+sam2_ckpt: weights/sam2.1_hiera_base_plus.pt

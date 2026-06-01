@@ -1,0 +1,8 @@
+fold0 n=72 SAM採用=0/72 | YOLO F1=0.684 R=0.734 | SAM F1=0.196 | CMC F1=0.684 IoU=0.525 | imgs->outputs/craq_cmc_maskprompt/fold0
+fold1 n=71 SAM採用=0/71 | YOLO F1=0.529 R=0.583 | SAM F1=0.230 | CMC F1=0.529 IoU=0.376 | imgs->outputs/craq_cmc_maskprompt/fold1
+fold2 n=29 SAM採用=0/29 | YOLO F1=0.051 R=0.095 | SAM F1=0.000 | CMC F1=0.051 IoU=0.030 | imgs->outputs/craq_cmc_maskprompt/fold2
+fold3 n=56 SAM採用=0/56 | YOLO F1=0.393 R=0.376 | SAM F1=0.138 | CMC F1=0.393 IoU=0.273 | imgs->outputs/craq_cmc_maskprompt/fold3
+
+==== 平均 ====
+4-fold     : YOLO 0.414 | SAM 0.141 | CMC 0.414
+排除fold2  : YOLO 0.536 | SAM 0.188 | CMC 0.536

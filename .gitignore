@@ -1,0 +1,34 @@
+# --- Virtual environments (huge, machine-specific) ---
+*_env/
+
+# --- Vendored third-party repo (keeps its own git history) ---
+segment-anything-2/
+
+# --- Python ---
+__pycache__/
+*.py[cod]
+*.egg-info/
+.ipynb_checkpoints/
+
+# --- Model weights / large binaries (not for git) ---
+*.pt
+*.pth
+*.ckpt
+*.onnx
+*.engine
+*.pkl
+*.safetensors
+
+# --- Datasets & generated outputs (large; live outside git) ---
+**/data/
+**/outputs/
+**/preds/
+**/checkpoints/
+
+# Note: runs/ is intentionally NOT ignored — manifest.md / metrics.json /
+# *.log are the experiment record and should be versioned. Weights inside
+# runs/ are excluded by the *.pt etc. rules above.
+
+# --- Misc ---
+.agent-trash/
+.DS_Store

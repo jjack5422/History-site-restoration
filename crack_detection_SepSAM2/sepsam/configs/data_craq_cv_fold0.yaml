@@ -1,0 +1,7 @@
+# craquelure CV fold 0 (val_groups=['KJTHT-SC-M-2RB1-4'])
+path: /home/zzz90/research/crack_detection_SepSAM2/sepsam/datasets/craq_cv
+train: /home/zzz90/research/crack_detection_SepSAM2/sepsam/datasets/craq_cv/craqfold0/train.txt
+val: /home/zzz90/research/crack_detection_SepSAM2/sepsam/datasets/craq_cv/craqfold0/val.txt
+nc: 1
+names:
+  - craquelure

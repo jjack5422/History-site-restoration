@@ -1,0 +1,9 @@
+# heritage_ft 切片資料集（512 tile / stride 256，由 scripts/make_heritage_tiles.py 產生）
+# train 216 tiles（pos 203 / empty 13），val 72 tiles（pos 39 / empty 33）。
+# 目的：解 (a) 資料稀缺（24→216）、(b) 全圖訓練下薄裂紋尺度過小。
+path: /home/zzz90/research/crack_detection_SepSAM2/sepsam/datasets/heritage_ft_tiles
+train: train/images
+val: val/images
+nc: 1
+names:
+  - crack

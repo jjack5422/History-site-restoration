@@ -1,0 +1,15 @@
+===== BASELINE (無負點, cmc_craq.yaml) =====
+fold0 n=72 SAM採用=0/72 | YOLO F1=0.684 R=0.734 | SAM F1=0.125 | CMC F1=0.684 IoU=0.525 | imgs->outputs/craq_cmc_base/fold0
+fold1 n=71 SAM採用=0/71 | YOLO F1=0.529 R=0.583 | SAM F1=0.071 | CMC F1=0.529 IoU=0.376 | imgs->outputs/craq_cmc_base/fold1
+fold2 n=29 SAM採用=0/29 | YOLO F1=0.051 R=0.095 | SAM F1=0.011 | CMC F1=0.051 IoU=0.030 | imgs->outputs/craq_cmc_base/fold2
+fold3 n=56 SAM採用=0/56 | YOLO F1=0.393 R=0.376 | SAM F1=0.065 | CMC F1=0.393 IoU=0.273 | imgs->outputs/craq_cmc_base/fold3
+==== 平均 ====
+排除fold2  : YOLO 0.536 | SAM 0.087 | CMC 0.536
+===== NEG (負點 NEG_RATIO=0.5, cmc_craq_neg.yaml) =====
+fold0 n=72 SAM採用=0/72 | YOLO F1=0.684 R=0.734 | SAM F1=0.123 | CMC F1=0.684 IoU=0.525 | imgs->outputs/craq_cmc_neg/fold0
+fold1 n=71 SAM採用=0/71 | YOLO F1=0.529 R=0.583 | SAM F1=0.092 | CMC F1=0.529 IoU=0.376 | imgs->outputs/craq_cmc_neg/fold1
+fold2 n=29 SAM採用=0/29 | YOLO F1=0.051 R=0.095 | SAM F1=0.014 | CMC F1=0.051 IoU=0.030 | imgs->outputs/craq_cmc_neg/fold2
+fold3 n=56 SAM採用=0/56 | YOLO F1=0.393 R=0.376 | SAM F1=0.156 | CMC F1=0.393 IoU=0.273 | imgs->outputs/craq_cmc_neg/fold3
+==== 平均 ====
+排除fold2  : YOLO 0.536 | SAM 0.124 | CMC 0.536
+===== ALL DONE =====

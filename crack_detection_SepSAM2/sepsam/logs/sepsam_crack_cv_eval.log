@@ -1,0 +1,8 @@
+fold0 n=72 SAM採用=0/72 | YOLO F1=0.626 R=0.607 | SAM F1=0.136 | CMC F1=0.626 IoU=0.460 | imgs->outputs/sepsam_crack_cv/fold0
+fold1 n=72 SAM採用=0/72 | YOLO F1=0.494 R=0.468 | SAM F1=0.078 | CMC F1=0.494 IoU=0.344 | imgs->outputs/sepsam_crack_cv/fold1
+fold2 n=72 SAM採用=0/72 | YOLO F1=0.049 R=0.056 | SAM F1=0.023 | CMC F1=0.049 IoU=0.029 | imgs->outputs/sepsam_crack_cv/fold2
+fold3 n=72 SAM採用=0/72 | YOLO F1=0.379 R=0.296 | SAM F1=0.107 | CMC F1=0.379 IoU=0.249 | imgs->outputs/sepsam_crack_cv/fold3
+
+==== 平均 ====
+4-fold     : YOLO 0.387 | SAM 0.086 | CMC 0.387
+排除fold2  : YOLO 0.500 | SAM 0.107 | CMC 0.500

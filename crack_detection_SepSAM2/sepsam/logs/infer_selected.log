@@ -1,0 +1,9 @@
+KJTHT-SC-L-1RB1-1_R2_C04: decision=sliding(0/9 tiles→sam) sam_score=0.512 conflict=65.274
+KJTHT-SC-L-1RB1-1_R2_C05: decision=sliding(0/9 tiles→sam) sam_score=0.440 conflict=63.239
+KJTHT-SC-L-1RB1-1_R3_C03: decision=sliding(0/9 tiles→sam) sam_score=0.329 conflict=98.607
+KJTHT-SC-L-1RB1-1_R3_C04: decision=sliding(0/9 tiles→sam) sam_score=0.351 conflict=76.682
+KSEJ26-8-A-甲-0-B-5_R1_C01: decision=sliding(0/9 tiles→sam) sam_score=0.853 conflict=90.475
+KSEJ26-8-A-甲-0-B-5_R9_C01: decision=sliding(0/9 tiles→sam) sam_score=0.804 conflict=78.796
+KSEJ26-8-A-甲-0-B-5_R9_C02: decision=sliding(0/9 tiles→sam) sam_score=0.760 conflict=41.979
+KSEJ26-8-A-甲-0-B-5_R9_C03: decision=sliding(0/9 tiles→sam) sam_score=0.792 conflict=40.165
+done → outputs/infer_selected

@@ -1,0 +1,6 @@
+path: /home/zzz90/research/crack_detection_SepSAM2/sepsam/datasets/heritage_ft
+train: train/images
+val: val/images
+nc: 1
+names:
+  - crack

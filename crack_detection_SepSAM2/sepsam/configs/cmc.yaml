@@ -1,0 +1,21 @@
+# ===== CMC 超參數（論文 Table 3）=====
+# 注意：論文寫 YOLO_CONF_1=0.0，但 ultralytics 8.4.57 對 conf=0.0 會繞過內建 NMS 門檻，
+# 收下最多 max_det(300) 個低信心錨點 → Agent 草稿幾乎飽和整圖，破壞 CMC 後續流程。
+# 改用 ultralytics 標準 NMS 門檻 0.25 才是論文意圖（D.5 校準前確認）。
+YOLO_CONF_1: 0.25
+YOLO_CONF_2: 0.5
+SAM_THRESH: 0.80           # D.5 校準：valid 100 張，best F1=0.7297（原論文值 0.85）
+CONFLICTION_RATIO: 0.50    # D.5 校準：原論文值 1.50；此資料集 SAM2 改進小，需更嚴的衝突門檻
+POINTS_DIVISOR: 50         # n_points = max(H,W)//POINTS_DIVISOR（最佳約 60 點/影像）
+
+agent_ckpt: runs/segment/runs/sepsam_agent_v8n_200ep/weights/best.pt
+device: cuda
+
+# ===== 大模型後端：'v1'（SAM ViT-H，對齊論文）或 'sam2'（改良）=====
+sam_backend: sam2
+
+sam_model_type: vit_h
+sam_ckpt: weights/sam_vit_h_4b8939.pth
+
+sam2_cfg: configs/sam2.1/sam2.1_hiera_b+.yaml
+sam2_ckpt: weights/sam2.1_hiera_base_plus.pt
