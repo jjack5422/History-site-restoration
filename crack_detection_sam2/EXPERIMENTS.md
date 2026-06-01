@@ -39,6 +39,8 @@
 | prompt_craq_fold2_small | 0.030 / 0.058 (@74) | 0.018 / 0.035 | 退化 |
 
 ## D. prompted frozen SAM2 (`model_prompted_sam2.py`)
+> 訓練/評估腳本 `train_promptsam2_craq.py`/`eval_promptsam2_craq.py` 已移除（依賴已刪的 gt_points）；以下為歷史結果。
+
 | run | best IoU / F1 (@ep) | final IoU / F1 | 註 |
 |---|---|---|---|
 | promptsam2_craq_fold1 | 0.457 / 0.627 (@42) | 0.395 / 0.566 | |

@@ -35,9 +35,11 @@
 
 → **不要把根目錄 .py 搬進 src/**，否則上述每一方的 import 都會壞，需同步改十幾處路徑。這是刻意保留的佈局。
 
-## 已知失效 (Known broken)
-`gt_points.py` 已被移除（判定無用）。仍 import 它、目前失效的檔（屬較差的 promptsam2 路線）：
+## 已移除 (Removed)
+`gt_points.py`（判定無用）連同 import 它的 promptsam2 路線檔一併移除：
 `dump_preds_promptsam2.py`、`eval_promptsam2_craq.py`、`train_promptsam2_craq.py`、`tests/test_gt_points.py`。
+模型定義 `model_prompted_sam2.py` 與 `tests/test_prompted_sam2_forward.py` 保留（不依賴 gt_points）；
+promptsam2 的歷史實驗結果仍記錄在 `EXPERIMENTS.md` 家族 D（`runs/promptsam2_craq_fold*`）。
 
 ## 資料與產出位置
 - `data/`（188M，gitignored）：tiles、masks、splits。
