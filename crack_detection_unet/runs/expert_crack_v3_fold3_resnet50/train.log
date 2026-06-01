@@ -1,0 +1,581 @@
+CLASS_NAMES=['background', 'crack'] NUM_CLASSES=2
+split=/home/zzz90/research/crack_detection_sam2/data/labeled32_crack_v3/tiles_512/group_split_stem.json fold=3 train=96 val=40
+val_groups=['KJTHT-SC-L-1RB1-1']
+class pixel counts (train): [25104818, 61006]
+class weights (median_freq): [0.5012, 206.257]
+ResUNet encoder=resnet50 weights=imagenet total=32.5M trainable=32.52M
+  ep1/80 it12/12 lr=1.37e-04 loss=0.8850 ce=0.7751 dice=0.9948 10.2s
+[val] ep1 mIoU=0.0119 mDice=0.0235 pixel_acc=0.6945 ce=0.6198
+class             IoU    Dice    Prec     Rec       gt_px
+background     0.6933  0.8189  0.9910  0.6977    10381063
+crack          0.0119  0.0235  0.0121  0.3685      104697
+macro(no_bg)   0.0119  0.0235  0.0121  0.3685
+pixel_acc = 0.6945  ignore_index=0
+[best] ep1 mIoU=0.0119 -> outputs/expert_crack_v3_fold3_resnet50/best.pt
+  ep2/80 it12/12 lr=2.87e-04 loss=0.8181 ce=0.6426 dice=0.9936 4.9s
+[val] ep2 mIoU=0.0136 mDice=0.0268 pixel_acc=0.3614 ce=1.2481
+class             IoU    Dice    Prec     Rec       gt_px
+background     0.3558  0.5248  0.9966  0.3562    10381063
+crack          0.0136  0.0268  0.0136  0.8805      104697
+macro(no_bg)   0.0136  0.0268  0.0136  0.8805
+pixel_acc = 0.3614  ignore_index=0
+[best] ep2 mIoU=0.0136 -> outputs/expert_crack_v3_fold3_resnet50/best.pt
+  ep3/80 it12/12 lr=3.00e-04 loss=0.7597 ce=0.5279 dice=0.9914 3.5s
+[val] ep3 mIoU=0.0219 mDice=0.0428 pixel_acc=0.6429 ce=0.8665
+class             IoU    Dice    Prec     Rec       gt_px
+background     0.6400  0.7805  0.9969  0.6413    10381063
+crack          0.0219  0.0428  0.0220  0.8001      104697
+macro(no_bg)   0.0219  0.0428  0.0220  0.8001
+pixel_acc = 0.6429  ignore_index=0
+[best] ep3 mIoU=0.0219 -> outputs/expert_crack_v3_fold3_resnet50/best.pt
+  ep4/80 it12/12 lr=3.00e-04 loss=0.7144 ce=0.4389 dice=0.9900 3.3s
+[val] ep4 mIoU=0.0387 mDice=0.0745 pixel_acc=0.8503 ce=0.4487
+class             IoU    Dice    Prec     Rec       gt_px
+background     0.8494  0.9186  0.9953  0.8528    10381063
+crack          0.0387  0.0745  0.0397  0.6030      104697
+macro(no_bg)   0.0387  0.0745  0.0397  0.6030
+pixel_acc = 0.8503  ignore_index=0
+[best] ep4 mIoU=0.0387 -> outputs/expert_crack_v3_fold3_resnet50/best.pt
+  ep5/80 it12/12 lr=2.99e-04 loss=0.6869 ce=0.3863 dice=0.9874 3.5s
+[val] ep5 mIoU=0.0328 mDice=0.0635 pixel_acc=0.7678 ce=0.5578
+class             IoU    Dice    Prec     Rec       gt_px
+background     0.7659  0.8675  0.9972  0.7676    10381063
+crack          0.0328  0.0635  0.0331  0.7883      104697
+macro(no_bg)   0.0328  0.0635  0.0331  0.7883
+pixel_acc = 0.7678  ignore_index=0
+  ep6/80 it12/12 lr=2.98e-04 loss=0.6538 ce=0.3222 dice=0.9854 3.3s
+[val] ep6 mIoU=0.0452 mDice=0.0865 pixel_acc=0.8458 ce=0.4275
+class             IoU    Dice    Prec     Rec       gt_px
+background     0.8446  0.9158  0.9968  0.8469    10381063
+crack          0.0452  0.0865  0.0460  0.7318      104697
+macro(no_bg)   0.0452  0.0865  0.0460  0.7318
+pixel_acc = 0.8458  ignore_index=0
+[best] ep6 mIoU=0.0452 -> outputs/expert_crack_v3_fold3_resnet50/best.pt
+  ep7/80 it12/12 lr=2.97e-04 loss=0.6493 ce=0.3158 dice=0.9827 3.4s
+[val] ep7 mIoU=0.0689 mDice=0.1290 pixel_acc=0.9089 ce=0.2883
+class             IoU    Dice    Prec     Rec       gt_px
+background     0.9083  0.9519  0.9964  0.9113    10381063
+crack          0.0689  0.1290  0.0713  0.6754      104697
+macro(no_bg)   0.0689  0.1290  0.0713  0.6754
+pixel_acc = 0.9089  ignore_index=0
+[best] ep7 mIoU=0.0689 -> outputs/expert_crack_v3_fold3_resnet50/best.pt
+  ep8/80 it12/12 lr=2.96e-04 loss=0.6477 ce=0.3138 dice=0.9815 3.5s
+[val] ep8 mIoU=0.0638 mDice=0.1199 pixel_acc=0.8940 ce=0.2923
+class             IoU    Dice    Prec     Rec       gt_px
+background     0.8932  0.9436  0.9969  0.8957    10381063
+crack          0.0638  0.1199  0.0654  0.7236      104697
+macro(no_bg)   0.0638  0.1199  0.0654  0.7236
+pixel_acc = 0.8940  ignore_index=0
+  ep9/80 it12/12 lr=2.94e-04 loss=0.6479 ce=0.3150 dice=0.9809 3.5s
+[val] ep9 mIoU=0.0784 mDice=0.1453 pixel_acc=0.9216 ce=0.2331
+class             IoU    Dice    Prec     Rec       gt_px
+background     0.9211  0.9589  0.9964  0.9242    10381063
+crack          0.0784  0.1453  0.0815  0.6674      104697
+macro(no_bg)   0.0784  0.1453  0.0815  0.6674
+pixel_acc = 0.9216  ignore_index=0
+[best] ep9 mIoU=0.0784 -> outputs/expert_crack_v3_fold3_resnet50/best.pt
+  ep10/80 it12/12 lr=2.92e-04 loss=0.6258 ce=0.2702 dice=0.9813 3.4s
+[val] ep10 mIoU=0.0511 mDice=0.0973 pixel_acc=0.8464 ce=0.3942
+class             IoU    Dice    Prec     Rec       gt_px
+background     0.8451  0.9160  0.9980  0.8465    10381063
+crack          0.0511  0.0973  0.0517  0.8288      104697
+macro(no_bg)   0.0511  0.0973  0.0517  0.8288
+pixel_acc = 0.8464  ignore_index=0
+  ep11/80 it12/12 lr=2.90e-04 loss=0.6112 ce=0.2452 dice=0.9772 3.4s
+[val] ep11 mIoU=0.0692 mDice=0.1294 pixel_acc=0.9007 ce=0.2643
+class             IoU    Dice    Prec     Rec       gt_px
+background     0.9000  0.9474  0.9971  0.9024    10381063
+crack          0.0692  0.1294  0.0709  0.7389      104697
+macro(no_bg)   0.0692  0.1294  0.0709  0.7389
+pixel_acc = 0.9007  ignore_index=0
+  ep12/80 it12/12 lr=2.88e-04 loss=0.6139 ce=0.2507 dice=0.9770 3.5s
+[val] ep12 mIoU=0.1109 mDice=0.1997 pixel_acc=0.9612 ce=0.1283
+class             IoU    Dice    Prec     Rec       gt_px
+background     0.9611  0.9801  0.9946  0.9661    10381063
+crack          0.1109  0.1997  0.1258  0.4842      104697
+macro(no_bg)   0.1109  0.1997  0.1258  0.4842
+pixel_acc = 0.9612  ignore_index=0
+[best] ep12 mIoU=0.1109 -> outputs/expert_crack_v3_fold3_resnet50/best.pt
+  ep13/80 it12/12 lr=2.86e-04 loss=0.6126 ce=0.2497 dice=0.9754 3.4s
+[val] ep13 mIoU=0.0963 mDice=0.1757 pixel_acc=0.9482 ce=0.1420
+class             IoU    Dice    Prec     Rec       gt_px
+background     0.9480  0.9733  0.9953  0.9522    10381063
+crack          0.0963  0.1757  0.1045  0.5525      104697
+macro(no_bg)   0.0963  0.1757  0.1045  0.5525
+pixel_acc = 0.9482  ignore_index=0
+  ep14/80 it12/12 lr=2.83e-04 loss=0.5935 ce=0.2144 dice=0.9726 2.1s
+[val] ep14 mIoU=0.0885 mDice=0.1625 pixel_acc=0.9409 ce=0.1593
+class             IoU    Dice    Prec     Rec       gt_px
+background     0.9405  0.9694  0.9955  0.9446    10381063
+crack          0.0885  0.1625  0.0947  0.5747      104697
+macro(no_bg)   0.0885  0.1625  0.0947  0.5747
+pixel_acc = 0.9409  ignore_index=0
+  ep15/80 it12/12 lr=2.80e-04 loss=0.5908 ce=0.2132 dice=0.9684 3.4s
+[val] ep15 mIoU=0.0910 mDice=0.1669 pixel_acc=0.9403 ce=0.1613
+class             IoU    Dice    Prec     Rec       gt_px
+background     0.9399  0.9690  0.9957  0.9437    10381063
+crack          0.0910  0.1669  0.0970  0.5988      104697
+macro(no_bg)   0.0910  0.1669  0.0970  0.5988
+pixel_acc = 0.9403  ignore_index=0
+  ep16/80 it12/12 lr=2.77e-04 loss=0.6007 ce=0.2334 dice=0.9679 3.5s
+[val] ep16 mIoU=0.0913 mDice=0.1673 pixel_acc=0.9457 ce=0.1447
+class             IoU    Dice    Prec     Rec       gt_px
+background     0.9454  0.9719  0.9952  0.9497    10381063
+crack          0.0913  0.1673  0.0987  0.5463      104697
+macro(no_bg)   0.0913  0.1673  0.0987  0.5463
+pixel_acc = 0.9457  ignore_index=0
+  ep17/80 it12/12 lr=2.74e-04 loss=0.5955 ce=0.2223 dice=0.9687 3.5s
+[val] ep17 mIoU=0.0459 mDice=0.0877 pixel_acc=0.8448 ce=0.3847
+class             IoU    Dice    Prec     Rec       gt_px
+background     0.8437  0.9152  0.9970  0.8458    10381063
+crack          0.0459  0.0877  0.0466  0.7471      104697
+macro(no_bg)   0.0459  0.0877  0.0466  0.7471
+pixel_acc = 0.8448  ignore_index=0
+  ep18/80 it12/12 lr=2.70e-04 loss=0.5856 ce=0.2051 dice=0.9661 3.4s
+[val] ep18 mIoU=0.1121 mDice=0.2016 pixel_acc=0.9600 ce=0.1164
+class             IoU    Dice    Prec     Rec       gt_px
+background     0.9598  0.9795  0.9949  0.9646    10381063
+crack          0.1121  0.2016  0.1259  0.5058      104697
+macro(no_bg)   0.1121  0.2016  0.1259  0.5058
+pixel_acc = 0.9600  ignore_index=0
+[best] ep18 mIoU=0.1121 -> outputs/expert_crack_v3_fold3_resnet50/best.pt
+  ep19/80 it12/12 lr=2.67e-04 loss=0.5780 ce=0.1901 dice=0.9658 3.5s
+[val] ep19 mIoU=0.0602 mDice=0.1136 pixel_acc=0.8950 ce=0.2506
+class             IoU    Dice    Prec     Rec       gt_px
+background     0.8943  0.9442  0.9964  0.8972    10381063
+crack          0.0602  0.1136  0.0621  0.6744      104697
+macro(no_bg)   0.0602  0.1136  0.0621  0.6744
+pixel_acc = 0.8950  ignore_index=0
+  ep20/80 it12/12 lr=2.63e-04 loss=0.5671 ce=0.1733 dice=0.9609 2.1s
+[val] ep20 mIoU=0.0986 mDice=0.1795 pixel_acc=0.9433 ce=0.1505
+class             IoU    Dice    Prec     Rec       gt_px
+background     0.9429  0.9706  0.9960  0.9465    10381063
+crack          0.0986  0.1795  0.1049  0.6213      104697
+macro(no_bg)   0.0986  0.1795  0.1049  0.6213
+pixel_acc = 0.9433  ignore_index=0
+  ep21/80 it12/12 lr=2.59e-04 loss=0.5608 ce=0.1648 dice=0.9568 3.5s
+[val] ep21 mIoU=0.0908 mDice=0.1666 pixel_acc=0.9409 ce=0.1567
+class             IoU    Dice    Prec     Rec       gt_px
+background     0.9405  0.9694  0.9957  0.9444    10381063
+crack          0.0908  0.1666  0.0969  0.5916      104697
+macro(no_bg)   0.0908  0.1666  0.0969  0.5916
+pixel_acc = 0.9409  ignore_index=0
+  ep22/80 it12/12 lr=2.54e-04 loss=0.5534 ce=0.1538 dice=0.9530 3.7s
+[val] ep22 mIoU=0.0945 mDice=0.1728 pixel_acc=0.9481 ce=0.1384
+class             IoU    Dice    Prec     Rec       gt_px
+background     0.9478  0.9732  0.9952  0.9522    10381063
+crack          0.0945  0.1728  0.1027  0.5427      104697
+macro(no_bg)   0.0945  0.1728  0.1027  0.5427
+pixel_acc = 0.9481  ignore_index=0
+  ep23/80 it12/12 lr=2.50e-04 loss=0.5455 ce=0.1414 dice=0.9496 3.5s
+[val] ep23 mIoU=0.0939 mDice=0.1716 pixel_acc=0.9495 ce=0.1347
+class             IoU    Dice    Prec     Rec       gt_px
+background     0.9493  0.9740  0.9950  0.9538    10381063
+crack          0.0939  0.1716  0.1026  0.5236      104697
+macro(no_bg)   0.0939  0.1716  0.1026  0.5236
+pixel_acc = 0.9495  ignore_index=0
+  ep24/80 it12/12 lr=2.45e-04 loss=0.5527 ce=0.1618 dice=0.9437 3.7s
+[val] ep24 mIoU=0.0792 mDice=0.1468 pixel_acc=0.9314 ce=0.1774
+class             IoU    Dice    Prec     Rec       gt_px
+background     0.9310  0.9643  0.9956  0.9348    10381063
+crack          0.0792  0.1468  0.0838  0.5908      104697
+macro(no_bg)   0.0792  0.1468  0.0838  0.5908
+pixel_acc = 0.9314  ignore_index=0
+  ep25/80 it12/12 lr=2.41e-04 loss=0.5666 ce=0.1839 dice=0.9493 3.8s
+[val] ep25 mIoU=0.0929 mDice=0.1700 pixel_acc=0.9462 ce=0.1376
+class             IoU    Dice    Prec     Rec       gt_px
+background     0.9459  0.9722  0.9953  0.9502    10381063
+crack          0.0929  0.1700  0.1005  0.5520      104697
+macro(no_bg)   0.0929  0.1700  0.1005  0.5520
+pixel_acc = 0.9462  ignore_index=0
+  ep26/80 it12/12 lr=2.36e-04 loss=0.5512 ce=0.1512 dice=0.9511 2.7s
+[val] ep26 mIoU=0.1008 mDice=0.1832 pixel_acc=0.9556 ce=0.1186
+class             IoU    Dice    Prec     Rec       gt_px
+background     0.9554  0.9772  0.9948  0.9602    10381063
+crack          0.1008  0.1832  0.1122  0.4986      104697
+macro(no_bg)   0.1008  0.1832  0.1122  0.4986
+pixel_acc = 0.9556  ignore_index=0
+  ep27/80 it12/12 lr=2.31e-04 loss=0.5536 ce=0.1624 dice=0.9449 4.1s
+[val] ep27 mIoU=0.1289 mDice=0.2284 pixel_acc=0.9697 ce=0.0881
+class             IoU    Dice    Prec     Rec       gt_px
+background     0.9696  0.9845  0.9943  0.9749    10381063
+crack          0.1289  0.2284  0.1531  0.4491      104697
+macro(no_bg)   0.1289  0.2284  0.1531  0.4491
+pixel_acc = 0.9697  ignore_index=0
+[best] ep27 mIoU=0.1289 -> outputs/expert_crack_v3_fold3_resnet50/best.pt
+  ep28/80 it12/12 lr=2.25e-04 loss=0.5391 ce=0.1377 dice=0.9405 3.8s
+[val] ep28 mIoU=0.0923 mDice=0.1690 pixel_acc=0.9500 ce=0.1351
+class             IoU    Dice    Prec     Rec       gt_px
+background     0.9497  0.9742  0.9948  0.9544    10381063
+crack          0.0923  0.1690  0.1013  0.5091      104697
+macro(no_bg)   0.0923  0.1690  0.1013  0.5091
+pixel_acc = 0.9500  ignore_index=0
+  ep29/80 it12/12 lr=2.20e-04 loss=0.5524 ce=0.1683 dice=0.9366 3.7s
+[val] ep29 mIoU=0.1135 mDice=0.2038 pixel_acc=0.9600 ce=0.1115
+class             IoU    Dice    Prec     Rec       gt_px
+background     0.9598  0.9795  0.9949  0.9645    10381063
+crack          0.1135  0.2038  0.1272  0.5128      104697
+macro(no_bg)   0.1135  0.2038  0.1272  0.5128
+pixel_acc = 0.9600  ignore_index=0
+  ep30/80 it12/12 lr=2.15e-04 loss=0.5553 ce=0.1687 dice=0.9419 3.8s
+[val] ep30 mIoU=0.1134 mDice=0.2037 pixel_acc=0.9638 ce=0.1015
+class             IoU    Dice    Prec     Rec       gt_px
+background     0.9636  0.9815  0.9944  0.9688    10381063
+crack          0.1134  0.2037  0.1305  0.4638      104697
+macro(no_bg)   0.1134  0.2037  0.1305  0.4638
+pixel_acc = 0.9638  ignore_index=0
+  ep31/80 it12/12 lr=2.09e-04 loss=0.5567 ce=0.1711 dice=0.9423 2.4s
+[val] ep31 mIoU=0.1084 mDice=0.1955 pixel_acc=0.9590 ce=0.1123
+class             IoU    Dice    Prec     Rec       gt_px
+background     0.9588  0.9789  0.9948  0.9636    10381063
+crack          0.1084  0.1955  0.1216  0.4994      104697
+macro(no_bg)   0.1084  0.1955  0.1216  0.4994
+pixel_acc = 0.9590  ignore_index=0
+  ep32/80 it12/12 lr=2.04e-04 loss=0.5358 ce=0.1322 dice=0.9394 3.4s
+[val] ep32 mIoU=0.1049 mDice=0.1898 pixel_acc=0.9567 ce=0.1214
+class             IoU    Dice    Prec     Rec       gt_px
+background     0.9565  0.9777  0.9949  0.9612    10381063
+crack          0.1049  0.1898  0.1167  0.5083      104697
+macro(no_bg)   0.1049  0.1898  0.1167  0.5083
+pixel_acc = 0.9567  ignore_index=0
+  ep33/80 it12/12 lr=1.98e-04 loss=0.5429 ce=0.1590 dice=0.9268 3.4s
+[val] ep33 mIoU=0.0969 mDice=0.1767 pixel_acc=0.9500 ce=0.1438
+class             IoU    Dice    Prec     Rec       gt_px
+background     0.9498  0.9742  0.9951  0.9542    10381063
+crack          0.0969  0.1767  0.1057  0.5368      104697
+macro(no_bg)   0.0969  0.1767  0.1057  0.5368
+pixel_acc = 0.9500  ignore_index=0
+  ep34/80 it12/12 lr=1.92e-04 loss=0.5505 ce=0.1740 dice=0.9271 3.5s
+[val] ep34 mIoU=0.1312 mDice=0.2320 pixel_acc=0.9685 ce=0.0882
+class             IoU    Dice    Prec     Rec       gt_px
+background     0.9683  0.9839  0.9946  0.9734    10381063
+crack          0.1312  0.2320  0.1533  0.4767      104697
+macro(no_bg)   0.1312  0.2320  0.1533  0.4767
+pixel_acc = 0.9685  ignore_index=0
+[best] ep34 mIoU=0.1312 -> outputs/expert_crack_v3_fold3_resnet50/best.pt
+  ep35/80 it12/12 lr=1.86e-04 loss=0.5371 ce=0.1444 dice=0.9298 3.4s
+[val] ep35 mIoU=0.1557 mDice=0.2694 pixel_acc=0.9737 ce=0.0756
+class             IoU    Dice    Prec     Rec       gt_px
+background     0.9736  0.9866  0.9947  0.9787    10381063
+crack          0.1557  0.2694  0.1865  0.4852      104697
+macro(no_bg)   0.1557  0.2694  0.1865  0.4852
+pixel_acc = 0.9737  ignore_index=0
+[best] ep35 mIoU=0.1557 -> outputs/expert_crack_v3_fold3_resnet50/best.pt
+  ep36/80 it12/12 lr=1.80e-04 loss=0.5399 ce=0.1439 dice=0.9359 3.4s
+[val] ep36 mIoU=0.1414 mDice=0.2477 pixel_acc=0.9758 ce=0.0722
+class             IoU    Dice    Prec     Rec       gt_px
+background     0.9757  0.9877  0.9939  0.9817    10381063
+crack          0.1414  0.2477  0.1797  0.3984      104697
+macro(no_bg)   0.1414  0.2477  0.1797  0.3984
+pixel_acc = 0.9758  ignore_index=0
+  ep37/80 it12/12 lr=1.75e-04 loss=0.5251 ce=0.1249 dice=0.9252 3.6s
+[val] ep37 mIoU=0.1356 mDice=0.2388 pixel_acc=0.9730 ce=0.0817
+class             IoU    Dice    Prec     Rec       gt_px
+background     0.9728  0.9862  0.9941  0.9785    10381063
+crack          0.1356  0.2388  0.1661  0.4249      104697
+macro(no_bg)   0.1356  0.2388  0.1661  0.4249
+pixel_acc = 0.9730  ignore_index=0
+  ep38/80 it12/12 lr=1.69e-04 loss=0.5257 ce=0.1378 dice=0.9136 3.4s
+[val] ep38 mIoU=0.1324 mDice=0.2339 pixel_acc=0.9744 ce=0.0786
+class             IoU    Dice    Prec     Rec       gt_px
+background     0.9743  0.9870  0.9938  0.9803    10381063
+crack          0.1324  0.2339  0.1668  0.3911      104697
+macro(no_bg)   0.1324  0.2339  0.1668  0.3911
+pixel_acc = 0.9744  ignore_index=0
+  ep39/80 it12/12 lr=1.63e-04 loss=0.5072 ce=0.1047 dice=0.9097 3.4s
+[val] ep39 mIoU=0.1473 mDice=0.2567 pixel_acc=0.9765 ce=0.0733
+class             IoU    Dice    Prec     Rec       gt_px
+background     0.9764  0.9880  0.9939  0.9822    10381063
+crack          0.1473  0.2567  0.1875  0.4070      104697
+macro(no_bg)   0.1473  0.2567  0.1875  0.4070
+pixel_acc = 0.9765  ignore_index=0
+  ep40/80 it12/12 lr=1.57e-04 loss=0.5112 ce=0.1257 dice=0.8967 3.5s
+[val] ep40 mIoU=0.1425 mDice=0.2494 pixel_acc=0.9782 ce=0.0712
+class             IoU    Dice    Prec     Rec       gt_px
+background     0.9781  0.9889  0.9935  0.9844    10381063
+crack          0.1425  0.2494  0.1899  0.3630      104697
+macro(no_bg)   0.1425  0.2494  0.1899  0.3630
+pixel_acc = 0.9782  ignore_index=0
+  ep41/80 it12/12 lr=1.51e-04 loss=0.4991 ce=0.1171 dice=0.8811 3.6s
+[val] ep41 mIoU=0.1477 mDice=0.2574 pixel_acc=0.9825 ce=0.0610
+class             IoU    Dice    Prec     Rec       gt_px
+background     0.9825  0.9912  0.9929  0.9894    10381063
+crack          0.1477  0.2574  0.2235  0.3034      104697
+macro(no_bg)   0.1477  0.2574  0.2235  0.3034
+pixel_acc = 0.9825  ignore_index=0
+  ep42/80 it12/12 lr=1.44e-04 loss=0.5234 ce=0.1703 dice=0.8765 3.6s
+[val] ep42 mIoU=0.1418 mDice=0.2484 pixel_acc=0.9799 ce=0.0676
+class             IoU    Dice    Prec     Rec       gt_px
+background     0.9798  0.9898  0.9932  0.9864    10381063
+crack          0.1418  0.2484  0.1981  0.3328      104697
+macro(no_bg)   0.1418  0.2484  0.1981  0.3328
+pixel_acc = 0.9799  ignore_index=0
+  ep43/80 it12/12 lr=1.38e-04 loss=0.5045 ce=0.1105 dice=0.8984 3.6s
+[val] ep43 mIoU=0.1304 mDice=0.2307 pixel_acc=0.9735 ce=0.0818
+class             IoU    Dice    Prec     Rec       gt_px
+background     0.9734  0.9865  0.9938  0.9794    10381063
+crack          0.1304  0.2307  0.1625  0.3972      104697
+macro(no_bg)   0.1304  0.2307  0.1625  0.3972
+pixel_acc = 0.9735  ignore_index=0
+  ep44/80 it12/12 lr=1.32e-04 loss=0.5186 ce=0.1383 dice=0.8989 2.2s
+[val] ep44 mIoU=0.1666 mDice=0.2857 pixel_acc=0.9820 ce=0.0578
+class             IoU    Dice    Prec     Rec       gt_px
+background     0.9820  0.9909  0.9935  0.9883    10381063
+crack          0.1666  0.2857  0.2369  0.3597      104697
+macro(no_bg)   0.1666  0.2857  0.2369  0.3597
+pixel_acc = 0.9820  ignore_index=0
+[best] ep44 mIoU=0.1666 -> outputs/expert_crack_v3_fold3_resnet50/best.pt
+  ep45/80 it12/12 lr=1.26e-04 loss=0.4971 ce=0.1073 dice=0.8869 3.6s
+[val] ep45 mIoU=0.1482 mDice=0.2582 pixel_acc=0.9755 ce=0.0762
+class             IoU    Dice    Prec     Rec       gt_px
+background     0.9754  0.9876  0.9941  0.9811    10381063
+crack          0.1482  0.2582  0.1852  0.4265      104697
+macro(no_bg)   0.1482  0.2582  0.1852  0.4265
+pixel_acc = 0.9755  ignore_index=0
+  ep46/80 it12/12 lr=1.20e-04 loss=0.4862 ce=0.1039 dice=0.8685 3.5s
+[val] ep46 mIoU=0.1717 mDice=0.2931 pixel_acc=0.9871 ce=0.0475
+class             IoU    Dice    Prec     Rec       gt_px
+background     0.9871  0.9935  0.9926  0.9944    10381063
+crack          0.1717  0.2931  0.3246  0.2672      104697
+macro(no_bg)   0.1717  0.2931  0.3246  0.2672
+pixel_acc = 0.9871  ignore_index=0
+[best] ep46 mIoU=0.1717 -> outputs/expert_crack_v3_fold3_resnet50/best.pt
+  ep47/80 it12/12 lr=1.15e-04 loss=0.4868 ce=0.1288 dice=0.8448 3.5s
+[val] ep47 mIoU=0.1663 mDice=0.2852 pixel_acc=0.9851 ce=0.0529
+class             IoU    Dice    Prec     Rec       gt_px
+background     0.9850  0.9924  0.9929  0.9920    10381063
+crack          0.1663  0.2852  0.2729  0.2987      104697
+macro(no_bg)   0.1663  0.2852  0.2729  0.2987
+pixel_acc = 0.9851  ignore_index=0
+  ep48/80 it12/12 lr=1.09e-04 loss=0.4772 ce=0.1261 dice=0.8282 3.5s
+[val] ep48 mIoU=0.1538 mDice=0.2667 pixel_acc=0.9786 ce=0.0710
+class             IoU    Dice    Prec     Rec       gt_px
+background     0.9785  0.9891  0.9938  0.9845    10381063
+crack          0.1538  0.2667  0.2026  0.3901      104697
+macro(no_bg)   0.1538  0.2667  0.2026  0.3901
+pixel_acc = 0.9786  ignore_index=0
+  ep49/80 it12/12 lr=1.03e-04 loss=0.4683 ce=0.1073 dice=0.8294 3.6s
+[val] ep49 mIoU=0.1499 mDice=0.2608 pixel_acc=0.9782 ce=0.0731
+class             IoU    Dice    Prec     Rec       gt_px
+background     0.9781  0.9889  0.9937  0.9842    10381063
+crack          0.1499  0.2608  0.1972  0.3850      104697
+macro(no_bg)   0.1499  0.2608  0.1972  0.3850
+pixel_acc = 0.9782  ignore_index=0
+  ep50/80 it12/12 lr=9.73e-05 loss=0.4518 ce=0.1042 dice=0.7994 2.2s
+[val] ep50 mIoU=0.1596 mDice=0.2753 pixel_acc=0.9866 ce=0.0504
+class             IoU    Dice    Prec     Rec       gt_px
+background     0.9866  0.9932  0.9925  0.9940    10381063
+crack          0.1596  0.2753  0.2994  0.2547      104697
+macro(no_bg)   0.1596  0.2753  0.2994  0.2547
+pixel_acc = 0.9866  ignore_index=0
+  ep51/80 it12/12 lr=9.17e-05 loss=0.4911 ce=0.1869 dice=0.7952 3.5s
+[val] ep51 mIoU=0.1520 mDice=0.2638 pixel_acc=0.9868 ce=0.0509
+class             IoU    Dice    Prec     Rec       gt_px
+background     0.9868  0.9933  0.9923  0.9944    10381063
+crack          0.1520  0.2638  0.2982  0.2366      104697
+macro(no_bg)   0.1520  0.2638  0.2982  0.2366
+pixel_acc = 0.9868  ignore_index=0
+  ep52/80 it12/12 lr=8.62e-05 loss=0.4566 ce=0.1224 dice=0.7907 3.4s
+[val] ep52 mIoU=0.1547 mDice=0.2679 pixel_acc=0.9846 ce=0.0565
+class             IoU    Dice    Prec     Rec       gt_px
+background     0.9846  0.9922  0.9928  0.9917    10381063
+crack          0.1547  0.2679  0.2551  0.2821      104697
+macro(no_bg)   0.1547  0.2679  0.2551  0.2821
+pixel_acc = 0.9846  ignore_index=0
+  ep53/80 it12/12 lr=8.07e-05 loss=0.4499 ce=0.1197 dice=0.7801 3.4s
+[val] ep53 mIoU=0.1447 mDice=0.2529 pixel_acc=0.9866 ce=0.0537
+class             IoU    Dice    Prec     Rec       gt_px
+background     0.9866  0.9932  0.9922  0.9943    10381063
+crack          0.1447  0.2529  0.2855  0.2269      104697
+macro(no_bg)   0.1447  0.2529  0.2855  0.2269
+pixel_acc = 0.9866  ignore_index=0
+  ep54/80 it12/12 lr=7.54e-05 loss=0.4611 ce=0.1452 dice=0.7770 3.4s
+[val] ep54 mIoU=0.1434 mDice=0.2508 pixel_acc=0.9848 ce=0.0606
+class             IoU    Dice    Prec     Rec       gt_px
+background     0.9847  0.9923  0.9925  0.9921    10381063
+crack          0.1434  0.2508  0.2466  0.2552      104697
+macro(no_bg)   0.1434  0.2508  0.2466  0.2552
+pixel_acc = 0.9848  ignore_index=0
+  ep55/80 it12/12 lr=7.03e-05 loss=0.4488 ce=0.1195 dice=0.7780 3.4s
+[val] ep55 mIoU=0.1546 mDice=0.2678 pixel_acc=0.9860 ce=0.0567
+class             IoU    Dice    Prec     Rec       gt_px
+background     0.9860  0.9929  0.9925  0.9934    10381063
+crack          0.1546  0.2678  0.2805  0.2563      104697
+macro(no_bg)   0.1546  0.2678  0.2805  0.2563
+pixel_acc = 0.9860  ignore_index=0
+  ep56/80 it12/12 lr=6.52e-05 loss=0.4240 ce=0.0955 dice=0.7525 2.1s
+[val] ep56 mIoU=0.1400 mDice=0.2457 pixel_acc=0.9867 ce=0.0562
+class             IoU    Dice    Prec     Rec       gt_px
+background     0.9866  0.9933  0.9921  0.9944    10381063
+crack          0.1400  0.2457  0.2819  0.2176      104697
+macro(no_bg)   0.1400  0.2457  0.2819  0.2176
+pixel_acc = 0.9867  ignore_index=0
+  ep57/80 it12/12 lr=6.03e-05 loss=0.4524 ce=0.1612 dice=0.7436 3.4s
+[val] ep57 mIoU=0.1328 mDice=0.2345 pixel_acc=0.9886 ce=0.0521
+class             IoU    Dice    Prec     Rec       gt_px
+background     0.9886  0.9943  0.9917  0.9968    10381063
+crack          0.1328  0.2345  0.3575  0.1745      104697
+macro(no_bg)   0.1328  0.2345  0.3575  0.1745
+pixel_acc = 0.9886  ignore_index=0
+  ep58/80 it12/12 lr=5.55e-05 loss=0.4472 ce=0.1787 dice=0.7157 3.5s
+[val] ep58 mIoU=0.1356 mDice=0.2389 pixel_acc=0.9885 ce=0.0518
+class             IoU    Dice    Prec     Rec       gt_px
+background     0.9885  0.9942  0.9918  0.9967    10381063
+crack          0.1356  0.2389  0.3550  0.1800      104697
+macro(no_bg)   0.1356  0.2389  0.3550  0.1800
+pixel_acc = 0.9885  ignore_index=0
+  ep59/80 it12/12 lr=5.09e-05 loss=0.4475 ce=0.1530 dice=0.7420 3.5s
+[val] ep59 mIoU=0.1558 mDice=0.2697 pixel_acc=0.9877 ce=0.0536
+class             IoU    Dice    Prec     Rec       gt_px
+background     0.9876  0.9938  0.9922  0.9953    10381063
+crack          0.1558  0.2697  0.3295  0.2282      104697
+macro(no_bg)   0.1558  0.2697  0.3295  0.2282
+pixel_acc = 0.9877  ignore_index=0
+  ep60/80 it12/12 lr=4.65e-05 loss=0.4250 ce=0.1176 dice=0.7325 3.3s
+[val] ep60 mIoU=0.1598 mDice=0.2755 pixel_acc=0.9861 ce=0.0570
+class             IoU    Dice    Prec     Rec       gt_px
+background     0.9861  0.9930  0.9926  0.9934    10381063
+crack          0.1598  0.2755  0.2880  0.2641      104697
+macro(no_bg)   0.1598  0.2755  0.2880  0.2641
+pixel_acc = 0.9861  ignore_index=0
+  ep61/80 it12/12 lr=4.22e-05 loss=0.4343 ce=0.1518 dice=0.7168 3.5s
+[val] ep61 mIoU=0.1620 mDice=0.2789 pixel_acc=0.9861 ce=0.0572
+class             IoU    Dice    Prec     Rec       gt_px
+background     0.9860  0.9930  0.9926  0.9933    10381063
+crack          0.1620  0.2789  0.2889  0.2695      104697
+macro(no_bg)   0.1620  0.2789  0.2889  0.2695
+pixel_acc = 0.9861  ignore_index=0
+  ep62/80 it12/12 lr=3.81e-05 loss=0.4230 ce=0.1305 dice=0.7155 3.6s
+[val] ep62 mIoU=0.1524 mDice=0.2645 pixel_acc=0.9873 ce=0.0540
+class             IoU    Dice    Prec     Rec       gt_px
+background     0.9873  0.9936  0.9922  0.9950    10381063
+crack          0.1524  0.2645  0.3143  0.2282      104697
+macro(no_bg)   0.1524  0.2645  0.3143  0.2282
+pixel_acc = 0.9873  ignore_index=0
+  ep63/80 it12/12 lr=3.41e-05 loss=0.4033 ce=0.1251 dice=0.6814 2.1s
+[val] ep63 mIoU=0.1437 mDice=0.2513 pixel_acc=0.9881 ce=0.0531
+class             IoU    Dice    Prec     Rec       gt_px
+background     0.9881  0.9940  0.9920  0.9961    10381063
+crack          0.1437  0.2513  0.3403  0.1993      104697
+macro(no_bg)   0.1437  0.2513  0.3403  0.1993
+pixel_acc = 0.9881  ignore_index=0
+  ep64/80 it12/12 lr=3.04e-05 loss=0.4273 ce=0.1762 dice=0.6783 3.5s
+[val] ep64 mIoU=0.1456 mDice=0.2542 pixel_acc=0.9880 ce=0.0536
+class             IoU    Dice    Prec     Rec       gt_px
+background     0.9880  0.9940  0.9920  0.9959    10381063
+crack          0.1456  0.2542  0.3353  0.2047      104697
+macro(no_bg)   0.1456  0.2542  0.3353  0.2047
+pixel_acc = 0.9880  ignore_index=0
+  ep65/80 it12/12 lr=2.68e-05 loss=0.4180 ce=0.1503 dice=0.6858 3.5s
+[val] ep65 mIoU=0.1397 mDice=0.2451 pixel_acc=0.9878 ce=0.0549
+class             IoU    Dice    Prec     Rec       gt_px
+background     0.9877  0.9938  0.9920  0.9957    10381063
+crack          0.1397  0.2451  0.3193  0.1989      104697
+macro(no_bg)   0.1397  0.2451  0.3193  0.1989
+pixel_acc = 0.9878  ignore_index=0
+  ep66/80 it12/12 lr=2.35e-05 loss=0.3987 ce=0.1185 dice=0.6790 3.5s
+[val] ep66 mIoU=0.1354 mDice=0.2385 pixel_acc=0.9881 ce=0.0542
+class             IoU    Dice    Prec     Rec       gt_px
+background     0.9881  0.9940  0.9918  0.9962    10381063
+crack          0.1354  0.2385  0.3298  0.1868      104697
+macro(no_bg)   0.1354  0.2385  0.3298  0.1868
+pixel_acc = 0.9881  ignore_index=0
+  ep67/80 it12/12 lr=2.03e-05 loss=0.3854 ce=0.1211 dice=0.6497 3.4s
+[val] ep67 mIoU=0.1242 mDice=0.2210 pixel_acc=0.9889 ce=0.0531
+class             IoU    Dice    Prec     Rec       gt_px
+background     0.9889  0.9944  0.9916  0.9973    10381063
+crack          0.1242  0.2210  0.3689  0.1578      104697
+macro(no_bg)   0.1242  0.2210  0.3689  0.1578
+pixel_acc = 0.9889  ignore_index=0
+  ep68/80 it12/12 lr=1.74e-05 loss=0.3974 ce=0.1405 dice=0.6543 3.4s
+[val] ep68 mIoU=0.1266 mDice=0.2248 pixel_acc=0.9889 ce=0.0533
+class             IoU    Dice    Prec     Rec       gt_px
+background     0.9888  0.9944  0.9916  0.9972    10381063
+crack          0.1266  0.2248  0.3681  0.1618      104697
+macro(no_bg)   0.1266  0.2248  0.3681  0.1618
+pixel_acc = 0.9889  ignore_index=0
+  ep69/80 it12/12 lr=1.47e-05 loss=0.4033 ce=0.1637 dice=0.6429 2.0s
+[val] ep69 mIoU=0.1278 mDice=0.2267 pixel_acc=0.9888 ce=0.0545
+class             IoU    Dice    Prec     Rec       gt_px
+background     0.9887  0.9943  0.9916  0.9971    10381063
+crack          0.1278  0.2267  0.3616  0.1651      104697
+macro(no_bg)   0.1278  0.2267  0.3616  0.1651
+pixel_acc = 0.9888  ignore_index=0
+  ep70/80 it12/12 lr=1.22e-05 loss=0.3990 ce=0.1485 dice=0.6496 3.4s
+[val] ep70 mIoU=0.1261 mDice=0.2239 pixel_acc=0.9888 ce=0.0547
+class             IoU    Dice    Prec     Rec       gt_px
+background     0.9888  0.9944  0.9916  0.9972    10381063
+crack          0.1261  0.2239  0.3640  0.1617      104697
+macro(no_bg)   0.1261  0.2239  0.3640  0.1617
+pixel_acc = 0.9888  ignore_index=0
+  ep71/80 it12/12 lr=9.93e-06 loss=0.3884 ce=0.1225 dice=0.6543 3.4s
+[val] ep71 mIoU=0.1325 mDice=0.2340 pixel_acc=0.9886 ce=0.0544
+class             IoU    Dice    Prec     Rec       gt_px
+background     0.9886  0.9943  0.9917  0.9969    10381063
+crack          0.1325  0.2340  0.3579  0.1738      104697
+macro(no_bg)   0.1325  0.2340  0.3579  0.1738
+pixel_acc = 0.9886  ignore_index=0
+  ep72/80 it12/12 lr=7.88e-06 loss=0.3929 ce=0.1453 dice=0.6405 3.5s
+[val] ep72 mIoU=0.1293 mDice=0.2290 pixel_acc=0.9889 ce=0.0540
+class             IoU    Dice    Prec     Rec       gt_px
+background     0.9889  0.9944  0.9916  0.9972    10381063
+crack          0.1293  0.2290  0.3747  0.1648      104697
+macro(no_bg)   0.1293  0.2290  0.3747  0.1648
+pixel_acc = 0.9889  ignore_index=0
+  ep73/80 it12/12 lr=6.06e-06 loss=0.4384 ce=0.2180 dice=0.6589 3.5s
+[val] ep73 mIoU=0.1328 mDice=0.2344 pixel_acc=0.9887 ce=0.0542
+class             IoU    Dice    Prec     Rec       gt_px
+background     0.9887  0.9943  0.9917  0.9969    10381063
+crack          0.1328  0.2344  0.3620  0.1733      104697
+macro(no_bg)   0.1328  0.2344  0.3620  0.1733
+pixel_acc = 0.9887  ignore_index=0
+  ep74/80 it12/12 lr=4.48e-06 loss=0.3942 ce=0.1417 dice=0.6467 3.5s
+[val] ep74 mIoU=0.1274 mDice=0.2261 pixel_acc=0.9889 ce=0.0542
+class             IoU    Dice    Prec     Rec       gt_px
+background     0.9889  0.9944  0.9916  0.9972    10381063
+crack          0.1274  0.2261  0.3715  0.1624      104697
+macro(no_bg)   0.1274  0.2261  0.3715  0.1624
+pixel_acc = 0.9889  ignore_index=0
+  ep75/80 it12/12 lr=3.13e-06 loss=0.4050 ce=0.1458 dice=0.6641 3.5s
+[val] ep75 mIoU=0.1290 mDice=0.2285 pixel_acc=0.9888 ce=0.0544
+class             IoU    Dice    Prec     Rec       gt_px
+background     0.9888  0.9944  0.9916  0.9971    10381063
+crack          0.1290  0.2285  0.3676  0.1657      104697
+macro(no_bg)   0.1290  0.2285  0.3676  0.1657
+pixel_acc = 0.9888  ignore_index=0
+  ep76/80 it12/12 lr=2.02e-06 loss=0.3993 ce=0.1440 dice=0.6547 3.4s
+[val] ep76 mIoU=0.1319 mDice=0.2331 pixel_acc=0.9888 ce=0.0546
+class             IoU    Dice    Prec     Rec       gt_px
+background     0.9888  0.9944  0.9917  0.9971    10381063
+crack          0.1319  0.2331  0.3716  0.1698      104697
+macro(no_bg)   0.1319  0.2331  0.3716  0.1698
+pixel_acc = 0.9888  ignore_index=0
+  ep77/80 it12/12 lr=1.16e-06 loss=0.3736 ce=0.1050 dice=0.6423 3.5s
+[val] ep77 mIoU=0.1239 mDice=0.2205 pixel_acc=0.9890 ce=0.0547
+class             IoU    Dice    Prec     Rec       gt_px
+background     0.9889  0.9944  0.9915  0.9974    10381063
+crack          0.1239  0.2205  0.3735  0.1565      104697
+macro(no_bg)   0.1239  0.2205  0.3735  0.1565
+pixel_acc = 0.9890  ignore_index=0
+  ep78/80 it12/12 lr=5.28e-07 loss=0.4019 ce=0.1479 dice=0.6558 3.4s
+[val] ep78 mIoU=0.1263 mDice=0.2242 pixel_acc=0.9887 ce=0.0548
+class             IoU    Dice    Prec     Rec       gt_px
+background     0.9887  0.9943  0.9916  0.9970    10381063
+crack          0.1263  0.2242  0.3554  0.1637      104697
+macro(no_bg)   0.1263  0.2242  0.3554  0.1637
+pixel_acc = 0.9887  ignore_index=0
+  ep79/80 it12/12 lr=1.43e-07 loss=0.3654 ce=0.1051 dice=0.6257 3.5s
+[val] ep79 mIoU=0.1287 mDice=0.2281 pixel_acc=0.9886 ce=0.0545
+class             IoU    Dice    Prec     Rec       gt_px
+background     0.9886  0.9943  0.9917  0.9969    10381063
+crack          0.1287  0.2281  0.3522  0.1686      104697
+macro(no_bg)   0.1287  0.2281  0.3522  0.1686
+pixel_acc = 0.9886  ignore_index=0
+  ep80/80 it12/12 lr=8.45e-10 loss=0.3877 ce=0.1186 dice=0.6568 3.5s
+[val] ep80 mIoU=0.1305 mDice=0.2309 pixel_acc=0.9884 ce=0.0550
+class             IoU    Dice    Prec     Rec       gt_px
+background     0.9884  0.9942  0.9917  0.9966    10381063
+crack          0.1305  0.2309  0.3417  0.1744      104697
+macro(no_bg)   0.1305  0.2309  0.3417  0.1744
+pixel_acc = 0.9884  ignore_index=0
+訓練結束 best_miou=0.1717

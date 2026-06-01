@@ -1,0 +1,57 @@
+CLASS_NAMES=['background', 'crack'] NUM_CLASSES=2
+split=/home/zzz90/research/crack_detection_sam2/data/labeled32_crack_v3/tiles_512/nofold_all_train.json fold=0 train=136 val=0
+val_groups=[]
+class pixel counts (train): [35485881, 165703]
+class weights (median_freq): [0.5023, 107.5768]
+ResUNet encoder=resnet50 weights=imagenet total=32.5M trainable=32.52M
+  ep1/50 it17/17 lr=1.41e-04 loss=0.8822 ce=0.7738 dice=0.9907 13.9s
+  ep2/50 it17/17 lr=2.91e-04 loss=0.7980 ce=0.6081 dice=0.9878 6.7s
+  ep3/50 it17/17 lr=3.00e-04 loss=0.7291 ce=0.4759 dice=0.9824 4.6s
+  ep4/50 it17/17 lr=2.99e-04 loss=0.6973 ce=0.4163 dice=0.9783 3.3s
+  ep5/50 it17/17 lr=2.97e-04 loss=0.6671 ce=0.3604 dice=0.9739 4.6s
+  ep6/50 it17/17 lr=2.95e-04 loss=0.6648 ce=0.3570 dice=0.9727 4.7s
+  ep7/50 it17/17 lr=2.92e-04 loss=0.6498 ce=0.3310 dice=0.9686 4.7s
+  ep8/50 it17/17 lr=2.89e-04 loss=0.6339 ce=0.3038 dice=0.9640 4.8s
+  ep9/50 it17/17 lr=2.85e-04 loss=0.6437 ce=0.3225 dice=0.9648 4.6s
+  ep10/50 it17/17 lr=2.80e-04 loss=0.6281 ce=0.2947 dice=0.9615 3.3s
+  ep11/50 it17/17 lr=2.75e-04 loss=0.6123 ce=0.2674 dice=0.9571 4.8s
+  ep12/50 it17/17 lr=2.69e-04 loss=0.6141 ce=0.2732 dice=0.9550 4.7s
+  ep13/50 it17/17 lr=2.63e-04 loss=0.6002 ce=0.2506 dice=0.9498 4.7s
+  ep14/50 it17/17 lr=2.56e-04 loss=0.6005 ce=0.2555 dice=0.9456 4.6s
+  ep15/50 it17/17 lr=2.49e-04 loss=0.6051 ce=0.2602 dice=0.9499 4.7s
+  ep16/50 it17/17 lr=2.42e-04 loss=0.5883 ce=0.2346 dice=0.9420 3.4s
+  ep17/50 it17/17 lr=2.34e-04 loss=0.5921 ce=0.2411 dice=0.9432 4.7s
+  ep18/50 it17/17 lr=2.25e-04 loss=0.5767 ce=0.2126 dice=0.9407 4.9s
+  ep19/50 it17/17 lr=2.17e-04 loss=0.5940 ce=0.2530 dice=0.9349 4.7s
+  ep20/50 it17/17 lr=2.08e-04 loss=0.5734 ce=0.2155 dice=0.9313 5.2s
+  ep21/50 it17/17 lr=1.99e-04 loss=0.5646 ce=0.2005 dice=0.9286 4.8s
+  ep22/50 it17/17 lr=1.89e-04 loss=0.5796 ce=0.2249 dice=0.9342 3.4s
+  ep23/50 it17/17 lr=1.80e-04 loss=0.5541 ce=0.1863 dice=0.9218 4.6s
+  ep24/50 it17/17 lr=1.70e-04 loss=0.5613 ce=0.2011 dice=0.9216 4.7s
+  ep25/50 it17/17 lr=1.60e-04 loss=0.5670 ce=0.2163 dice=0.9176 4.7s
+  ep26/50 it17/17 lr=1.51e-04 loss=0.5508 ce=0.1845 dice=0.9171 4.9s
+  ep27/50 it17/17 lr=1.41e-04 loss=0.5625 ce=0.2106 dice=0.9143 4.8s
+  ep28/50 it17/17 lr=1.31e-04 loss=0.5608 ce=0.2074 dice=0.9142 4.7s
+  ep29/50 it17/17 lr=1.21e-04 loss=0.5491 ce=0.1847 dice=0.9135 3.3s
+  ep30/50 it17/17 lr=1.12e-04 loss=0.5473 ce=0.1846 dice=0.9101 4.7s
+  ep31/50 it17/17 lr=1.02e-04 loss=0.5574 ce=0.2046 dice=0.9101 4.7s
+  ep32/50 it17/17 lr=9.31e-05 loss=0.5535 ce=0.1966 dice=0.9105 4.7s
+  ep33/50 it17/17 lr=8.42e-05 loss=0.5449 ce=0.1881 dice=0.9017 4.7s
+  ep34/50 it17/17 lr=7.55e-05 loss=0.5400 ce=0.1777 dice=0.9023 4.8s
+  ep35/50 it17/17 lr=6.71e-05 loss=0.5419 ce=0.1793 dice=0.9046 3.4s
+  ep36/50 it17/17 lr=5.91e-05 loss=0.5454 ce=0.1856 dice=0.9052 4.7s
+  ep37/50 it17/17 lr=5.15e-05 loss=0.5315 ce=0.1680 dice=0.8949 4.7s
+  ep38/50 it17/17 lr=4.43e-05 loss=0.5129 ce=0.1475 dice=0.8784 4.7s
+  ep39/50 it17/17 lr=3.76e-05 loss=0.5339 ce=0.1807 dice=0.8871 4.7s
+  ep40/50 it17/17 lr=3.13e-05 loss=0.5142 ce=0.1541 dice=0.8744 4.7s
+  ep41/50 it17/17 lr=2.56e-05 loss=0.5136 ce=0.1509 dice=0.8764 3.4s
+  ep42/50 it17/17 lr=2.04e-05 loss=0.5260 ce=0.1840 dice=0.8681 4.6s
+  ep43/50 it17/17 lr=1.57e-05 loss=0.5307 ce=0.1872 dice=0.8741 4.6s
+  ep44/50 it17/17 lr=1.16e-05 loss=0.5238 ce=0.1777 dice=0.8699 4.6s
+  ep45/50 it17/17 lr=8.15e-06 loss=0.5254 ce=0.1774 dice=0.8735 4.7s
+  ep46/50 it17/17 lr=5.26e-06 loss=0.5226 ce=0.1710 dice=0.8743 4.7s
+  ep47/50 it17/17 lr=3.00e-06 loss=0.5248 ce=0.1780 dice=0.8717 3.3s
+  ep48/50 it17/17 lr=1.36e-06 loss=0.5051 ce=0.1457 dice=0.8645 4.7s
+  ep49/50 it17/17 lr=3.60e-07 loss=0.5189 ce=0.1620 dice=0.8758 4.7s
+  ep50/50 it17/17 lr=1.11e-09 loss=0.5118 ce=0.1506 dice=0.8730 4.7s
+訓練結束 best_miou=-1.0000

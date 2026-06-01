@@ -1,0 +1,23 @@
+{
+  "tiles_root": "/home/zzz90/research/crack_detection_sam2/data/labeled32_crack_v3/tiles_512",
+  "split": "/home/zzz90/research/crack_detection_sam2/data/labeled32_crack_v3/tiles_512/group_split_stem.json",
+  "fold": 3,
+  "encoder": "resnet50",
+  "encoder_weights": "imagenet",
+  "image_size": 512,
+  "batch_size": 8,
+  "num_workers": 4,
+  "epochs": 80,
+  "warmup_epochs": 2,
+  "base_lr": 0.0003,
+  "encoder_lr_mult": 0.1,
+  "weight_decay": 0.0001,
+  "ce_weight": 0.5,
+  "dice_weight": 0.5,
+  "class_weight_mode": "median_freq",
+  "no_amp": false,
+  "seed": 42,
+  "output_dir": "outputs/expert_crack_v3_fold3_resnet50",
+  "log_interval": 50,
+  "class_names": "background,crack"
+}
