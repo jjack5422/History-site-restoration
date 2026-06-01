@@ -1,0 +1,740 @@
+override CLASS_NAMES=['background', 'craquelure'] (NUM_CLASSES=2)
+split=data/labeled32_craq_v3/tiles_512/group_split_stem.json fold=3 train=172 val=56
+val_groups=['KJTHT-SC-L-1RB1-1']
+class pixel counts (train): [43278913, 1809855]
+class weights (median_freq): [0.5209, 12.4565]
+model=SAM2SemSegFullFPN variant=small total=35.6M trainable=1.70M
+  ep1/80 it20/43 lr=6.63e-05 loss=0.7706 ce=0.6280 dice=0.9133 3.1s
+  ep1/80 it40/43 lr=1.36e-04 loss=0.7087 ce=0.5408 dice=0.8766 4.0s
+  ep1/80 it43/43 lr=1.47e-04 loss=0.6980 ce=0.5261 dice=0.8698 4.2s
+[val] ep1 mIoU=0.1071 mDice=0.1934 pixel_acc=0.7590 ce=0.5562
+class             IoU    Dice    Prec     Rec       gt_px
+background     0.7518  0.8583  0.9981  0.7529    14235765
+craquelure     0.1071  0.1934  0.1076  0.9549      444299
+macro(no_bg)   0.1071  0.1934  0.1076  0.9549
+pixel_acc = 0.7590  ignore_index=0
+[best] ep1 mIoU=0.1071 -> outputs/fullfpn_craq_v3_clahe_fold3_small/best.pt
+  ep2/80 it20/43 lr=2.16e-04 loss=0.6190 ce=0.4261 dice=0.8120 1.4s
+  ep2/80 it40/43 lr=2.86e-04 loss=0.6162 ce=0.4287 dice=0.8037 1.3s
+  ep2/80 it43/43 lr=2.97e-04 loss=0.6099 ce=0.4197 dice=0.8000 1.4s
+[val] ep2 mIoU=0.3698 mDice=0.5400 pixel_acc=0.9598 ce=0.1121
+class             IoU    Dice    Prec     Rec       gt_px
+background     0.9588  0.9790  0.9929  0.9654    14235765
+craquelure     0.3698  0.5400  0.4129  0.7799      444299
+macro(no_bg)   0.3698  0.5400  0.4129  0.7799
+pixel_acc = 0.9598  ignore_index=0
+[best] ep2 mIoU=0.3698 -> outputs/fullfpn_craq_v3_clahe_fold3_small/best.pt
+  ep3/80 it20/43 lr=3.00e-04 loss=0.5069 ce=0.3054 dice=0.7085 1.2s
+  ep3/80 it40/43 lr=3.00e-04 loss=0.5326 ce=0.3567 dice=0.7085 2.2s
+  ep3/80 it43/43 lr=3.00e-04 loss=0.5225 ce=0.3462 dice=0.6988 2.4s
+[val] ep3 mIoU=0.3821 mDice=0.5529 pixel_acc=0.9616 ce=0.1006
+class             IoU    Dice    Prec     Rec       gt_px
+background     0.9607  0.9799  0.9931  0.9671    14235765
+craquelure     0.3821  0.5529  0.4268  0.7847      444299
+macro(no_bg)   0.3821  0.5529  0.4268  0.7847
+pixel_acc = 0.9616  ignore_index=0
+[best] ep3 mIoU=0.3821 -> outputs/fullfpn_craq_v3_clahe_fold3_small/best.pt
+  ep4/80 it20/43 lr=3.00e-04 loss=0.4648 ce=0.2946 dice=0.6350 1.3s
+  ep4/80 it40/43 lr=3.00e-04 loss=0.4777 ce=0.3229 dice=0.6325 2.2s
+  ep4/80 it43/43 lr=3.00e-04 loss=0.4736 ce=0.3161 dice=0.6311 2.4s
+[val] ep4 mIoU=0.3762 mDice=0.5467 pixel_acc=0.9598 ce=0.1040
+class             IoU    Dice    Prec     Rec       gt_px
+background     0.9588  0.9790  0.9936  0.9647    14235765
+craquelure     0.3762  0.5467  0.4148  0.8015      444299
+macro(no_bg)   0.3762  0.5467  0.4148  0.8015
+pixel_acc = 0.9598  ignore_index=0
+  ep5/80 it20/43 lr=2.99e-04 loss=0.4377 ce=0.2859 dice=0.5894 1.3s
+  ep5/80 it40/43 lr=2.99e-04 loss=0.4729 ce=0.3191 dice=0.6267 2.3s
+  ep5/80 it43/43 lr=2.99e-04 loss=0.4702 ce=0.3130 dice=0.6274 2.5s
+[val] ep5 mIoU=0.3643 mDice=0.5340 pixel_acc=0.9560 ce=0.1160
+class             IoU    Dice    Prec     Rec       gt_px
+background     0.9549  0.9769  0.9946  0.9599    14235765
+craquelure     0.3643  0.5340  0.3930  0.8328      444299
+macro(no_bg)   0.3643  0.5340  0.3930  0.8328
+pixel_acc = 0.9560  ignore_index=0
+  ep6/80 it20/43 lr=2.99e-04 loss=0.4337 ce=0.2776 dice=0.5899 1.3s
+  ep6/80 it40/43 lr=2.98e-04 loss=0.4696 ce=0.3286 dice=0.6105 2.3s
+  ep6/80 it43/43 lr=2.98e-04 loss=0.4633 ce=0.3194 dice=0.6071 2.4s
+[val] ep6 mIoU=0.3798 mDice=0.5505 pixel_acc=0.9600 ce=0.1045
+class             IoU    Dice    Prec     Rec       gt_px
+background     0.9590  0.9791  0.9939  0.9647    14235765
+craquelure     0.3798  0.5505  0.4170  0.8099      444299
+macro(no_bg)   0.3798  0.5505  0.4170  0.8099
+pixel_acc = 0.9600  ignore_index=0
+  ep7/80 it20/43 lr=2.98e-04 loss=0.4645 ce=0.3327 dice=0.5964 1.3s
+  ep7/80 it40/43 lr=2.97e-04 loss=0.4767 ce=0.3383 dice=0.6152 2.2s
+  ep7/80 it43/43 lr=2.97e-04 loss=0.4714 ce=0.3282 dice=0.6146 2.4s
+[val] ep7 mIoU=0.4356 mDice=0.6068 pixel_acc=0.9701 ce=0.0775
+class             IoU    Dice    Prec     Rec       gt_px
+background     0.9694  0.9844  0.9925  0.9765    14235765
+craquelure     0.4356  0.6068  0.5036  0.7633      444299
+macro(no_bg)   0.4356  0.6068  0.5036  0.7633
+pixel_acc = 0.9701  ignore_index=0
+[best] ep7 mIoU=0.4356 -> outputs/fullfpn_craq_v3_clahe_fold3_small/best.pt
+  ep8/80 it20/43 lr=2.96e-04 loss=0.4076 ce=0.2878 dice=0.5273 1.3s
+  ep8/80 it40/43 lr=2.96e-04 loss=0.4504 ce=0.3314 dice=0.5694 2.3s
+  ep8/80 it43/43 lr=2.96e-04 loss=0.4462 ce=0.3226 dice=0.5699 2.4s
+[val] ep8 mIoU=0.4417 mDice=0.6128 pixel_acc=0.9716 ce=0.0745
+class             IoU    Dice    Prec     Rec       gt_px
+background     0.9709  0.9852  0.9919  0.9787    14235765
+craquelure     0.4417  0.6128  0.5214  0.7430      444299
+macro(no_bg)   0.4417  0.6128  0.5214  0.7430
+pixel_acc = 0.9716  ignore_index=0
+[best] ep8 mIoU=0.4417 -> outputs/fullfpn_craq_v3_clahe_fold3_small/best.pt
+  ep9/80 it20/43 lr=2.95e-04 loss=0.4101 ce=0.2645 dice=0.5557 1.3s
+  ep9/80 it40/43 lr=2.94e-04 loss=0.4516 ce=0.3240 dice=0.5793 2.2s
+  ep9/80 it43/43 lr=2.94e-04 loss=0.4473 ce=0.3156 dice=0.5789 2.4s
+[val] ep9 mIoU=0.3850 mDice=0.5560 pixel_acc=0.9603 ce=0.1027
+class             IoU    Dice    Prec     Rec       gt_px
+background     0.9593  0.9792  0.9942  0.9647    14235765
+craquelure     0.3850  0.5560  0.4203  0.8208      444299
+macro(no_bg)   0.3850  0.5560  0.4203  0.8208
+pixel_acc = 0.9603  ignore_index=0
+  ep10/80 it20/43 lr=2.93e-04 loss=0.3967 ce=0.2680 dice=0.5254 1.3s
+  ep10/80 it40/43 lr=2.92e-04 loss=0.4439 ce=0.3237 dice=0.5642 2.3s
+  ep10/80 it43/43 lr=2.92e-04 loss=0.4380 ce=0.3122 dice=0.5638 2.4s
+[val] ep10 mIoU=0.4201 mDice=0.5917 pixel_acc=0.9683 ce=0.0857
+class             IoU    Dice    Prec     Rec       gt_px
+background     0.9676  0.9835  0.9923  0.9749    14235765
+craquelure     0.4201  0.5917  0.4850  0.7586      444299
+macro(no_bg)   0.4201  0.5917  0.4850  0.7586
+pixel_acc = 0.9683  ignore_index=0
+  ep11/80 it20/43 lr=2.91e-04 loss=0.4106 ce=0.2909 dice=0.5302 1.3s
+  ep11/80 it40/43 lr=2.90e-04 loss=0.4402 ce=0.3119 dice=0.5684 2.2s
+  ep11/80 it43/43 lr=2.90e-04 loss=0.4315 ce=0.3032 dice=0.5598 2.4s
+[val] ep11 mIoU=0.4270 mDice=0.5985 pixel_acc=0.9694 ce=0.0809
+class             IoU    Dice    Prec     Rec       gt_px
+background     0.9687  0.9841  0.9922  0.9761    14235765
+craquelure     0.4270  0.5985  0.4964  0.7534      444299
+macro(no_bg)   0.4270  0.5985  0.4964  0.7534
+pixel_acc = 0.9694  ignore_index=0
+  ep12/80 it20/43 lr=2.89e-04 loss=0.3805 ce=0.2525 dice=0.5085 1.3s
+  ep12/80 it40/43 lr=2.88e-04 loss=0.4252 ce=0.3075 dice=0.5428 2.2s
+  ep12/80 it43/43 lr=2.88e-04 loss=0.4234 ce=0.3015 dice=0.5453 2.4s
+[val] ep12 mIoU=0.3978 mDice=0.5692 pixel_acc=0.9633 ce=0.0962
+class             IoU    Dice    Prec     Rec       gt_px
+background     0.9624  0.9808  0.9936  0.9683    14235765
+craquelure     0.3978  0.5692  0.4414  0.8013      444299
+macro(no_bg)   0.3978  0.5692  0.4414  0.8013
+pixel_acc = 0.9633  ignore_index=0
+  ep13/80 it20/43 lr=2.87e-04 loss=0.4332 ce=0.3103 dice=0.5561 1.3s
+  ep13/80 it40/43 lr=2.86e-04 loss=0.4413 ce=0.3157 dice=0.5669 2.3s
+  ep13/80 it43/43 lr=2.86e-04 loss=0.4400 ce=0.3133 dice=0.5666 2.4s
+[val] ep13 mIoU=0.4319 mDice=0.6033 pixel_acc=0.9692 ce=0.0794
+class             IoU    Dice    Prec     Rec       gt_px
+background     0.9684  0.9840  0.9928  0.9753    14235765
+craquelure     0.4319  0.6033  0.4941  0.7744      444299
+macro(no_bg)   0.4319  0.6033  0.4941  0.7744
+pixel_acc = 0.9692  ignore_index=0
+  ep14/80 it20/43 lr=2.84e-04 loss=0.4006 ce=0.2744 dice=0.5268 1.2s
+  ep14/80 it40/43 lr=2.83e-04 loss=0.4334 ce=0.3047 dice=0.5620 2.2s
+  ep14/80 it43/43 lr=2.83e-04 loss=0.4295 ce=0.2971 dice=0.5619 2.4s
+[val] ep14 mIoU=0.4184 mDice=0.5899 pixel_acc=0.9670 ce=0.0874
+class             IoU    Dice    Prec     Rec       gt_px
+background     0.9662  0.9828  0.9932  0.9726    14235765
+craquelure     0.4184  0.5899  0.4725  0.7852      444299
+macro(no_bg)   0.4184  0.5899  0.4725  0.7852
+pixel_acc = 0.9670  ignore_index=0
+  ep15/80 it20/43 lr=2.82e-04 loss=0.3898 ce=0.2631 dice=0.5165 1.3s
+  ep15/80 it40/43 lr=2.80e-04 loss=0.4232 ce=0.3076 dice=0.5388 2.3s
+  ep15/80 it43/43 lr=2.80e-04 loss=0.4179 ce=0.3022 dice=0.5336 2.4s
+[val] ep15 mIoU=0.4587 mDice=0.6290 pixel_acc=0.9741 ce=0.0679
+class             IoU    Dice    Prec     Rec       gt_px
+background     0.9735  0.9866  0.9914  0.9818    14235765
+craquelure     0.4587  0.6290  0.5549  0.7259      444299
+macro(no_bg)   0.4587  0.6290  0.5549  0.7259
+pixel_acc = 0.9741  ignore_index=0
+[best] ep15 mIoU=0.4587 -> outputs/fullfpn_craq_v3_clahe_fold3_small/best.pt
+  ep16/80 it20/43 lr=2.79e-04 loss=0.3878 ce=0.2577 dice=0.5180 1.3s
+  ep16/80 it40/43 lr=2.77e-04 loss=0.4248 ce=0.3084 dice=0.5412 2.2s
+  ep16/80 it43/43 lr=2.77e-04 loss=0.4231 ce=0.3024 dice=0.5437 2.4s
+[val] ep16 mIoU=0.4438 mDice=0.6148 pixel_acc=0.9726 ce=0.0739
+class             IoU    Dice    Prec     Rec       gt_px
+background     0.9720  0.9858  0.9912  0.9804    14235765
+craquelure     0.4438  0.6148  0.5353  0.7219      444299
+macro(no_bg)   0.4438  0.6148  0.5353  0.7219
+pixel_acc = 0.9726  ignore_index=0
+  ep17/80 it20/43 lr=2.75e-04 loss=0.4054 ce=0.2672 dice=0.5436 1.3s
+  ep17/80 it40/43 lr=2.74e-04 loss=0.4315 ce=0.3028 dice=0.5602 2.2s
+  ep17/80 it43/43 lr=2.74e-04 loss=0.4267 ce=0.2952 dice=0.5582 2.4s
+[val] ep17 mIoU=0.4424 mDice=0.6134 pixel_acc=0.9711 ce=0.0758
+class             IoU    Dice    Prec     Rec       gt_px
+background     0.9704  0.9850  0.9923  0.9777    14235765
+craquelure     0.4424  0.6134  0.5149  0.7584      444299
+macro(no_bg)   0.4424  0.6134  0.5149  0.7584
+pixel_acc = 0.9711  ignore_index=0
+  ep18/80 it20/43 lr=2.72e-04 loss=0.3853 ce=0.2766 dice=0.4940 1.3s
+  ep18/80 it40/43 lr=2.70e-04 loss=0.4246 ce=0.3066 dice=0.5426 2.2s
+  ep18/80 it43/43 lr=2.70e-04 loss=0.4220 ce=0.2987 dice=0.5454 2.4s
+[val] ep18 mIoU=0.4612 mDice=0.6313 pixel_acc=0.9748 ce=0.0687
+class             IoU    Dice    Prec     Rec       gt_px
+background     0.9743  0.9870  0.9910  0.9830    14235765
+craquelure     0.4612  0.6313  0.5667  0.7125      444299
+macro(no_bg)   0.4612  0.6313  0.5667  0.7125
+pixel_acc = 0.9748  ignore_index=0
+[best] ep18 mIoU=0.4612 -> outputs/fullfpn_craq_v3_clahe_fold3_small/best.pt
+  ep19/80 it20/43 lr=2.68e-04 loss=0.3868 ce=0.2675 dice=0.5061 1.3s
+  ep19/80 it40/43 lr=2.67e-04 loss=0.4239 ce=0.2988 dice=0.5490 2.2s
+  ep19/80 it43/43 lr=2.66e-04 loss=0.4179 ce=0.2935 dice=0.5424 2.4s
+[val] ep19 mIoU=0.4572 mDice=0.6275 pixel_acc=0.9739 ce=0.0700
+class             IoU    Dice    Prec     Rec       gt_px
+background     0.9733  0.9865  0.9914  0.9816    14235765
+craquelure     0.4572  0.6275  0.5519  0.7271      444299
+macro(no_bg)   0.4572  0.6275  0.5519  0.7271
+pixel_acc = 0.9739  ignore_index=0
+  ep20/80 it20/43 lr=2.64e-04 loss=0.3828 ce=0.2422 dice=0.5233 1.3s
+  ep20/80 it40/43 lr=2.63e-04 loss=0.4084 ce=0.2795 dice=0.5372 2.2s
+  ep20/80 it43/43 lr=2.62e-04 loss=0.4050 ce=0.2751 dice=0.5348 2.4s
+[val] ep20 mIoU=0.3856 mDice=0.5566 pixel_acc=0.9605 ce=0.1065
+class             IoU    Dice    Prec     Rec       gt_px
+background     0.9594  0.9793  0.9942  0.9648    14235765
+craquelure     0.3856  0.5566  0.4212  0.8202      444299
+macro(no_bg)   0.3856  0.5566  0.4212  0.8202
+pixel_acc = 0.9605  ignore_index=0
+  ep21/80 it20/43 lr=2.60e-04 loss=0.3749 ce=0.2553 dice=0.4945 1.3s
+  ep21/80 it40/43 lr=2.59e-04 loss=0.4209 ce=0.2978 dice=0.5439 2.3s
+  ep21/80 it43/43 lr=2.58e-04 loss=0.4152 ce=0.2894 dice=0.5409 2.4s
+[val] ep21 mIoU=0.4459 mDice=0.6167 pixel_acc=0.9713 ce=0.0765
+class             IoU    Dice    Prec     Rec       gt_px
+background     0.9706  0.9851  0.9925  0.9778    14235765
+craquelure     0.4459  0.6167  0.5176  0.7629      444299
+macro(no_bg)   0.4459  0.6167  0.5176  0.7629
+pixel_acc = 0.9713  ignore_index=0
+  ep22/80 it20/43 lr=2.56e-04 loss=0.3682 ce=0.2530 dice=0.4833 1.2s
+  ep22/80 it40/43 lr=2.54e-04 loss=0.4127 ce=0.2882 dice=0.5373 2.2s
+  ep22/80 it43/43 lr=2.54e-04 loss=0.4113 ce=0.2821 dice=0.5405 2.4s
+[val] ep22 mIoU=0.4072 mDice=0.5787 pixel_acc=0.9656 ce=0.0920
+class             IoU    Dice    Prec     Rec       gt_px
+background     0.9648  0.9821  0.9930  0.9714    14235765
+craquelure     0.4072  0.5787  0.4599  0.7803      444299
+macro(no_bg)   0.4072  0.5787  0.4599  0.7803
+pixel_acc = 0.9656  ignore_index=0
+  ep23/80 it20/43 lr=2.52e-04 loss=0.3869 ce=0.2555 dice=0.5184 1.3s
+  ep23/80 it40/43 lr=2.50e-04 loss=0.4210 ce=0.3032 dice=0.5388 2.3s
+  ep23/80 it43/43 lr=2.50e-04 loss=0.4155 ce=0.2965 dice=0.5345 2.4s
+[val] ep23 mIoU=0.4380 mDice=0.6091 pixel_acc=0.9716 ce=0.0800
+class             IoU    Dice    Prec     Rec       gt_px
+background     0.9710  0.9853  0.9915  0.9791    14235765
+craquelure     0.4380  0.6091  0.5220  0.7313      444299
+macro(no_bg)   0.4380  0.6091  0.5220  0.7313
+pixel_acc = 0.9716  ignore_index=0
+  ep24/80 it20/43 lr=2.47e-04 loss=0.3829 ce=0.2503 dice=0.5154 1.3s
+  ep24/80 it40/43 lr=2.45e-04 loss=0.4119 ce=0.2933 dice=0.5306 2.2s
+  ep24/80 it43/43 lr=2.45e-04 loss=0.4085 ce=0.2841 dice=0.5330 2.4s
+[val] ep24 mIoU=0.4621 mDice=0.6321 pixel_acc=0.9748 ce=0.0687
+class             IoU    Dice    Prec     Rec       gt_px
+background     0.9743  0.9870  0.9910  0.9829    14235765
+craquelure     0.4621  0.6321  0.5665  0.7150      444299
+macro(no_bg)   0.4621  0.6321  0.5665  0.7150
+pixel_acc = 0.9748  ignore_index=0
+[best] ep24 mIoU=0.4621 -> outputs/fullfpn_craq_v3_clahe_fold3_small/best.pt
+  ep25/80 it20/43 lr=2.43e-04 loss=0.3588 ce=0.2398 dice=0.4779 1.3s
+  ep25/80 it40/43 lr=2.41e-04 loss=0.4040 ce=0.2832 dice=0.5249 1.2s
+  ep25/80 it43/43 lr=2.40e-04 loss=0.3967 ce=0.2768 dice=0.5167 1.4s
+[val] ep25 mIoU=0.4376 mDice=0.6088 pixel_acc=0.9702 ce=0.0830
+class             IoU    Dice    Prec     Rec       gt_px
+background     0.9695  0.9845  0.9926  0.9766    14235765
+craquelure     0.4376  0.6088  0.5053  0.7655      444299
+macro(no_bg)   0.4376  0.6088  0.5053  0.7655
+pixel_acc = 0.9702  ignore_index=0
+  ep26/80 it20/43 lr=2.38e-04 loss=0.3787 ce=0.2708 dice=0.4866 1.3s
+  ep26/80 it40/43 lr=2.36e-04 loss=0.4017 ce=0.2874 dice=0.5160 2.3s
+  ep26/80 it43/43 lr=2.35e-04 loss=0.3982 ce=0.2826 dice=0.5138 2.4s
+[val] ep26 mIoU=0.4660 mDice=0.6357 pixel_acc=0.9761 ce=0.0681
+class             IoU    Dice    Prec     Rec       gt_px
+background     0.9756  0.9876  0.9902  0.9851    14235765
+craquelure     0.4660  0.6357  0.5901  0.6890      444299
+macro(no_bg)   0.4660  0.6357  0.5901  0.6890
+pixel_acc = 0.9761  ignore_index=0
+[best] ep26 mIoU=0.4660 -> outputs/fullfpn_craq_v3_clahe_fold3_small/best.pt
+  ep27/80 it20/43 lr=2.33e-04 loss=0.3812 ce=0.2491 dice=0.5132 1.2s
+  ep27/80 it40/43 lr=2.31e-04 loss=0.4074 ce=0.2899 dice=0.5249 2.2s
+  ep27/80 it43/43 lr=2.30e-04 loss=0.4040 ce=0.2811 dice=0.5269 2.4s
+[val] ep27 mIoU=0.4475 mDice=0.6183 pixel_acc=0.9728 ce=0.0750
+class             IoU    Dice    Prec     Rec       gt_px
+background     0.9721  0.9859  0.9914  0.9804    14235765
+craquelure     0.4475  0.6183  0.5368  0.7290      444299
+macro(no_bg)   0.4475  0.6183  0.5368  0.7290
+pixel_acc = 0.9728  ignore_index=0
+  ep28/80 it20/43 lr=2.28e-04 loss=0.3794 ce=0.2514 dice=0.5074 1.3s
+  ep28/80 it40/43 lr=2.25e-04 loss=0.4080 ce=0.2869 dice=0.5291 2.2s
+  ep28/80 it43/43 lr=2.25e-04 loss=0.4050 ce=0.2809 dice=0.5291 2.4s
+[val] ep28 mIoU=0.4355 mDice=0.6068 pixel_acc=0.9708 ce=0.0844
+class             IoU    Dice    Prec     Rec       gt_px
+background     0.9701  0.9848  0.9919  0.9778    14235765
+craquelure     0.4355  0.6068  0.5119  0.7449      444299
+macro(no_bg)   0.4355  0.6068  0.5119  0.7449
+pixel_acc = 0.9708  ignore_index=0
+  ep29/80 it20/43 lr=2.23e-04 loss=0.3733 ce=0.2566 dice=0.4900 1.2s
+  ep29/80 it40/43 lr=2.20e-04 loss=0.4164 ce=0.3056 dice=0.5273 2.2s
+  ep29/80 it43/43 lr=2.20e-04 loss=0.4167 ce=0.2992 dice=0.5341 2.4s
+[val] ep29 mIoU=0.4441 mDice=0.6150 pixel_acc=0.9715 ce=0.0787
+class             IoU    Dice    Prec     Rec       gt_px
+background     0.9708  0.9852  0.9922  0.9783    14235765
+craquelure     0.4441  0.6150  0.5196  0.7533      444299
+macro(no_bg)   0.4441  0.6150  0.5196  0.7533
+pixel_acc = 0.9715  ignore_index=0
+  ep30/80 it20/43 lr=2.17e-04 loss=0.3777 ce=0.2639 dice=0.4915 1.3s
+  ep30/80 it40/43 lr=2.15e-04 loss=0.4029 ce=0.2759 dice=0.5300 2.2s
+  ep30/80 it43/43 lr=2.14e-04 loss=0.3969 ce=0.2718 dice=0.5220 2.4s
+[val] ep30 mIoU=0.4553 mDice=0.6257 pixel_acc=0.9738 ce=0.0740
+class             IoU    Dice    Prec     Rec       gt_px
+background     0.9732  0.9864  0.9913  0.9816    14235765
+craquelure     0.4553  0.6257  0.5514  0.7232      444299
+macro(no_bg)   0.4553  0.6257  0.5514  0.7232
+pixel_acc = 0.9738  ignore_index=0
+  ep31/80 it20/43 lr=2.12e-04 loss=0.3552 ce=0.2333 dice=0.4771 1.3s
+  ep31/80 it40/43 lr=2.09e-04 loss=0.4108 ce=0.2872 dice=0.5344 2.2s
+  ep31/80 it43/43 lr=2.09e-04 loss=0.4050 ce=0.2786 dice=0.5314 2.4s
+[val] ep31 mIoU=0.4469 mDice=0.6178 pixel_acc=0.9723 ce=0.0770
+class             IoU    Dice    Prec     Rec       gt_px
+background     0.9717  0.9856  0.9917  0.9796    14235765
+craquelure     0.4469  0.6178  0.5308  0.7388      444299
+macro(no_bg)   0.4469  0.6178  0.5308  0.7388
+pixel_acc = 0.9723  ignore_index=0
+  ep32/80 it20/43 lr=2.06e-04 loss=0.3693 ce=0.2498 dice=0.4889 1.3s
+  ep32/80 it40/43 lr=2.04e-04 loss=0.4174 ce=0.2891 dice=0.5457 2.3s
+  ep32/80 it43/43 lr=2.03e-04 loss=0.4098 ce=0.2825 dice=0.5370 2.4s
+[val] ep32 mIoU=0.4447 mDice=0.6156 pixel_acc=0.9736 ce=0.0772
+class             IoU    Dice    Prec     Rec       gt_px
+background     0.9731  0.9864  0.9905  0.9823    14235765
+craquelure     0.4447  0.6156  0.5511  0.6971      444299
+macro(no_bg)   0.4447  0.6156  0.5511  0.6971
+pixel_acc = 0.9736  ignore_index=0
+  ep33/80 it20/43 lr=2.01e-04 loss=0.3636 ce=0.2485 dice=0.4788 1.3s
+  ep33/80 it40/43 lr=1.98e-04 loss=0.3994 ce=0.2830 dice=0.5159 1.2s
+  ep33/80 it43/43 lr=1.98e-04 loss=0.3968 ce=0.2770 dice=0.5166 1.4s
+[val] ep33 mIoU=0.4626 mDice=0.6325 pixel_acc=0.9750 ce=0.0710
+class             IoU    Dice    Prec     Rec       gt_px
+background     0.9744  0.9871  0.9909  0.9832    14235765
+craquelure     0.4626  0.6325  0.5695  0.7112      444299
+macro(no_bg)   0.4626  0.6325  0.5695  0.7112
+pixel_acc = 0.9750  ignore_index=0
+  ep34/80 it20/43 lr=1.95e-04 loss=0.3823 ce=0.2439 dice=0.5207 1.3s
+  ep34/80 it40/43 lr=1.92e-04 loss=0.4013 ce=0.2710 dice=0.5317 2.3s
+  ep34/80 it43/43 lr=1.92e-04 loss=0.3951 ce=0.2661 dice=0.5240 2.4s
+[val] ep34 mIoU=0.4660 mDice=0.6357 pixel_acc=0.9752 ce=0.0690
+class             IoU    Dice    Prec     Rec       gt_px
+background     0.9747  0.9872  0.9910  0.9833    14235765
+craquelure     0.4660  0.6357  0.5723  0.7149      444299
+macro(no_bg)   0.4660  0.6357  0.5723  0.7149
+pixel_acc = 0.9752  ignore_index=0
+  ep35/80 it20/43 lr=1.89e-04 loss=0.3721 ce=0.2452 dice=0.4990 1.2s
+  ep35/80 it40/43 lr=1.86e-04 loss=0.3918 ce=0.2770 dice=0.5066 2.2s
+  ep35/80 it43/43 lr=1.86e-04 loss=0.3861 ce=0.2694 dice=0.5028 2.4s
+[val] ep35 mIoU=0.4631 mDice=0.6330 pixel_acc=0.9783 ce=0.0752
+class             IoU    Dice    Prec     Rec       gt_px
+background     0.9778  0.9888  0.9881  0.9895    14235765
+craquelure     0.4631  0.6330  0.6472  0.6194      444299
+macro(no_bg)   0.4631  0.6330  0.6472  0.6194
+pixel_acc = 0.9783  ignore_index=0
+  ep36/80 it20/43 lr=1.83e-04 loss=0.3664 ce=0.2244 dice=0.5085 1.3s
+  ep36/80 it40/43 lr=1.81e-04 loss=0.3939 ce=0.2693 dice=0.5186 2.3s
+  ep36/80 it43/43 lr=1.80e-04 loss=0.3948 ce=0.2668 dice=0.5228 2.4s
+[val] ep36 mIoU=0.4478 mDice=0.6186 pixel_acc=0.9719 ce=0.0791
+class             IoU    Dice    Prec     Rec       gt_px
+background     0.9712  0.9854  0.9922  0.9787    14235765
+craquelure     0.4478  0.6186  0.5246  0.7536      444299
+macro(no_bg)   0.4478  0.6186  0.5246  0.7536
+pixel_acc = 0.9719  ignore_index=0
+  ep37/80 it20/43 lr=1.77e-04 loss=0.3722 ce=0.2518 dice=0.4925 1.3s
+  ep37/80 it40/43 lr=1.75e-04 loss=0.3979 ce=0.2882 dice=0.5077 2.3s
+  ep37/80 it43/43 lr=1.74e-04 loss=0.3932 ce=0.2830 dice=0.5033 2.4s
+[val] ep37 mIoU=0.4623 mDice=0.6323 pixel_acc=0.9763 ce=0.0734
+class             IoU    Dice    Prec     Rec       gt_px
+background     0.9758  0.9877  0.9898  0.9857    14235765
+craquelure     0.4623  0.6323  0.5950  0.6746      444299
+macro(no_bg)   0.4623  0.6323  0.5950  0.6746
+pixel_acc = 0.9763  ignore_index=0
+  ep38/80 it20/43 lr=1.71e-04 loss=0.3670 ce=0.2574 dice=0.4767 1.2s
+  ep38/80 it40/43 lr=1.69e-04 loss=0.3935 ce=0.2742 dice=0.5128 2.2s
+  ep38/80 it43/43 lr=1.68e-04 loss=0.3878 ce=0.2673 dice=0.5083 2.4s
+[val] ep38 mIoU=0.4612 mDice=0.6312 pixel_acc=0.9764 ce=0.0732
+class             IoU    Dice    Prec     Rec       gt_px
+background     0.9759  0.9878  0.9896  0.9861    14235765
+craquelure     0.4612  0.6312  0.5993  0.6668      444299
+macro(no_bg)   0.4612  0.6312  0.5993  0.6668
+pixel_acc = 0.9764  ignore_index=0
+  ep39/80 it20/43 lr=1.65e-04 loss=0.3461 ce=0.2270 dice=0.4652 1.3s
+  ep39/80 it40/43 lr=1.63e-04 loss=0.3849 ce=0.2740 dice=0.4958 2.2s
+  ep39/80 it43/43 lr=1.62e-04 loss=0.3830 ce=0.2723 dice=0.4937 2.4s
+[val] ep39 mIoU=0.4596 mDice=0.6298 pixel_acc=0.9757 ce=0.0733
+class             IoU    Dice    Prec     Rec       gt_px
+background     0.9752  0.9874  0.9901  0.9848    14235765
+craquelure     0.4596  0.6298  0.5841  0.6833      444299
+macro(no_bg)   0.4596  0.6298  0.5841  0.6833
+pixel_acc = 0.9757  ignore_index=0
+  ep40/80 it20/43 lr=1.59e-04 loss=0.3559 ce=0.2331 dice=0.4788 1.3s
+  ep40/80 it40/43 lr=1.57e-04 loss=0.3866 ce=0.2679 dice=0.5053 2.3s
+  ep40/80 it43/43 lr=1.56e-04 loss=0.3832 ce=0.2592 dice=0.5073 2.4s
+[val] ep40 mIoU=0.4605 mDice=0.6306 pixel_acc=0.9756 ce=0.0716
+class             IoU    Dice    Prec     Rec       gt_px
+background     0.9751  0.9874  0.9902  0.9846    14235765
+craquelure     0.4605  0.6306  0.5824  0.6875      444299
+macro(no_bg)   0.4605  0.6306  0.5824  0.6875
+pixel_acc = 0.9756  ignore_index=0
+  ep41/80 it20/43 lr=1.53e-04 loss=0.3449 ce=0.2297 dice=0.4600 0.2s
+  ep41/80 it40/43 lr=1.51e-04 loss=0.3901 ce=0.2743 dice=0.5059 1.2s
+  ep41/80 it43/43 lr=1.50e-04 loss=0.3829 ce=0.2655 dice=0.5003 1.3s
+[val] ep41 mIoU=0.4520 mDice=0.6226 pixel_acc=0.9749 ce=0.0750
+class             IoU    Dice    Prec     Rec       gt_px
+background     0.9743  0.9870  0.9901  0.9839    14235765
+craquelure     0.4520  0.6226  0.5705  0.6850      444299
+macro(no_bg)   0.4520  0.6226  0.5705  0.6850
+pixel_acc = 0.9749  ignore_index=0
+  ep42/80 it20/43 lr=1.47e-04 loss=0.3317 ce=0.2086 dice=0.4548 1.2s
+  ep42/80 it40/43 lr=1.45e-04 loss=0.3899 ce=0.2807 dice=0.4991 2.2s
+  ep42/80 it43/43 lr=1.44e-04 loss=0.3852 ce=0.2730 dice=0.4974 2.4s
+[val] ep42 mIoU=0.4523 mDice=0.6229 pixel_acc=0.9748 ce=0.0801
+class             IoU    Dice    Prec     Rec       gt_px
+background     0.9743  0.9870  0.9902  0.9838    14235765
+craquelure     0.4523  0.6229  0.5695  0.6872      444299
+macro(no_bg)   0.4523  0.6229  0.5695  0.6872
+pixel_acc = 0.9748  ignore_index=0
+  ep43/80 it20/43 lr=1.41e-04 loss=0.3607 ce=0.2168 dice=0.5046 1.3s
+  ep43/80 it40/43 lr=1.38e-04 loss=0.3920 ce=0.2813 dice=0.5027 2.3s
+  ep43/80 it43/43 lr=1.38e-04 loss=0.3867 ce=0.2744 dice=0.4990 2.4s
+[val] ep43 mIoU=0.4649 mDice=0.6347 pixel_acc=0.9767 ce=0.0718
+class             IoU    Dice    Prec     Rec       gt_px
+background     0.9762  0.9879  0.9897  0.9862    14235765
+craquelure     0.4649  0.6347  0.6030  0.6699      444299
+macro(no_bg)   0.4649  0.6347  0.6030  0.6699
+pixel_acc = 0.9767  ignore_index=0
+  ep44/80 it20/43 lr=1.35e-04 loss=0.3460 ce=0.2174 dice=0.4746 1.3s
+  ep44/80 it40/43 lr=1.32e-04 loss=0.3848 ce=0.2769 dice=0.4928 2.2s
+  ep44/80 it43/43 lr=1.32e-04 loss=0.3815 ce=0.2668 dice=0.4962 2.4s
+[val] ep44 mIoU=0.4665 mDice=0.6362 pixel_acc=0.9786 ce=0.0714
+class             IoU    Dice    Prec     Rec       gt_px
+background     0.9782  0.9890  0.9881  0.9899    14235765
+craquelure     0.4665  0.6362  0.6557  0.6178      444299
+macro(no_bg)   0.4665  0.6362  0.6557  0.6178
+pixel_acc = 0.9786  ignore_index=0
+[best] ep44 mIoU=0.4665 -> outputs/fullfpn_craq_v3_clahe_fold3_small/best.pt
+  ep45/80 it20/43 lr=1.29e-04 loss=0.3455 ce=0.2173 dice=0.4736 1.3s
+  ep45/80 it40/43 lr=1.26e-04 loss=0.3816 ce=0.2624 dice=0.5008 2.3s
+  ep45/80 it43/43 lr=1.26e-04 loss=0.3850 ce=0.2550 dice=0.5151 2.4s
+[val] ep45 mIoU=0.4596 mDice=0.6298 pixel_acc=0.9749 ce=0.0738
+class             IoU    Dice    Prec     Rec       gt_px
+background     0.9744  0.9870  0.9907  0.9834    14235765
+craquelure     0.4596  0.6298  0.5694  0.7044      444299
+macro(no_bg)   0.4596  0.6298  0.5694  0.7044
+pixel_acc = 0.9749  ignore_index=0
+  ep46/80 it20/43 lr=1.23e-04 loss=0.3491 ce=0.2284 dice=0.4698 1.3s
+  ep46/80 it40/43 lr=1.21e-04 loss=0.3739 ce=0.2642 dice=0.4835 2.3s
+  ep46/80 it43/43 lr=1.20e-04 loss=0.3742 ce=0.2569 dice=0.4916 2.4s
+[val] ep46 mIoU=0.4670 mDice=0.6367 pixel_acc=0.9779 ce=0.0691
+class             IoU    Dice    Prec     Rec       gt_px
+background     0.9775  0.9886  0.9887  0.9885    14235765
+craquelure     0.4670  0.6367  0.6340  0.6394      444299
+macro(no_bg)   0.4670  0.6367  0.6340  0.6394
+pixel_acc = 0.9779  ignore_index=0
+[best] ep46 mIoU=0.4670 -> outputs/fullfpn_craq_v3_clahe_fold3_small/best.pt
+  ep47/80 it20/43 lr=1.17e-04 loss=0.3485 ce=0.2196 dice=0.4774 1.3s
+  ep47/80 it40/43 lr=1.15e-04 loss=0.3869 ce=0.2760 dice=0.4977 2.2s
+  ep47/80 it43/43 lr=1.14e-04 loss=0.3834 ce=0.2732 dice=0.4936 2.4s
+[val] ep47 mIoU=0.4637 mDice=0.6336 pixel_acc=0.9789 ce=0.0743
+class             IoU    Dice    Prec     Rec       gt_px
+background     0.9785  0.9892  0.9876  0.9907    14235765
+craquelure     0.4637  0.6336  0.6691  0.6018      444299
+macro(no_bg)   0.4637  0.6336  0.6691  0.6018
+pixel_acc = 0.9789  ignore_index=0
+  ep48/80 it20/43 lr=1.12e-04 loss=0.3449 ce=0.2093 dice=0.4804 1.2s
+  ep48/80 it40/43 lr=1.09e-04 loss=0.3939 ce=0.2783 dice=0.5095 2.2s
+  ep48/80 it43/43 lr=1.08e-04 loss=0.3861 ce=0.2716 dice=0.5007 2.4s
+[val] ep48 mIoU=0.4602 mDice=0.6304 pixel_acc=0.9796 ce=0.0735
+class             IoU    Dice    Prec     Rec       gt_px
+background     0.9793  0.9895  0.9868  0.9923    14235765
+craquelure     0.4602  0.6304  0.6998  0.5734      444299
+macro(no_bg)   0.4602  0.6304  0.6998  0.5734
+pixel_acc = 0.9796  ignore_index=0
+  ep49/80 it20/43 lr=1.06e-04 loss=0.3411 ce=0.2116 dice=0.4706 1.3s
+  ep49/80 it40/43 lr=1.03e-04 loss=0.3815 ce=0.2554 dice=0.5076 2.3s
+  ep49/80 it43/43 lr=1.03e-04 loss=0.3754 ce=0.2505 dice=0.5004 2.4s
+[val] ep49 mIoU=0.4636 mDice=0.6335 pixel_acc=0.9767 ce=0.0712
+class             IoU    Dice    Prec     Rec       gt_px
+background     0.9762  0.9880  0.9895  0.9864    14235765
+craquelure     0.4636  0.6335  0.6050  0.6649      444299
+macro(no_bg)   0.4636  0.6335  0.6050  0.6649
+pixel_acc = 0.9767  ignore_index=0
+  ep50/80 it20/43 lr=1.00e-04 loss=0.3395 ce=0.2307 dice=0.4482 1.2s
+  ep50/80 it40/43 lr=9.73e-05 loss=0.3802 ce=0.2593 dice=0.5010 2.2s
+  ep50/80 it43/43 lr=9.69e-05 loss=0.3767 ce=0.2562 dice=0.4971 2.4s
+[val] ep50 mIoU=0.4570 mDice=0.6273 pixel_acc=0.9789 ce=0.0744
+class             IoU    Dice    Prec     Rec       gt_px
+background     0.9785  0.9891  0.9872  0.9911    14235765
+craquelure     0.4570  0.6273  0.6731  0.5873      444299
+macro(no_bg)   0.4570  0.6273  0.6731  0.5873
+pixel_acc = 0.9789  ignore_index=0
+  ep51/80 it20/43 lr=9.43e-05 loss=0.3530 ce=0.2335 dice=0.4725 1.3s
+  ep51/80 it40/43 lr=9.17e-05 loss=0.3772 ce=0.2608 dice=0.4936 2.2s
+  ep51/80 it43/43 lr=9.13e-05 loss=0.3751 ce=0.2556 dice=0.4946 2.4s
+[val] ep51 mIoU=0.4622 mDice=0.6322 pixel_acc=0.9787 ce=0.0758
+class             IoU    Dice    Prec     Rec       gt_px
+background     0.9784  0.9891  0.9877  0.9905    14235765
+craquelure     0.4622  0.6322  0.6638  0.6035      444299
+macro(no_bg)   0.4622  0.6322  0.6638  0.6035
+pixel_acc = 0.9787  ignore_index=0
+  ep52/80 it20/43 lr=8.88e-05 loss=0.3597 ce=0.2633 dice=0.4562 1.3s
+  ep52/80 it40/43 lr=8.62e-05 loss=0.3741 ce=0.2551 dice=0.4932 2.3s
+  ep52/80 it43/43 lr=8.58e-05 loss=0.3672 ce=0.2471 dice=0.4874 2.4s
+[val] ep52 mIoU=0.4616 mDice=0.6316 pixel_acc=0.9772 ce=0.0726
+class             IoU    Dice    Prec     Rec       gt_px
+background     0.9767  0.9882  0.9889  0.9875    14235765
+craquelure     0.4616  0.6316  0.6177  0.6462      444299
+macro(no_bg)   0.4616  0.6316  0.6177  0.6462
+pixel_acc = 0.9772  ignore_index=0
+  ep53/80 it20/43 lr=8.33e-05 loss=0.3471 ce=0.2474 dice=0.4469 1.2s
+  ep53/80 it40/43 lr=8.08e-05 loss=0.3724 ce=0.2651 dice=0.4797 2.2s
+  ep53/80 it43/43 lr=8.04e-05 loss=0.3711 ce=0.2602 dice=0.4820 2.4s
+[val] ep53 mIoU=0.4630 mDice=0.6329 pixel_acc=0.9753 ce=0.0740
+class             IoU    Dice    Prec     Rec       gt_px
+background     0.9748  0.9872  0.9907  0.9838    14235765
+craquelure     0.4630  0.6329  0.5755  0.7031      444299
+macro(no_bg)   0.4630  0.6329  0.5755  0.7031
+pixel_acc = 0.9753  ignore_index=0
+  ep54/80 it20/43 lr=7.79e-05 loss=0.3413 ce=0.2140 dice=0.4686 1.2s
+  ep54/80 it40/43 lr=7.55e-05 loss=0.3846 ce=0.2744 dice=0.4948 2.2s
+  ep54/80 it43/43 lr=7.51e-05 loss=0.3773 ce=0.2687 dice=0.4859 2.4s
+[val] ep54 mIoU=0.4680 mDice=0.6376 pixel_acc=0.9794 ce=0.0726
+class             IoU    Dice    Prec     Rec       gt_px
+background     0.9790  0.9894  0.9876  0.9912    14235765
+craquelure     0.4680  0.6376  0.6806  0.5996      444299
+macro(no_bg)   0.4680  0.6376  0.6806  0.5996
+pixel_acc = 0.9794  ignore_index=0
+[best] ep54 mIoU=0.4680 -> outputs/fullfpn_craq_v3_clahe_fold3_small/best.pt
+  ep55/80 it20/43 lr=7.27e-05 loss=0.3469 ce=0.2247 dice=0.4692 1.3s
+  ep55/80 it40/43 lr=7.03e-05 loss=0.3711 ce=0.2545 dice=0.4878 2.3s
+  ep55/80 it43/43 lr=6.99e-05 loss=0.3669 ce=0.2498 dice=0.4841 2.4s
+[val] ep55 mIoU=0.4623 mDice=0.6323 pixel_acc=0.9794 ce=0.0747
+class             IoU    Dice    Prec     Rec       gt_px
+background     0.9790  0.9894  0.9871  0.9917    14235765
+craquelure     0.4623  0.6323  0.6870  0.5856      444299
+macro(no_bg)   0.4623  0.6323  0.6870  0.5856
+pixel_acc = 0.9794  ignore_index=0
+  ep56/80 it20/43 lr=6.76e-05 loss=0.3510 ce=0.2340 dice=0.4680 1.3s
+  ep56/80 it40/43 lr=6.53e-05 loss=0.3757 ce=0.2582 dice=0.4932 2.3s
+  ep56/80 it43/43 lr=6.49e-05 loss=0.3695 ce=0.2512 dice=0.4878 2.4s
+[val] ep56 mIoU=0.4594 mDice=0.6296 pixel_acc=0.9779 ce=0.0750
+class             IoU    Dice    Prec     Rec       gt_px
+background     0.9775  0.9886  0.9881  0.9891    14235765
+craquelure     0.4594  0.6296  0.6403  0.6191      444299
+macro(no_bg)   0.4594  0.6296  0.6403  0.6191
+pixel_acc = 0.9779  ignore_index=0
+  ep57/80 it20/43 lr=6.26e-05 loss=0.3362 ce=0.2181 dice=0.4544 1.3s
+  ep57/80 it40/43 lr=6.03e-05 loss=0.3677 ce=0.2479 dice=0.4875 2.3s
+  ep57/80 it43/43 lr=6.00e-05 loss=0.3632 ce=0.2446 dice=0.4818 2.4s
+[val] ep57 mIoU=0.4609 mDice=0.6310 pixel_acc=0.9774 ce=0.0733
+class             IoU    Dice    Prec     Rec       gt_px
+background     0.9769  0.9883  0.9887  0.9879    14235765
+craquelure     0.4609  0.6310  0.6225  0.6397      444299
+macro(no_bg)   0.4609  0.6310  0.6225  0.6397
+pixel_acc = 0.9774  ignore_index=0
+  ep58/80 it20/43 lr=5.78e-05 loss=0.3354 ce=0.2257 dice=0.4451 1.3s
+  ep58/80 it40/43 lr=5.56e-05 loss=0.3697 ce=0.2579 dice=0.4814 2.2s
+  ep58/80 it43/43 lr=5.52e-05 loss=0.3666 ce=0.2555 dice=0.4778 2.4s
+[val] ep58 mIoU=0.4626 mDice=0.6326 pixel_acc=0.9777 ce=0.0724
+class             IoU    Dice    Prec     Rec       gt_px
+background     0.9773  0.9885  0.9886  0.9885    14235765
+craquelure     0.4626  0.6326  0.6317  0.6335      444299
+macro(no_bg)   0.4626  0.6326  0.6317  0.6335
+pixel_acc = 0.9777  ignore_index=0
+  ep59/80 it20/43 lr=5.31e-05 loss=0.3350 ce=0.2210 dice=0.4491 1.3s
+  ep59/80 it40/43 lr=5.10e-05 loss=0.3696 ce=0.2464 dice=0.4928 2.3s
+  ep59/80 it43/43 lr=5.06e-05 loss=0.3655 ce=0.2391 dice=0.4919 2.4s
+[val] ep59 mIoU=0.4586 mDice=0.6288 pixel_acc=0.9785 ce=0.0757
+class             IoU    Dice    Prec     Rec       gt_px
+background     0.9781  0.9889  0.9876  0.9903    14235765
+craquelure     0.4586  0.6288  0.6596  0.6008      444299
+macro(no_bg)   0.4586  0.6288  0.6596  0.6008
+pixel_acc = 0.9785  ignore_index=0
+  ep60/80 it20/43 lr=4.85e-05 loss=0.3372 ce=0.2139 dice=0.4605 1.2s
+  ep60/80 it40/43 lr=4.65e-05 loss=0.3761 ce=0.2553 dice=0.4970 2.2s
+  ep60/80 it43/43 lr=4.62e-05 loss=0.3694 ce=0.2488 dice=0.4900 2.4s
+[val] ep60 mIoU=0.4593 mDice=0.6295 pixel_acc=0.9790 ce=0.0757
+class             IoU    Dice    Prec     Rec       gt_px
+background     0.9786  0.9892  0.9872  0.9912    14235765
+craquelure     0.4593  0.6295  0.6756  0.5892      444299
+macro(no_bg)   0.4593  0.6295  0.6756  0.5892
+pixel_acc = 0.9790  ignore_index=0
+  ep61/80 it20/43 lr=4.42e-05 loss=0.3394 ce=0.2063 dice=0.4725 1.3s
+  ep61/80 it40/43 lr=4.22e-05 loss=0.3787 ce=0.2745 dice=0.4830 2.3s
+  ep61/80 it43/43 lr=4.19e-05 loss=0.3714 ce=0.2657 dice=0.4770 2.4s
+[val] ep61 mIoU=0.4666 mDice=0.6363 pixel_acc=0.9783 ce=0.0730
+class             IoU    Dice    Prec     Rec       gt_px
+background     0.9779  0.9888  0.9884  0.9892    14235765
+craquelure     0.4666  0.6363  0.6449  0.6279      444299
+macro(no_bg)   0.4666  0.6363  0.6449  0.6279
+pixel_acc = 0.9783  ignore_index=0
+  ep62/80 it20/43 lr=4.00e-05 loss=0.3534 ce=0.1993 dice=0.5074 1.2s
+  ep62/80 it40/43 lr=3.81e-05 loss=0.3685 ce=0.2501 dice=0.4869 2.2s
+  ep62/80 it43/43 lr=3.78e-05 loss=0.3632 ce=0.2456 dice=0.4808 2.4s
+[val] ep62 mIoU=0.4624 mDice=0.6324 pixel_acc=0.9783 ce=0.0733
+class             IoU    Dice    Prec     Rec       gt_px
+background     0.9779  0.9888  0.9881  0.9896    14235765
+craquelure     0.4624  0.6324  0.6490  0.6167      444299
+macro(no_bg)   0.4624  0.6324  0.6490  0.6167
+pixel_acc = 0.9783  ignore_index=0
+  ep63/80 it20/43 lr=3.60e-05 loss=0.3338 ce=0.1954 dice=0.4723 1.3s
+  ep63/80 it40/43 lr=3.42e-05 loss=0.3707 ce=0.2604 dice=0.4810 2.3s
+  ep63/80 it43/43 lr=3.39e-05 loss=0.3658 ce=0.2555 dice=0.4761 2.4s
+[val] ep63 mIoU=0.4634 mDice=0.6334 pixel_acc=0.9791 ce=0.0734
+class             IoU    Dice    Prec     Rec       gt_px
+background     0.9787  0.9893  0.9874  0.9911    14235765
+craquelure     0.4634  0.6334  0.6757  0.5960      444299
+macro(no_bg)   0.4634  0.6334  0.6757  0.5960
+pixel_acc = 0.9791  ignore_index=0
+  ep64/80 it20/43 lr=3.21e-05 loss=0.3300 ce=0.2073 dice=0.4528 1.2s
+  ep64/80 it40/43 lr=3.04e-05 loss=0.3561 ce=0.2368 dice=0.4754 1.2s
+  ep64/80 it43/43 lr=3.02e-05 loss=0.3552 ce=0.2334 dice=0.4770 1.3s
+[val] ep64 mIoU=0.4697 mDice=0.6392 pixel_acc=0.9779 ce=0.0710
+class             IoU    Dice    Prec     Rec       gt_px
+background     0.9775  0.9886  0.9890  0.9882    14235765
+craquelure     0.4697  0.6392  0.6319  0.6466      444299
+macro(no_bg)   0.4697  0.6392  0.6319  0.6466
+pixel_acc = 0.9779  ignore_index=0
+[best] ep64 mIoU=0.4697 -> outputs/fullfpn_craq_v3_clahe_fold3_small/best.pt
+  ep65/80 it20/43 lr=2.85e-05 loss=0.3501 ce=0.2276 dice=0.4726 1.3s
+  ep65/80 it40/43 lr=2.69e-05 loss=0.3608 ce=0.2452 dice=0.4763 2.3s
+  ep65/80 it43/43 lr=2.66e-05 loss=0.3592 ce=0.2413 dice=0.4770 2.4s
+[val] ep65 mIoU=0.4632 mDice=0.6331 pixel_acc=0.9774 ce=0.0730
+class             IoU    Dice    Prec     Rec       gt_px
+background     0.9770  0.9884  0.9888  0.9879    14235765
+craquelure     0.4632  0.6331  0.6236  0.6429      444299
+macro(no_bg)   0.4632  0.6331  0.6236  0.6429
+pixel_acc = 0.9774  ignore_index=0
+  ep66/80 it20/43 lr=2.51e-05 loss=0.3353 ce=0.2253 dice=0.4454 1.3s
+  ep66/80 it40/43 lr=2.35e-05 loss=0.3635 ce=0.2524 dice=0.4746 2.2s
+  ep66/80 it43/43 lr=2.33e-05 loss=0.3608 ce=0.2516 dice=0.4700 2.4s
+[val] ep66 mIoU=0.4654 mDice=0.6352 pixel_acc=0.9783 ce=0.0723
+class             IoU    Dice    Prec     Rec       gt_px
+background     0.9779  0.9888  0.9883  0.9893    14235765
+craquelure     0.4654  0.6352  0.6464  0.6244      444299
+macro(no_bg)   0.4654  0.6352  0.6464  0.6244
+pixel_acc = 0.9783  ignore_index=0
+  ep67/80 it20/43 lr=2.18e-05 loss=0.3441 ce=0.2369 dice=0.4512 1.3s
+  ep67/80 it40/43 lr=2.04e-05 loss=0.3663 ce=0.2500 dice=0.4826 2.3s
+  ep67/80 it43/43 lr=2.02e-05 loss=0.3637 ce=0.2483 dice=0.4791 2.4s
+[val] ep67 mIoU=0.4632 mDice=0.6332 pixel_acc=0.9772 ce=0.0741
+class             IoU    Dice    Prec     Rec       gt_px
+background     0.9768  0.9882  0.9890  0.9874    14235765
+craquelure     0.4632  0.6332  0.6175  0.6496      444299
+macro(no_bg)   0.4632  0.6332  0.6175  0.6496
+pixel_acc = 0.9772  ignore_index=0
+  ep68/80 it20/43 lr=1.88e-05 loss=0.3556 ce=0.2394 dice=0.4719 1.3s
+  ep68/80 it40/43 lr=1.74e-05 loss=0.3748 ce=0.2512 dice=0.4985 2.3s
+  ep68/80 it43/43 lr=1.72e-05 loss=0.3675 ce=0.2470 dice=0.4881 2.4s
+[val] ep68 mIoU=0.4624 mDice=0.6324 pixel_acc=0.9786 ce=0.0746
+class             IoU    Dice    Prec     Rec       gt_px
+background     0.9782  0.9890  0.9878  0.9902    14235765
+craquelure     0.4624  0.6324  0.6593  0.6076      444299
+macro(no_bg)   0.4624  0.6324  0.6593  0.6076
+pixel_acc = 0.9786  ignore_index=0
+  ep69/80 it20/43 lr=1.60e-05 loss=0.3293 ce=0.2243 dice=0.4343 1.3s
+  ep69/80 it40/43 lr=1.47e-05 loss=0.3659 ce=0.2580 dice=0.4738 2.3s
+  ep69/80 it43/43 lr=1.45e-05 loss=0.3614 ce=0.2493 dice=0.4734 2.4s
+[val] ep69 mIoU=0.4644 mDice=0.6343 pixel_acc=0.9777 ce=0.0737
+class             IoU    Dice    Prec     Rec       gt_px
+background     0.9773  0.9885  0.9887  0.9883    14235765
+craquelure     0.4644  0.6343  0.6296  0.6391      444299
+macro(no_bg)   0.4644  0.6343  0.6296  0.6391
+pixel_acc = 0.9777  ignore_index=0
+  ep70/80 it20/43 lr=1.34e-05 loss=0.3364 ce=0.2255 dice=0.4472 1.3s
+  ep70/80 it40/43 lr=1.22e-05 loss=0.3586 ce=0.2400 dice=0.4773 2.2s
+  ep70/80 it43/43 lr=1.21e-05 loss=0.3544 ce=0.2342 dice=0.4747 2.4s
+[val] ep70 mIoU=0.4632 mDice=0.6331 pixel_acc=0.9774 ce=0.0740
+class             IoU    Dice    Prec     Rec       gt_px
+background     0.9769  0.9883  0.9889  0.9878    14235765
+craquelure     0.4632  0.6331  0.6218  0.6449      444299
+macro(no_bg)   0.4632  0.6331  0.6218  0.6449
+pixel_acc = 0.9774  ignore_index=0
+  ep71/80 it20/43 lr=1.10e-05 loss=0.3222 ce=0.2031 dice=0.4414 1.2s
+  ep71/80 it40/43 lr=9.95e-06 loss=0.3637 ce=0.2617 dice=0.4657 2.2s
+  ep71/80 it43/43 lr=9.80e-06 loss=0.3587 ce=0.2543 dice=0.4632 2.4s
+[val] ep71 mIoU=0.4604 mDice=0.6305 pixel_acc=0.9777 ce=0.0749
+class             IoU    Dice    Prec     Rec       gt_px
+background     0.9773  0.9885  0.9884  0.9886    14235765
+craquelure     0.4604  0.6305  0.6330  0.6281      444299
+macro(no_bg)   0.4604  0.6305  0.6330  0.6281
+pixel_acc = 0.9777  ignore_index=0
+  ep72/80 it20/43 lr=8.82e-06 loss=0.3345 ce=0.2129 dice=0.4561 0.2s
+  ep72/80 it40/43 lr=7.90e-06 loss=0.3674 ce=0.2514 dice=0.4833 1.2s
+  ep72/80 it43/43 lr=7.76e-06 loss=0.3605 ce=0.2439 dice=0.4770 1.3s
+[val] ep72 mIoU=0.4649 mDice=0.6348 pixel_acc=0.9781 ce=0.0735
+class             IoU    Dice    Prec     Rec       gt_px
+background     0.9777  0.9887  0.9884  0.9891    14235765
+craquelure     0.4649  0.6348  0.6416  0.6281      444299
+macro(no_bg)   0.4649  0.6348  0.6416  0.6281
+pixel_acc = 0.9781  ignore_index=0
+  ep73/80 it20/43 lr=6.90e-06 loss=0.3323 ce=0.2077 dice=0.4569 1.2s
+  ep73/80 it40/43 lr=6.08e-06 loss=0.3623 ce=0.2475 dice=0.4771 2.2s
+  ep73/80 it43/43 lr=5.96e-06 loss=0.3586 ce=0.2430 dice=0.4743 2.4s
+[val] ep73 mIoU=0.4660 mDice=0.6358 pixel_acc=0.9778 ce=0.0727
+class             IoU    Dice    Prec     Rec       gt_px
+background     0.9773  0.9885  0.9888  0.9883    14235765
+craquelure     0.4660  0.6358  0.6302  0.6415      444299
+macro(no_bg)   0.4660  0.6358  0.6302  0.6415
+pixel_acc = 0.9778  ignore_index=0
+  ep74/80 it20/43 lr=5.20e-06 loss=0.3368 ce=0.2118 dice=0.4618 1.3s
+  ep74/80 it40/43 lr=4.49e-06 loss=0.3696 ce=0.2632 dice=0.4761 2.3s
+  ep74/80 it43/43 lr=4.39e-06 loss=0.3656 ce=0.2571 dice=0.4742 2.4s
+[val] ep74 mIoU=0.4601 mDice=0.6302 pixel_acc=0.9777 ce=0.0757
+class             IoU    Dice    Prec     Rec       gt_px
+background     0.9772  0.9885  0.9884  0.9885    14235765
+craquelure     0.4601  0.6302  0.6312  0.6293      444299
+macro(no_bg)   0.4601  0.6302  0.6312  0.6293
+pixel_acc = 0.9777  ignore_index=0
+  ep75/80 it20/43 lr=3.74e-06 loss=0.3385 ce=0.2134 dice=0.4637 1.3s
+  ep75/80 it40/43 lr=3.14e-06 loss=0.3747 ce=0.2562 dice=0.4933 2.2s
+  ep75/80 it43/43 lr=3.06e-06 loss=0.3681 ce=0.2527 dice=0.4836 2.4s
+[val] ep75 mIoU=0.4611 mDice=0.6312 pixel_acc=0.9779 ce=0.0750
+class             IoU    Dice    Prec     Rec       gt_px
+background     0.9775  0.9886  0.9883  0.9890    14235765
+craquelure     0.4611  0.6312  0.6387  0.6239      444299
+macro(no_bg)   0.4611  0.6312  0.6387  0.6239
+pixel_acc = 0.9779  ignore_index=0
+  ep76/80 it20/43 lr=2.52e-06 loss=0.3546 ce=0.2319 dice=0.4772 1.2s
+  ep76/80 it40/43 lr=2.03e-06 loss=0.3667 ce=0.2545 dice=0.4789 2.2s
+  ep76/80 it43/43 lr=1.97e-06 loss=0.3647 ce=0.2486 dice=0.4808 2.4s
+[val] ep76 mIoU=0.4641 mDice=0.6340 pixel_acc=0.9773 ce=0.0737
+class             IoU    Dice    Prec     Rec       gt_px
+background     0.9769  0.9883  0.9890  0.9876    14235765
+craquelure     0.4641  0.6340  0.6199  0.6487      444299
+macro(no_bg)   0.4641  0.6340  0.6199  0.6487
+pixel_acc = 0.9773  ignore_index=0
+  ep77/80 it20/43 lr=1.54e-06 loss=0.3391 ce=0.1965 dice=0.4816 1.3s
+  ep77/80 it40/43 lr=1.16e-06 loss=0.3584 ce=0.2383 dice=0.4784 2.3s
+  ep77/80 it43/43 lr=1.11e-06 loss=0.3559 ce=0.2357 dice=0.4762 2.4s
+[val] ep77 mIoU=0.4634 mDice=0.6333 pixel_acc=0.9777 ce=0.0742
+class             IoU    Dice    Prec     Rec       gt_px
+background     0.9772  0.9885  0.9887  0.9883    14235765
+craquelure     0.4634  0.6333  0.6297  0.6370      444299
+macro(no_bg)   0.4634  0.6333  0.6297  0.6370
+pixel_acc = 0.9777  ignore_index=0
+  ep78/80 it20/43 lr=7.95e-07 loss=0.3299 ce=0.2221 dice=0.4378 1.2s
+  ep78/80 it40/43 lr=5.33e-07 loss=0.3674 ce=0.2590 dice=0.4758 2.2s
+  ep78/80 it43/43 lr=4.98e-07 loss=0.3608 ce=0.2509 dice=0.4708 2.4s
+[val] ep78 mIoU=0.4605 mDice=0.6306 pixel_acc=0.9775 ce=0.0757
+class             IoU    Dice    Prec     Rec       gt_px
+background     0.9770  0.9884  0.9886  0.9882    14235765
+craquelure     0.4605  0.6306  0.6264  0.6348      444299
+macro(no_bg)   0.4605  0.6306  0.6264  0.6348
+pixel_acc = 0.9775  ignore_index=0
+  ep79/80 it20/43 lr=2.95e-07 loss=0.3402 ce=0.2210 dice=0.4593 1.3s
+  ep79/80 it40/43 lr=1.45e-07 loss=0.3625 ce=0.2529 dice=0.4721 2.2s
+  ep79/80 it43/43 lr=1.27e-07 loss=0.3568 ce=0.2460 dice=0.4675 2.4s
+[val] ep79 mIoU=0.4628 mDice=0.6327 pixel_acc=0.9779 ce=0.0738
+class             IoU    Dice    Prec     Rec       gt_px
+background     0.9775  0.9886  0.9884  0.9889    14235765
+craquelure     0.4628  0.6327  0.6376  0.6280      444299
+macro(no_bg)   0.4628  0.6327  0.6376  0.6280
+pixel_acc = 0.9779  ignore_index=0
+  ep80/80 it20/43 lr=3.79e-08 loss=0.3507 ce=0.2436 dice=0.4578 1.3s
+  ep80/80 it40/43 lr=1.05e-09 loss=0.3808 ce=0.2779 dice=0.4838 2.2s
+  ep80/80 it43/43 lr=6.58e-11 loss=0.3746 ce=0.2704 dice=0.4788 2.4s
+[val] ep80 mIoU=0.4612 mDice=0.6313 pixel_acc=0.9778 ce=0.0749
+class             IoU    Dice    Prec     Rec       gt_px
+background     0.9774  0.9886  0.9884  0.9887    14235765
+craquelure     0.4612  0.6313  0.6346  0.6280      444299
+macro(no_bg)   0.4612  0.6313  0.6346  0.6280
+pixel_acc = 0.9778  ignore_index=0
+訓練結束 best_miou=0.4697

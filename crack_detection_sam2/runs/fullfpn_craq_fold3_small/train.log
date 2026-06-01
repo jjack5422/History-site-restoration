@@ -1,0 +1,6 @@
+override CLASS_NAMES=['background', 'craquelure'] (NUM_CLASSES=2)
+split=data/labeled32_craq_v3/tiles_512/group_split_stem.json fold=3 train=172 val=56
+val_groups=['KJTHT-SC-L-1RB1-1']
+class pixel counts (train): [43278913, 1809855]
+class weights (median_freq): [0.5209, 12.4565]
+model=SAM2SemSegFullFPN variant=small total=35.6M trainable=1.70M

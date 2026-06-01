@@ -25,7 +25,8 @@ from tqdm import tqdm
 PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, PROJECT_ROOT)
 
-UNET_ROOT = os.path.join(os.path.dirname(PROJECT_ROOT), "crack_detection_unet")
+# crack_detection_unet's modules now live under src/ (workspace layout)
+UNET_ROOT = os.path.join(os.path.dirname(PROJECT_ROOT), "crack_detection_unet", "src")
 sys.path.insert(0, UNET_ROOT)
 
 from augment import IMAGENET_MEAN, IMAGENET_STD  # noqa: E402

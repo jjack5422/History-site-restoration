@@ -25,6 +25,16 @@ __pycache__/
 **/preds/
 **/checkpoints/
 
+# --- Generated images (predictions, overlays, visualizations) ---
+# Not versioned. Exception: figures curated for the paper under results/.
+*.png
+*.jpg
+*.jpeg
+*.bmp
+*.tif
+*.tiff
+!**/results/**
+
 # Note: runs/ is intentionally NOT ignored — manifest.md / metrics.json /
 # *.log are the experiment record and should be versioned. Weights inside
 # runs/ are excluded by the *.pt etc. rules above.

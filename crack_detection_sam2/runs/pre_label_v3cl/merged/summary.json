@@ -1,0 +1,1397 @@
+{
+  "args": {
+    "craq_prob_dir": "/home/zzz90/research/crack_detection_sam2/outputs/pre_label_v3cl/craq_raw/prob",
+    "crack_prob_dir": "/home/zzz90/research/crack_detection_sam2/outputs/pre_label_v3cl/crack_raw/prob",
+    "image_dir": "/home/zzz90/research/crack_detection_sam2/data/selected_slices",
+    "out_dir": "/home/zzz90/research/crack_detection_sam2/outputs/pre_label_v3cl/merged",
+    "skip_list": "/home/zzz90/research/crack_detection_sam2/data/1-31test/already_labeled_32.txt",
+    "craq_thresh": 0.5,
+    "crack_thresh": 0.5,
+    "min_blob_px": 0,
+    "priority": "craq_over_crack"
+  },
+  "n_processed": 152,
+  "n_skipped_labeled": 32,
+  "skipped_stems_sample": [
+    "KJTHT-SC-L-1RB1-1_R2_C04",
+    "KJTHT-SC-L-1RB1-1_R2_C05",
+    "KJTHT-SC-L-1RB1-1_R3_C03",
+    "KJTHT-SC-L-1RB1-1_R3_C04",
+    "KJTHT-SC-L-1RB1-1_R3_C05",
+    "KJTHT-SC-L-1RB1-1_R3_C06",
+    "KJTHT-SC-L-1RB1-1_R4_C03",
+    "KJTHT-SC-L-1RB1-1_R5_C03",
+    "KJTHT-SC-L-A4-4_R1_C05",
+    "KJTHT-SC-L-A4-4_R1_C06"
+  ],
+  "per_image": [
+    {
+      "stem": "KJTHT-SC-M-A4-8_R4_C04",
+      "craq_pixels": 9138,
+      "crack_pixels": 1149,
+      "craq_max_prob": 0.9991489052772522,
+      "crack_max_prob": 0.9881951212882996,
+      "craq_mean_prob": 0.020107589662075043,
+      "crack_mean_prob": 0.005308622028678656
+    },
+    {
+      "stem": "KJTHT-SC-M-A4-8_R4_C05",
+      "craq_pixels": 11265,
+      "crack_pixels": 572,
+      "craq_max_prob": 0.999880850315094,
+      "crack_max_prob": 0.9948544502258301,
+      "craq_mean_prob": 0.019676126539707184,
+      "crack_mean_prob": 0.004421552177518606
+    },
+    {
+      "stem": "KJTHT-SC-M-A4-8_R4_C06",
+      "craq_pixels": 10353,
+      "crack_pixels": 3477,
+      "craq_max_prob": 0.9994840621948242,
+      "crack_max_prob": 0.9961193799972534,
+      "craq_mean_prob": 0.020990047603845596,
+      "crack_mean_prob": 0.00847618468105793
+    },
+    {
+      "stem": "KJTHT-SC-M-A4-8_R5_C02",
+      "craq_pixels": 6623,
+      "crack_pixels": 292,
+      "craq_max_prob": 0.9985321164131165,
+      "crack_max_prob": 0.921746015548706,
+      "craq_mean_prob": 0.018038205802440643,
+      "crack_mean_prob": 0.0037153668235987425
+    },
+    {
+      "stem": "KJTHT-SC-M-A4-8_R5_C03",
+      "craq_pixels": 11975,
+      "crack_pixels": 3287,
+      "craq_max_prob": 0.9974637627601624,
+      "crack_max_prob": 0.99452143907547,
+      "craq_mean_prob": 0.027868662029504776,
+      "crack_mean_prob": 0.007933039218187332
+    },
+    {
+      "stem": "KJTHT-SC-M-A4-8_R5_C04",
+      "craq_pixels": 10424,
+      "crack_pixels": 4053,
+      "craq_max_prob": 0.9993633031845093,
+      "crack_max_prob": 0.9963640570640564,
+      "craq_mean_prob": 0.02039140835404396,
+      "crack_mean_prob": 0.009115420281887054
+    },
+    {
+      "stem": "KJTHT-SC-M-A4-8_R5_C07",
+      "craq_pixels": 8798,
+      "crack_pixels": 4629,
+      "craq_max_prob": 0.9993744492530823,
+      "crack_max_prob": 0.9987863898277283,
+      "craq_mean_prob": 0.01997937634587288,
+      "crack_mean_prob": 0.009471260011196136
+    },
+    {
+      "stem": "KJTHT-SC-M-A4-8_R6_C07",
+      "craq_pixels": 12590,
+      "crack_pixels": 1177,
+      "craq_max_prob": 0.9997587203979492,
+      "crack_max_prob": 0.9978002309799194,
+      "craq_mean_prob": 0.02274881862103939,
+      "crack_mean_prob": 0.005250743590295315
+    },
+    {
+      "stem": "KJTHT-SC-R-A4-3_R2_C03",
+      "craq_pixels": 48728,
+      "crack_pixels": 58886,
+      "craq_max_prob": 0.9999338984489441,
+      "crack_max_prob": 0.9999896287918091,
+      "craq_mean_prob": 0.05352449417114258,
+      "crack_mean_prob": 0.06648896634578705
+    },
+    {
+      "stem": "KJTHT-SC-R-A4-3_R2_C04",
+      "craq_pixels": 51755,
+      "crack_pixels": 54469,
+      "craq_max_prob": 0.9998754858970642,
+      "crack_max_prob": 0.9999978542327881,
+      "craq_mean_prob": 0.05819094553589821,
+      "crack_mean_prob": 0.06272736936807632
+    },
+    {
+      "stem": "KJTHT-SC-R-A4-3_R2_C05",
+      "craq_pixels": 43955,
+      "crack_pixels": 57709,
+      "craq_max_prob": 0.9999818801879883,
+      "crack_max_prob": 0.9999924898147583,
+      "craq_mean_prob": 0.04911427944898605,
+      "crack_mean_prob": 0.06574820727109909
+    },
+    {
+      "stem": "KJTHT-SC-R-A4-3_R2_C06",
+      "craq_pixels": 39936,
+      "crack_pixels": 57124,
+      "craq_max_prob": 0.9999284744262695,
+      "crack_max_prob": 0.9999963641166687,
+      "craq_mean_prob": 0.04480605572462082,
+      "crack_mean_prob": 0.06544913351535797
+    },
+    {
+      "stem": "KJTHT-SC-R-A4-3_R3_C03",
+      "craq_pixels": 47100,
+      "crack_pixels": 50608,
+      "craq_max_prob": 0.9999253749847412,
+      "crack_max_prob": 0.9999918937683105,
+      "craq_mean_prob": 0.0533110573887825,
+      "crack_mean_prob": 0.05889815092086792
+    },
+    {
+      "stem": "KJTHT-SC-R-A4-3_R3_C04",
+      "craq_pixels": 46613,
+      "crack_pixels": 44612,
+      "craq_max_prob": 0.9998196363449097,
+      "crack_max_prob": 0.9999837875366211,
+      "craq_mean_prob": 0.05326484143733978,
+      "crack_mean_prob": 0.05313585698604584
+    },
+    {
+      "stem": "KJTHT-SC-R-A4-3_R3_C05",
+      "craq_pixels": 43115,
+      "crack_pixels": 49991,
+      "craq_max_prob": 0.9999567866325378,
+      "crack_max_prob": 0.999994158744812,
+      "craq_mean_prob": 0.04829992726445198,
+      "crack_mean_prob": 0.05764715000987053
+    },
+    {
+      "stem": "KJTHT-SC-R-A4-3_R3_C06",
+      "craq_pixels": 41835,
+      "crack_pixels": 48800,
+      "craq_max_prob": 0.9999561309814453,
+      "crack_max_prob": 0.9999959468841553,
+      "craq_mean_prob": 0.046986229717731476,
+      "crack_mean_prob": 0.0566883310675621
+    },
+    {
+      "stem": "KSEJ26-8-A-\u7532-0-B-5_R1_C01",
+      "craq_pixels": 10661,
+      "crack_pixels": 13275,
+      "craq_max_prob": 0.9996455311775208,
+      "crack_max_prob": 0.9996557831764221,
+      "craq_mean_prob": 0.02119295671582222,
+      "crack_mean_prob": 0.021916665136814117
+    },
+    {
+      "stem": "KSEJ26-8-A-\u7532-0-B-5_R9_C01",
+      "craq_pixels": 8168,
+      "crack_pixels": 6585,
+      "craq_max_prob": 0.9971877932548523,
+      "crack_max_prob": 0.9999908208847046,
+      "craq_mean_prob": 0.015568463131785393,
+      "crack_mean_prob": 0.011390004307031631
+    },
+    {
+      "stem": "KSEJ26-8-A-\u7532-0-B-5_R9_C02",
+      "craq_pixels": 15860,
+      "crack_pixels": 13049,
+      "craq_max_prob": 0.9998770952224731,
+      "crack_max_prob": 0.999862015247345,
+      "craq_mean_prob": 0.025084584951400757,
+      "crack_mean_prob": 0.018450472503900528
+    },
+    {
+      "stem": "KSEJ26-8-A-\u7532-0-B-5_R9_C03",
+      "craq_pixels": 12098,
+      "crack_pixels": 15388,
+      "craq_max_prob": 0.9997705817222595,
+      "crack_max_prob": 0.9999812841415405,
+      "craq_mean_prob": 0.02171456813812256,
+      "crack_mean_prob": 0.02106066234409809
+    },
+    {
+      "stem": "MGLST-DT-1L-A2-1_R1_C01",
+      "craq_pixels": 2177,
+      "crack_pixels": 21,
+      "craq_max_prob": 0.9768540859222412,
+      "crack_max_prob": 0.5968058705329895,
+      "craq_mean_prob": 0.013032402843236923,
+      "crack_mean_prob": 0.0030817952938377857
+    },
+    {
+      "stem": "MGLST-DT-1L-A2-1_R1_C02",
+      "craq_pixels": 20455,
+      "crack_pixels": 2415,
+      "craq_max_prob": 0.9989866018295288,
+      "crack_max_prob": 0.9996997714042664,
+      "craq_mean_prob": 0.03484344482421875,
+      "crack_mean_prob": 0.005753753706812859
+    },
+    {
+      "stem": "MGLST-DT-1L-A2-1_R1_C03",
+      "craq_pixels": 12830,
+      "crack_pixels": 4701,
+      "craq_max_prob": 0.9999527931213379,
+      "crack_max_prob": 0.9999138116836548,
+      "craq_mean_prob": 0.022394919767975807,
+      "crack_mean_prob": 0.00924005452543497
+    },
+    {
+      "stem": "MGLST-DT-1L-A2-1_R1_C04",
+      "craq_pixels": 2338,
+      "crack_pixels": 2928,
+      "craq_max_prob": 0.9876288771629333,
+      "crack_max_prob": 0.9987695813179016,
+      "craq_mean_prob": 0.008328165858983994,
+      "crack_mean_prob": 0.006642181891947985
+    },
+    {
+      "stem": "MGLST-DT-1L-A2-1_R2_C01",
+      "craq_pixels": 3095,
+      "crack_pixels": 380,
+      "craq_max_prob": 0.9722229838371277,
+      "crack_max_prob": 0.9667770266532898,
+      "craq_mean_prob": 0.014070107601583004,
+      "crack_mean_prob": 0.0036151092499494553
+    },
+    {
+      "stem": "MGLST-DT-1L-A2-1_R2_C02",
+      "craq_pixels": 25622,
+      "crack_pixels": 1879,
+      "craq_max_prob": 0.9988781809806824,
+      "crack_max_prob": 0.999709963798523,
+      "craq_mean_prob": 0.04717462509870529,
+      "crack_mean_prob": 0.006824051961302757
+    },
+    {
+      "stem": "MGLST-DT-1L-A2-1_R2_C03",
+      "craq_pixels": 12737,
+      "crack_pixels": 5103,
+      "craq_max_prob": 0.9999233484268188,
+      "crack_max_prob": 0.9998596906661987,
+      "craq_mean_prob": 0.026550522074103355,
+      "crack_mean_prob": 0.011481357738375664
+    },
+    {
+      "stem": "MGLST-DT-1L-A2-1_R2_C04",
+      "craq_pixels": 6270,
+      "crack_pixels": 3835,
+      "craq_max_prob": 0.9964762926101685,
+      "crack_max_prob": 0.9933223128318787,
+      "craq_mean_prob": 0.013550007715821266,
+      "crack_mean_prob": 0.007649704348295927
+    },
+    {
+      "stem": "MGLST-DT-1R-A2-1_R1_C01",
+      "craq_pixels": 42750,
+      "crack_pixels": 6921,
+      "craq_max_prob": 0.9998149275779724,
+      "crack_max_prob": 0.9904728531837463,
+      "craq_mean_prob": 0.06637653708457947,
+      "crack_mean_prob": 0.015115443617105484
+    },
+    {
+      "stem": "MGLST-DT-1R-A2-1_R1_C02",
+      "craq_pixels": 23665,
+      "crack_pixels": 4212,
+      "craq_max_prob": 0.999622106552124,
+      "crack_max_prob": 0.9985483884811401,
+      "craq_mean_prob": 0.04411502182483673,
+      "crack_mean_prob": 0.008272189646959305
+    },
+    {
+      "stem": "MGLST-DT-1R-A2-1_R1_C04",
+      "craq_pixels": 57268,
+      "crack_pixels": 16220,
+      "craq_max_prob": 0.999720573425293,
+      "crack_max_prob": 0.997973620891571,
+      "craq_mean_prob": 0.08367498964071274,
+      "crack_mean_prob": 0.031883761286735535
+    },
+    {
+      "stem": "MGLST-DT-1R-A2-1_R1_C05",
+      "craq_pixels": 53623,
+      "crack_pixels": 10263,
+      "craq_max_prob": 0.9998542070388794,
+      "crack_max_prob": 0.9956262707710266,
+      "craq_mean_prob": 0.08228538930416107,
+      "crack_mean_prob": 0.025902770459651947
+    },
+    {
+      "stem": "MGLST-DT-1R-A2-1_R2_C01",
+      "craq_pixels": 46248,
+      "crack_pixels": 4595,
+      "craq_max_prob": 0.9998326301574707,
+      "crack_max_prob": 0.995408833026886,
+      "craq_mean_prob": 0.07402635365724564,
+      "crack_mean_prob": 0.013790154829621315
+    },
+    {
+      "stem": "MGLST-DT-1R-A2-1_R2_C02",
+      "craq_pixels": 27704,
+      "crack_pixels": 3730,
+      "craq_max_prob": 0.999622642993927,
+      "crack_max_prob": 0.9982776641845703,
+      "craq_mean_prob": 0.047769661992788315,
+      "crack_mean_prob": 0.00806361809372902
+    },
+    {
+      "stem": "MGLST-DT-1R-A2-1_R2_C04",
+      "craq_pixels": 58235,
+      "crack_pixels": 11733,
+      "craq_max_prob": 0.9994692206382751,
+      "crack_max_prob": 0.9976606965065002,
+      "craq_mean_prob": 0.0841120257973671,
+      "crack_mean_prob": 0.02682170644402504
+    },
+    {
+      "stem": "MGLST-DT-1R-A2-1_R2_C05",
+      "craq_pixels": 58504,
+      "crack_pixels": 10134,
+      "craq_max_prob": 0.9998345375061035,
+      "crack_max_prob": 0.998115599155426,
+      "craq_mean_prob": 0.08673746883869171,
+      "crack_mean_prob": 0.025756096467375755
+    },
+    {
+      "stem": "MGLST-DT2F-1R-C1_-1_R1_C01",
+      "craq_pixels": 16567,
+      "crack_pixels": 2125,
+      "craq_max_prob": 0.9991371631622314,
+      "crack_max_prob": 0.9817135334014893,
+      "craq_mean_prob": 0.03516101837158203,
+      "crack_mean_prob": 0.00701982993632555
+    },
+    {
+      "stem": "MGLST-DT2F-1R-C1_-1_R1_C02",
+      "craq_pixels": 12792,
+      "crack_pixels": 11244,
+      "craq_max_prob": 0.9994714856147766,
+      "crack_max_prob": 0.9996910095214844,
+      "craq_mean_prob": 0.030880305916070938,
+      "crack_mean_prob": 0.0177047997713089
+    },
+    {
+      "stem": "MGLST-DT2F-1R-C1_-1_R1_C03",
+      "craq_pixels": 16657,
+      "crack_pixels": 6210,
+      "craq_max_prob": 0.9996851086616516,
+      "crack_max_prob": 0.9985716342926025,
+      "craq_mean_prob": 0.02715022675693035,
+      "crack_mean_prob": 0.011280255392193794
+    },
+    {
+      "stem": "MGLST-DT2F-1R-C1_-1_R2_C01",
+      "craq_pixels": 15678,
+      "crack_pixels": 861,
+      "craq_max_prob": 0.9994122982025146,
+      "crack_max_prob": 0.9732377529144287,
+      "craq_mean_prob": 0.03182092681527138,
+      "crack_mean_prob": 0.005954897031188011
+    },
+    {
+      "stem": "MGLST-DT2F-1R-C1_-1_R2_C02",
+      "craq_pixels": 14821,
+      "crack_pixels": 8572,
+      "craq_max_prob": 0.9985429644584656,
+      "crack_max_prob": 0.9987217783927917,
+      "craq_mean_prob": 0.036244168877601624,
+      "crack_mean_prob": 0.0151241235435009
+    },
+    {
+      "stem": "MGLST-DT2F-1R-C1_-1_R2_C03",
+      "craq_pixels": 19095,
+      "crack_pixels": 7062,
+      "craq_max_prob": 0.9996716380119324,
+      "crack_max_prob": 0.9986093640327454,
+      "craq_mean_prob": 0.031121402978897095,
+      "crack_mean_prob": 0.012170061469078064
+    },
+    {
+      "stem": "MGLST-RH-2R-A5_-2_R1_C01",
+      "craq_pixels": 13141,
+      "crack_pixels": 3912,
+      "craq_max_prob": 0.9993489980697632,
+      "crack_max_prob": 0.9916882514953613,
+      "craq_mean_prob": 0.024662841111421585,
+      "crack_mean_prob": 0.008892572484910488
+    },
+    {
+      "stem": "MGLST-RH-2R-A5_-2_R1_C02",
+      "craq_pixels": 8247,
+      "crack_pixels": 1930,
+      "craq_max_prob": 0.9989586472511292,
+      "crack_max_prob": 0.9950879812240601,
+      "craq_mean_prob": 0.020760584622621536,
+      "crack_mean_prob": 0.005927183665335178
+    },
+    {
+      "stem": "MGLST-RH-2R-A5_-2_R1_C03",
+      "craq_pixels": 2317,
+      "crack_pixels": 912,
+      "craq_max_prob": 0.9979206919670105,
+      "crack_max_prob": 0.9958821535110474,
+      "craq_mean_prob": 0.014333091676235199,
+      "crack_mean_prob": 0.004219462163746357
+    },
+    {
+      "stem": "MGLST-RH-2R-A5_-2_R1_C04",
+      "craq_pixels": 3869,
+      "crack_pixels": 676,
+      "craq_max_prob": 0.9907026886940002,
+      "crack_max_prob": 0.970491349697113,
+      "craq_mean_prob": 0.012700114399194717,
+      "crack_mean_prob": 0.00460007693618536
+    },
+    {
+      "stem": "MGLST-RH-2R-A5_-2_R2_C01",
+      "craq_pixels": 11642,
+      "crack_pixels": 2648,
+      "craq_max_prob": 0.9989680647850037,
+      "crack_max_prob": 0.9958959221839905,
+      "craq_mean_prob": 0.022189000621438026,
+      "crack_mean_prob": 0.007579676806926727
+    },
+    {
+      "stem": "MGLST-RH-2R-A5_-2_R2_C02",
+      "craq_pixels": 5731,
+      "crack_pixels": 901,
+      "craq_max_prob": 0.9991081357002258,
+      "crack_max_prob": 0.9961494207382202,
+      "craq_mean_prob": 0.018247440457344055,
+      "crack_mean_prob": 0.004602678585797548
+    },
+    {
+      "stem": "MGLST-RH-2R-A5_-2_R2_C03",
+      "craq_pixels": 1380,
+      "crack_pixels": 0,
+      "craq_max_prob": 0.9838581681251526,
+      "crack_max_prob": 0.07788701355457306,
+      "craq_mean_prob": 0.01168926153331995,
+      "crack_mean_prob": 0.0029508655425161123
+    },
+    {
+      "stem": "MGLST-RH-2R-A5_-2_R2_C04",
+      "craq_pixels": 2974,
+      "crack_pixels": 1047,
+      "craq_max_prob": 0.9972696304321289,
+      "crack_max_prob": 0.9939437508583069,
+      "craq_mean_prob": 0.01208474300801754,
+      "crack_mean_prob": 0.004749163519591093
+    },
+    {
+      "stem": "MGLST-RH-M-A1-2_R1_C02",
+      "craq_pixels": 17927,
+      "crack_pixels": 5404,
+      "craq_max_prob": 0.9998897910118103,
+      "crack_max_prob": 0.9997087717056274,
+      "craq_mean_prob": 0.031132057309150696,
+      "crack_mean_prob": 0.009706828743219376
+    },
+    {
+      "stem": "MGLST-RH-M-A1-2_R1_C03",
+      "craq_pixels": 14530,
+      "crack_pixels": 3603,
+      "craq_max_prob": 0.999714195728302,
+      "crack_max_prob": 0.9885361790657043,
+      "craq_mean_prob": 0.027557600289583206,
+      "crack_mean_prob": 0.00946444645524025
+    },
+    {
+      "stem": "MGLST-RH-M-A1-2_R1_C04",
+      "craq_pixels": 16081,
+      "crack_pixels": 3870,
+      "craq_max_prob": 0.9989165663719177,
+      "crack_max_prob": 0.9992388486862183,
+      "craq_mean_prob": 0.028380319476127625,
+      "crack_mean_prob": 0.00877794437110424
+    },
+    {
+      "stem": "MGLST-RH-M-A1-2_R1_C05",
+      "craq_pixels": 13812,
+      "crack_pixels": 4806,
+      "craq_max_prob": 0.999763011932373,
+      "crack_max_prob": 0.9989340305328369,
+      "craq_mean_prob": 0.02506912127137184,
+      "crack_mean_prob": 0.01031192671507597
+    },
+    {
+      "stem": "MGLST-RH-M-A1-2_R2_C02",
+      "craq_pixels": 16036,
+      "crack_pixels": 4963,
+      "craq_max_prob": 0.9998108744621277,
+      "crack_max_prob": 0.9998756051063538,
+      "craq_mean_prob": 0.028664585202932358,
+      "crack_mean_prob": 0.00953535083681345
+    },
+    {
+      "stem": "MGLST-RH-M-A1-2_R2_C03",
+      "craq_pixels": 13965,
+      "crack_pixels": 2579,
+      "craq_max_prob": 0.9997380375862122,
+      "crack_max_prob": 0.9952771067619324,
+      "craq_mean_prob": 0.027033787220716476,
+      "crack_mean_prob": 0.008610127493739128
+    },
+    {
+      "stem": "MGLST-RH-M-A1-2_R2_C04",
+      "craq_pixels": 13289,
+      "crack_pixels": 2809,
+      "craq_max_prob": 0.9994662404060364,
+      "crack_max_prob": 0.9988089203834534,
+      "craq_mean_prob": 0.02598388120532036,
+      "crack_mean_prob": 0.008104468695819378
+    },
+    {
+      "stem": "MGLST-RH-M-A1-2_R2_C05",
+      "craq_pixels": 11995,
+      "crack_pixels": 4707,
+      "craq_max_prob": 0.9998100399971008,
+      "crack_max_prob": 0.9993961453437805,
+      "craq_mean_prob": 0.022857526317238808,
+      "crack_mean_prob": 0.010578938759863377
+    },
+    {
+      "stem": "MGLST-SC-1L-A3-1_R10_C01",
+      "craq_pixels": 4698,
+      "crack_pixels": 4561,
+      "craq_max_prob": 0.995743989944458,
+      "crack_max_prob": 0.994070291519165,
+      "craq_mean_prob": 0.012257760390639305,
+      "crack_mean_prob": 0.008658667095005512
+    },
+    {
+      "stem": "MGLST-SC-1L-A3-1_R10_C03",
+      "craq_pixels": 8253,
+      "crack_pixels": 563,
+      "craq_max_prob": 0.9928856492042542,
+      "crack_max_prob": 0.8960998058319092,
+      "craq_mean_prob": 0.021760201081633568,
+      "crack_mean_prob": 0.004285998176783323
+    },
+    {
+      "stem": "MGLST-SC-1L-A3-1_R2_C02",
+      "craq_pixels": 31920,
+      "crack_pixels": 2076,
+      "craq_max_prob": 0.9996141791343689,
+      "crack_max_prob": 0.9740918874740601,
+      "craq_mean_prob": 0.050833478569984436,
+      "crack_mean_prob": 0.006568094715476036
+    },
+    {
+      "stem": "MGLST-SC-1L-A3-1_R2_C03",
+      "craq_pixels": 27104,
+      "crack_pixels": 194,
+      "craq_max_prob": 0.9986096620559692,
+      "crack_max_prob": 0.9439089298248291,
+      "craq_mean_prob": 0.044278912246227264,
+      "crack_mean_prob": 0.003965720999985933
+    },
+    {
+      "stem": "MGLST-SC-1L-A3-1_R3_C01",
+      "craq_pixels": 29289,
+      "crack_pixels": 8680,
+      "craq_max_prob": 0.9993283748626709,
+      "crack_max_prob": 0.9980923533439636,
+      "craq_mean_prob": 0.047791264951229095,
+      "crack_mean_prob": 0.014808868058025837
+    },
+    {
+      "stem": "MGLST-SC-1L-A3-1_R3_C02",
+      "craq_pixels": 18387,
+      "crack_pixels": 4433,
+      "craq_max_prob": 0.9973998069763184,
+      "crack_max_prob": 0.9992213845252991,
+      "craq_mean_prob": 0.03615951165556908,
+      "crack_mean_prob": 0.010334471240639687
+    },
+    {
+      "stem": "MGLST-SC-1L-A3-1_R3_C03",
+      "craq_pixels": 22227,
+      "crack_pixels": 2461,
+      "craq_max_prob": 0.9990299344062805,
+      "crack_max_prob": 0.9987379312515259,
+      "craq_mean_prob": 0.036510515958070755,
+      "crack_mean_prob": 0.007559720426797867
+    },
+    {
+      "stem": "MGLST-SC-1L-A3-1_R4_C01",
+      "craq_pixels": 81424,
+      "crack_pixels": 13864,
+      "craq_max_prob": 0.999903678894043,
+      "crack_max_prob": 0.9994956254959106,
+      "craq_mean_prob": 0.10049980133771896,
+      "crack_mean_prob": 0.025034423917531967
+    },
+    {
+      "stem": "MGLST-SC-2L-A5-2_R1_C01",
+      "craq_pixels": 13757,
+      "crack_pixels": 5117,
+      "craq_max_prob": 0.9998535513877869,
+      "crack_max_prob": 0.9983559250831604,
+      "craq_mean_prob": 0.025792516767978668,
+      "crack_mean_prob": 0.01192021556198597
+    },
+    {
+      "stem": "MGLST-SC-2L-A5-2_R1_C02",
+      "craq_pixels": 26453,
+      "crack_pixels": 11553,
+      "craq_max_prob": 0.9997157454490662,
+      "crack_max_prob": 0.9993513822555542,
+      "craq_mean_prob": 0.04230203479528427,
+      "crack_mean_prob": 0.019988514482975006
+    },
+    {
+      "stem": "MGLST-SC-2L-A5-2_R1_C03",
+      "craq_pixels": 31781,
+      "crack_pixels": 4064,
+      "craq_max_prob": 0.9993368983268738,
+      "crack_max_prob": 0.9971383810043335,
+      "craq_mean_prob": 0.04852302372455597,
+      "crack_mean_prob": 0.009389209561049938
+    },
+    {
+      "stem": "MGLST-SC-2L-A5-2_R1_C04",
+      "craq_pixels": 21284,
+      "crack_pixels": 4809,
+      "craq_max_prob": 0.9990376830101013,
+      "crack_max_prob": 0.9983881115913391,
+      "craq_mean_prob": 0.035666290670633316,
+      "crack_mean_prob": 0.010967709124088287
+    },
+    {
+      "stem": "MGLST-SC-2L-A5-2_R1_C05",
+      "craq_pixels": 38241,
+      "crack_pixels": 11828,
+      "craq_max_prob": 0.9999272227287292,
+      "crack_max_prob": 0.9997861385345459,
+      "craq_mean_prob": 0.04984831437468529,
+      "crack_mean_prob": 0.020599208772182465
+    },
+    {
+      "stem": "MGLST-SC-2L-A5-2_R2_C06",
+      "craq_pixels": 37732,
+      "crack_pixels": 12777,
+      "craq_max_prob": 0.9999146461486816,
+      "crack_max_prob": 0.9999549984931946,
+      "craq_mean_prob": 0.051299799233675,
+      "crack_mean_prob": 0.021141815930604935
+    },
+    {
+      "stem": "SSGWT-MH-M-A8-1_R11_C03",
+      "craq_pixels": 2099,
+      "crack_pixels": 5587,
+      "craq_max_prob": 0.9988778233528137,
+      "crack_max_prob": 0.9999433755874634,
+      "craq_mean_prob": 0.005708792246878147,
+      "crack_mean_prob": 0.009157944470643997
+    },
+    {
+      "stem": "SSGWT-MH-M-A8-1_R12_C05",
+      "craq_pixels": 4041,
+      "crack_pixels": 10658,
+      "craq_max_prob": 0.9954794645309448,
+      "crack_max_prob": 0.9999291896820068,
+      "craq_mean_prob": 0.009582800790667534,
+      "crack_mean_prob": 0.014837433584034443
+    },
+    {
+      "stem": "SSGWT-MH-M-A8-1_R12_C06",
+      "craq_pixels": 1072,
+      "crack_pixels": 4197,
+      "craq_max_prob": 0.9641187787055969,
+      "crack_max_prob": 0.9968096017837524,
+      "craq_mean_prob": 0.00844778586179018,
+      "crack_mean_prob": 0.00982754584401846
+    },
+    {
+      "stem": "SSGWT-MH-M-A8-1_R7_C02",
+      "craq_pixels": 6226,
+      "crack_pixels": 16425,
+      "craq_max_prob": 0.9996652603149414,
+      "crack_max_prob": 0.9999812245368958,
+      "craq_mean_prob": 0.010893048718571663,
+      "crack_mean_prob": 0.020673952996730804
+    },
+    {
+      "stem": "SSGWT-MH-M-A8-1_R8_C05",
+      "craq_pixels": 4530,
+      "crack_pixels": 12628,
+      "craq_max_prob": 0.9986577033996582,
+      "crack_max_prob": 0.9998613595962524,
+      "craq_mean_prob": 0.0095699243247509,
+      "crack_mean_prob": 0.018246661871671677
+    },
+    {
+      "stem": "SSGWT-MH-M-A8-1_R8_C06",
+      "craq_pixels": 1087,
+      "crack_pixels": 6308,
+      "craq_max_prob": 0.9760118722915649,
+      "crack_max_prob": 0.9975603818893433,
+      "craq_mean_prob": 0.008052898570895195,
+      "crack_mean_prob": 0.0143866753205657
+    },
+    {
+      "stem": "SSGWT-MH-M-A8-1_R9_C01",
+      "craq_pixels": 257,
+      "crack_pixels": 2278,
+      "craq_max_prob": 0.9211892485618591,
+      "crack_max_prob": 0.9986949563026428,
+      "craq_mean_prob": 0.003919490613043308,
+      "crack_mean_prob": 0.006358917336910963
+    },
+    {
+      "stem": "SSGWT-MH-M-A8-1_R9_C05",
+      "craq_pixels": 7606,
+      "crack_pixels": 17217,
+      "craq_max_prob": 0.9999423623085022,
+      "crack_max_prob": 0.9998142123222351,
+      "craq_mean_prob": 0.011449606157839298,
+      "crack_mean_prob": 0.0236975084990263
+    },
+    {
+      "stem": "TNDA08-6-A-\u4e59-0-F-1_R3_C02",
+      "craq_pixels": 21572,
+      "crack_pixels": 11795,
+      "craq_max_prob": 0.9999001026153564,
+      "crack_max_prob": 0.9998446702957153,
+      "craq_mean_prob": 0.04966004937887192,
+      "crack_mean_prob": 0.024762477725744247
+    },
+    {
+      "stem": "TNDA08-6-A-\u4e59-0-F-1_R3_C03",
+      "craq_pixels": 13891,
+      "crack_pixels": 14089,
+      "craq_max_prob": 0.9999342560768127,
+      "crack_max_prob": 0.999980628490448,
+      "craq_mean_prob": 0.036757733672857285,
+      "crack_mean_prob": 0.029588457196950912
+    },
+    {
+      "stem": "TNDA08-6-A-\u4e59-0-F-1_R4_C02",
+      "craq_pixels": 15682,
+      "crack_pixels": 23537,
+      "craq_max_prob": 0.9998100399971008,
+      "crack_max_prob": 0.9999045133590698,
+      "craq_mean_prob": 0.0333976112306118,
+      "crack_mean_prob": 0.043140120804309845
+    },
+    {
+      "stem": "TNDA08-6-A-\u4e59-0-F-1_R4_C03",
+      "craq_pixels": 11720,
+      "crack_pixels": 20910,
+      "craq_max_prob": 0.9999564290046692,
+      "crack_max_prob": 0.9999610781669617,
+      "craq_mean_prob": 0.03819222375750542,
+      "crack_mean_prob": 0.04298928380012512
+    },
+    {
+      "stem": "TNDA08-6-A-\u4e59-0-F-1_R4_C04",
+      "craq_pixels": 13262,
+      "crack_pixels": 22192,
+      "craq_max_prob": 0.9998244643211365,
+      "crack_max_prob": 0.9999619722366333,
+      "craq_mean_prob": 0.032100237905979156,
+      "crack_mean_prob": 0.04177968204021454
+    },
+    {
+      "stem": "TNDA08-6-A-\u4e59-0-F-1_R5_C02",
+      "craq_pixels": 15590,
+      "crack_pixels": 24257,
+      "craq_max_prob": 0.9999052882194519,
+      "crack_max_prob": 0.9998875260353088,
+      "craq_mean_prob": 0.03244505450129509,
+      "crack_mean_prob": 0.043201759457588196
+    },
+    {
+      "stem": "TNDA08-6-A-\u4e59-0-F-1_R5_C03",
+      "craq_pixels": 12811,
+      "crack_pixels": 22143,
+      "craq_max_prob": 0.9999602437019348,
+      "crack_max_prob": 0.9999887347221375,
+      "craq_mean_prob": 0.036011338233947754,
+      "crack_mean_prob": 0.043216217309236526
+    },
+    {
+      "stem": "TNDA08-6-A-\u4e59-0-F-1_R5_C04",
+      "craq_pixels": 13997,
+      "crack_pixels": 21671,
+      "craq_max_prob": 0.9998152852058411,
+      "crack_max_prob": 0.9999643564224243,
+      "craq_mean_prob": 0.033157914876937866,
+      "crack_mean_prob": 0.0408967062830925
+    },
+    {
+      "stem": "TNDF15-19-B-\u4e19-0-B-11_R10_C02",
+      "craq_pixels": 15976,
+      "crack_pixels": 12549,
+      "craq_max_prob": 0.9993500709533691,
+      "crack_max_prob": 0.9999099969863892,
+      "craq_mean_prob": 0.03291865065693855,
+      "crack_mean_prob": 0.023085616528987885
+    },
+    {
+      "stem": "TNDF15-19-B-\u4e19-0-B-11_R2_C04",
+      "craq_pixels": 33734,
+      "crack_pixels": 3410,
+      "craq_max_prob": 0.9999238848686218,
+      "crack_max_prob": 0.9973016381263733,
+      "craq_mean_prob": 0.05252021178603172,
+      "crack_mean_prob": 0.010292891412973404
+    },
+    {
+      "stem": "TNDF15-19-B-\u4e19-0-B-11_R3_C03",
+      "craq_pixels": 31024,
+      "crack_pixels": 6453,
+      "craq_max_prob": 0.9999397397041321,
+      "crack_max_prob": 0.9998679161071777,
+      "craq_mean_prob": 0.05022120103240013,
+      "crack_mean_prob": 0.01217125914990902
+    },
+    {
+      "stem": "TNDF15-19-B-\u4e19-0-B-11_R5_C04",
+      "craq_pixels": 42640,
+      "crack_pixels": 2479,
+      "craq_max_prob": 0.9998517036437988,
+      "crack_max_prob": 0.9960391521453857,
+      "craq_mean_prob": 0.0631057396531105,
+      "crack_mean_prob": 0.009361883625388145
+    },
+    {
+      "stem": "TNDF15-19-B-\u4e19-0-B-11_R7_C02",
+      "craq_pixels": 51449,
+      "crack_pixels": 12098,
+      "craq_max_prob": 0.9999818205833435,
+      "crack_max_prob": 0.9998161792755127,
+      "craq_mean_prob": 0.06732098013162613,
+      "crack_mean_prob": 0.021062416955828667
+    },
+    {
+      "stem": "TNDF15-19-B-\u4e19-0-B-11_R7_C03",
+      "craq_pixels": 28922,
+      "crack_pixels": 787,
+      "craq_max_prob": 0.9999909400939941,
+      "crack_max_prob": 0.9324840903282166,
+      "craq_mean_prob": 0.042075932025909424,
+      "crack_mean_prob": 0.008011946454644203
+    },
+    {
+      "stem": "TNDF15-19-B-\u4e19-0-B-11_R8_C02",
+      "craq_pixels": 31173,
+      "crack_pixels": 13900,
+      "craq_max_prob": 0.9998180866241455,
+      "crack_max_prob": 0.9968015551567078,
+      "craq_mean_prob": 0.04432736337184906,
+      "crack_mean_prob": 0.02572501450777054
+    },
+    {
+      "stem": "TNDF15-19-B-\u4e19-0-B-11_R8_C03",
+      "craq_pixels": 44043,
+      "crack_pixels": 10322,
+      "craq_max_prob": 0.9999710917472839,
+      "crack_max_prob": 0.9997525215148926,
+      "craq_mean_prob": 0.05847626179456711,
+      "crack_mean_prob": 0.02105168253183365
+    },
+    {
+      "stem": "TNDF15-19-B-\u4e19-0-B-8_R1_C03",
+      "craq_pixels": 29114,
+      "crack_pixels": 3721,
+      "craq_max_prob": 0.9991941452026367,
+      "crack_max_prob": 0.9989909529685974,
+      "craq_mean_prob": 0.04585015028715134,
+      "crack_mean_prob": 0.010480035096406937
+    },
+    {
+      "stem": "TNDF15-19-B-\u4e19-0-B-8_R1_C06",
+      "craq_pixels": 49493,
+      "crack_pixels": 15248,
+      "craq_max_prob": 0.999938428401947,
+      "crack_max_prob": 0.9999794960021973,
+      "craq_mean_prob": 0.06133768707513809,
+      "crack_mean_prob": 0.023087069392204285
+    },
+    {
+      "stem": "TNDF15-19-B-\u4e19-0-B-8_R2_C01",
+      "craq_pixels": 42481,
+      "crack_pixels": 3643,
+      "craq_max_prob": 0.9998908638954163,
+      "crack_max_prob": 0.9993537664413452,
+      "craq_mean_prob": 0.05560917407274246,
+      "crack_mean_prob": 0.010042695328593254
+    },
+    {
+      "stem": "TNDF15-19-B-\u4e19-0-B-8_R3_C02",
+      "craq_pixels": 48868,
+      "crack_pixels": 7500,
+      "craq_max_prob": 0.999989926815033,
+      "crack_max_prob": 0.9999112486839294,
+      "craq_mean_prob": 0.06997665017843246,
+      "crack_mean_prob": 0.014486719854176044
+    },
+    {
+      "stem": "TNDF15-19-B-\u4e19-0-B-8_R5_C04",
+      "craq_pixels": 53050,
+      "crack_pixels": 7648,
+      "craq_max_prob": 0.9999118447303772,
+      "crack_max_prob": 0.9997782111167908,
+      "craq_mean_prob": 0.07082094252109528,
+      "crack_mean_prob": 0.01531287282705307
+    },
+    {
+      "stem": "TNDF15-19-B-\u4e19-0-B-8_R6_C04",
+      "craq_pixels": 34057,
+      "crack_pixels": 7321,
+      "craq_max_prob": 0.9998571872711182,
+      "crack_max_prob": 0.9998758435249329,
+      "craq_mean_prob": 0.05075523257255554,
+      "crack_mean_prob": 0.016342313960194588
+    },
+    {
+      "stem": "TNDF15-19-B-\u4e19-0-B-8_R7_C04",
+      "craq_pixels": 19311,
+      "crack_pixels": 8672,
+      "craq_max_prob": 0.9996734857559204,
+      "crack_max_prob": 0.99989914894104,
+      "craq_mean_prob": 0.03747835010290146,
+      "crack_mean_prob": 0.016184676438570023
+    },
+    {
+      "stem": "TNDF15-19-B-\u4e19-0-B-8_R9_C04",
+      "craq_pixels": 31301,
+      "crack_pixels": 11519,
+      "craq_max_prob": 0.9998937845230103,
+      "crack_max_prob": 0.9999591708183289,
+      "craq_mean_prob": 0.04581216722726822,
+      "crack_mean_prob": 0.019742654636502266
+    },
+    {
+      "stem": "TNDH27-9-ARI-\u4e59-0-F-2_R1_C03",
+      "craq_pixels": 7416,
+      "crack_pixels": 3293,
+      "craq_max_prob": 0.9985328912734985,
+      "crack_max_prob": 0.9972770810127258,
+      "craq_mean_prob": 0.022777065634727478,
+      "crack_mean_prob": 0.010055538266897202
+    },
+    {
+      "stem": "TNDH27-9-ARI-\u4e59-0-F-2_R3_C03",
+      "craq_pixels": 19372,
+      "crack_pixels": 12617,
+      "craq_max_prob": 0.9994666576385498,
+      "crack_max_prob": 0.9999430179595947,
+      "craq_mean_prob": 0.04098999500274658,
+      "crack_mean_prob": 0.021561922505497932
+    },
+    {
+      "stem": "TNDH27-9-ARI-\u4e59-0-F-2_R3_C04",
+      "craq_pixels": 18693,
+      "crack_pixels": 7775,
+      "craq_max_prob": 0.998633086681366,
+      "crack_max_prob": 0.9996405839920044,
+      "craq_mean_prob": 0.03612249344587326,
+      "crack_mean_prob": 0.015048583969473839
+    },
+    {
+      "stem": "TNDH27-9-ARI-\u4e59-0-F-2_R4_C02",
+      "craq_pixels": 35421,
+      "crack_pixels": 1314,
+      "craq_max_prob": 0.9986886978149414,
+      "crack_max_prob": 0.9867885708808899,
+      "craq_mean_prob": 0.06045249477028847,
+      "crack_mean_prob": 0.009219051338732243
+    },
+    {
+      "stem": "TNDH27-9-ARI-\u4e59-0-F-2_R4_C03",
+      "craq_pixels": 23589,
+      "crack_pixels": 10743,
+      "craq_max_prob": 0.9996817111968994,
+      "crack_max_prob": 0.9985836148262024,
+      "craq_mean_prob": 0.04556547477841377,
+      "crack_mean_prob": 0.0212338175624609
+    },
+    {
+      "stem": "TNDH27-9-ARI-\u4e59-0-F-2_R4_C04",
+      "craq_pixels": 28738,
+      "crack_pixels": 20753,
+      "craq_max_prob": 0.9991898536682129,
+      "crack_max_prob": 0.9991626143455505,
+      "craq_mean_prob": 0.05942830443382263,
+      "crack_mean_prob": 0.03529807925224304
+    },
+    {
+      "stem": "TNDH27-9-ARI-\u4e59-0-F-2_R4_C05",
+      "craq_pixels": 12670,
+      "crack_pixels": 17873,
+      "craq_max_prob": 0.9957756996154785,
+      "crack_max_prob": 0.9998214244842529,
+      "craq_mean_prob": 0.033809565007686615,
+      "crack_mean_prob": 0.029890291392803192
+    },
+    {
+      "stem": "TNDH27-9-ARI-\u4e59-0-F-2_R5_C03",
+      "craq_pixels": 13808,
+      "crack_pixels": 7263,
+      "craq_max_prob": 0.9973819851875305,
+      "crack_max_prob": 0.9994233846664429,
+      "craq_mean_prob": 0.03063271753489971,
+      "crack_mean_prob": 0.016002807766199112
+    },
+    {
+      "stem": "TNDH27-9-ARI-\u4e59-0-F-3_R2_C01",
+      "craq_pixels": 16309,
+      "crack_pixels": 1720,
+      "craq_max_prob": 0.9998347759246826,
+      "crack_max_prob": 0.9997563362121582,
+      "craq_mean_prob": 0.0398826077580452,
+      "crack_mean_prob": 0.009268756955862045
+    },
+    {
+      "stem": "TNDH27-9-ARI-\u4e59-0-F-3_R2_C04",
+      "craq_pixels": 25813,
+      "crack_pixels": 4998,
+      "craq_max_prob": 0.9986878037452698,
+      "crack_max_prob": 0.9967251420021057,
+      "craq_mean_prob": 0.051370687782764435,
+      "crack_mean_prob": 0.012423337437212467
+    },
+    {
+      "stem": "TNDH27-9-ARI-\u4e59-0-F-3_R2_C05",
+      "craq_pixels": 28055,
+      "crack_pixels": 5480,
+      "craq_max_prob": 0.9987639784812927,
+      "crack_max_prob": 0.9967795610427856,
+      "craq_mean_prob": 0.055044494569301605,
+      "crack_mean_prob": 0.012796875089406967
+    },
+    {
+      "stem": "TNDH27-9-ARI-\u4e59-0-F-3_R3_C01",
+      "craq_pixels": 19071,
+      "crack_pixels": 11855,
+      "craq_max_prob": 0.9996037483215332,
+      "crack_max_prob": 0.998722493648529,
+      "craq_mean_prob": 0.045541562139987946,
+      "crack_mean_prob": 0.020756086334586143
+    },
+    {
+      "stem": "TNDH27-9-ARI-\u4e59-0-F-3_R4_C01",
+      "craq_pixels": 17064,
+      "crack_pixels": 15221,
+      "craq_max_prob": 0.999933660030365,
+      "crack_max_prob": 0.9999905228614807,
+      "craq_mean_prob": 0.045583467930555344,
+      "crack_mean_prob": 0.02550448849797249
+    },
+    {
+      "stem": "TNDH27-9-ARI-\u4e59-0-F-3_R4_C02",
+      "craq_pixels": 19979,
+      "crack_pixels": 21613,
+      "craq_max_prob": 0.9998437166213989,
+      "crack_max_prob": 0.9998118281364441,
+      "craq_mean_prob": 0.04798396676778793,
+      "crack_mean_prob": 0.03431057184934616
+    },
+    {
+      "stem": "TNDH27-9-ARI-\u4e59-0-F-3_R5_C01",
+      "craq_pixels": 13128,
+      "crack_pixels": 23405,
+      "craq_max_prob": 0.9993735551834106,
+      "crack_max_prob": 0.9999622106552124,
+      "craq_mean_prob": 0.03372667729854584,
+      "crack_mean_prob": 0.035804666578769684
+    },
+    {
+      "stem": "TNDH27-9-ARI-\u4e59-0-F-3_R5_C02",
+      "craq_pixels": 23894,
+      "crack_pixels": 22540,
+      "craq_max_prob": 0.9995294213294983,
+      "crack_max_prob": 0.9988916516304016,
+      "craq_mean_prob": 0.047820962965488434,
+      "crack_mean_prob": 0.03863225877285004
+    },
+    {
+      "stem": "ZXT-RSHMH-M-1RB1-2_R2_C05",
+      "craq_pixels": 18183,
+      "crack_pixels": 7598,
+      "craq_max_prob": 0.9998887777328491,
+      "crack_max_prob": 0.9998971223831177,
+      "craq_mean_prob": 0.02946702018380165,
+      "crack_mean_prob": 0.013804062269628048
+    },
+    {
+      "stem": "ZXT-RSHMH-M-1RB1-2_R2_C06",
+      "craq_pixels": 13383,
+      "crack_pixels": 6049,
+      "craq_max_prob": 0.9986072778701782,
+      "crack_max_prob": 0.9989027380943298,
+      "craq_mean_prob": 0.025159744545817375,
+      "crack_mean_prob": 0.012453318573534489
+    },
+    {
+      "stem": "ZXT-RSHMH-M-1RB1-2_R2_C07",
+      "craq_pixels": 12465,
+      "crack_pixels": 11922,
+      "craq_max_prob": 0.9999646544456482,
+      "crack_max_prob": 0.9999846816062927,
+      "craq_mean_prob": 0.025048216804862022,
+      "crack_mean_prob": 0.01797008514404297
+    },
+    {
+      "stem": "ZXT-RSHMH-M-1RB1-2_R2_C08",
+      "craq_pixels": 9462,
+      "crack_pixels": 4969,
+      "craq_max_prob": 0.9998613595962524,
+      "crack_max_prob": 0.9957726001739502,
+      "craq_mean_prob": 0.020512565970420837,
+      "crack_mean_prob": 0.011945105157792568
+    },
+    {
+      "stem": "ZXT-RSHMH-M-1RB1-2_R2_C09",
+      "craq_pixels": 14347,
+      "crack_pixels": 6673,
+      "craq_max_prob": 0.9999182820320129,
+      "crack_max_prob": 0.9982028007507324,
+      "craq_mean_prob": 0.029227305203676224,
+      "crack_mean_prob": 0.013744095340371132
+    },
+    {
+      "stem": "ZXT-RSHMH-M-1RB1-2_R2_C10",
+      "craq_pixels": 12862,
+      "crack_pixels": 6642,
+      "craq_max_prob": 0.9998940825462341,
+      "crack_max_prob": 0.9987019896507263,
+      "craq_mean_prob": 0.027873270213603973,
+      "crack_mean_prob": 0.01365161594003439
+    },
+    {
+      "stem": "ZXT-RSHMH-M-1RB1-2_R3_C06",
+      "craq_pixels": 25384,
+      "crack_pixels": 4922,
+      "craq_max_prob": 0.9999843239784241,
+      "crack_max_prob": 0.9984145164489746,
+      "craq_mean_prob": 0.04035979509353638,
+      "crack_mean_prob": 0.011782849207520485
+    },
+    {
+      "stem": "ZXT-RSHMH-M-1RB1-2_R3_C07",
+      "craq_pixels": 20231,
+      "crack_pixels": 14992,
+      "craq_max_prob": 0.9999681711196899,
+      "crack_max_prob": 0.9994857311248779,
+      "craq_mean_prob": 0.03937117010354996,
+      "crack_mean_prob": 0.021858008578419685
+    },
+    {
+      "stem": "ZXT-SC-M-A4_-8_R2_C02",
+      "craq_pixels": 2131,
+      "crack_pixels": 21320,
+      "craq_max_prob": 0.9723586440086365,
+      "crack_max_prob": 0.9998972415924072,
+      "craq_mean_prob": 0.008914383128285408,
+      "crack_mean_prob": 0.03189873695373535
+    },
+    {
+      "stem": "ZXT-SC-M-A4_-8_R2_C03",
+      "craq_pixels": 6933,
+      "crack_pixels": 26009,
+      "craq_max_prob": 0.9988285303115845,
+      "crack_max_prob": 0.9997543692588806,
+      "craq_mean_prob": 0.015029861591756344,
+      "crack_mean_prob": 0.03682593256235123
+    },
+    {
+      "stem": "ZXT-SC-M-A4_-8_R2_C04",
+      "craq_pixels": 3330,
+      "crack_pixels": 25056,
+      "craq_max_prob": 0.9940147399902344,
+      "crack_max_prob": 0.9998891949653625,
+      "craq_mean_prob": 0.01033707894384861,
+      "crack_mean_prob": 0.03454611822962761
+    },
+    {
+      "stem": "ZXT-SC-M-A4_-8_R2_C05",
+      "craq_pixels": 4813,
+      "crack_pixels": 23449,
+      "craq_max_prob": 0.9981890320777893,
+      "crack_max_prob": 0.9998795986175537,
+      "craq_mean_prob": 0.009756744839251041,
+      "crack_mean_prob": 0.032094359397888184
+    },
+    {
+      "stem": "ZXT-SC-M-A4_-8_R3_C01",
+      "craq_pixels": 17285,
+      "crack_pixels": 9126,
+      "craq_max_prob": 0.9999243021011353,
+      "crack_max_prob": 0.9997164607048035,
+      "craq_mean_prob": 0.031675759702920914,
+      "crack_mean_prob": 0.01524567510932684
+    },
+    {
+      "stem": "ZXT-SC-M-A4_-8_R3_C02",
+      "craq_pixels": 3660,
+      "crack_pixels": 23472,
+      "craq_max_prob": 0.9975996017456055,
+      "crack_max_prob": 0.9999591112136841,
+      "craq_mean_prob": 0.01086264569312334,
+      "crack_mean_prob": 0.03420449048280716
+    },
+    {
+      "stem": "ZXT-SC-M-A4_-8_R3_C04",
+      "craq_pixels": 5002,
+      "crack_pixels": 7055,
+      "craq_max_prob": 0.9973776340484619,
+      "crack_max_prob": 0.9994437098503113,
+      "craq_mean_prob": 0.014475634321570396,
+      "crack_mean_prob": 0.014935394749045372
+    },
+    {
+      "stem": "ZXT-SC-M-A4_-8_R3_C05",
+      "craq_pixels": 4377,
+      "crack_pixels": 13572,
+      "craq_max_prob": 0.9989039897918701,
+      "crack_max_prob": 0.9997745156288147,
+      "craq_mean_prob": 0.011881359852850437,
+      "crack_mean_prob": 0.02042071893811226
+    },
+    {
+      "stem": "ZXT-SC-M-A8-1_R2_C02",
+      "craq_pixels": 25032,
+      "crack_pixels": 4824,
+      "craq_max_prob": 0.9998393654823303,
+      "crack_max_prob": 0.9978384375572205,
+      "craq_mean_prob": 0.038862984627485275,
+      "crack_mean_prob": 0.008926577866077423
+    },
+    {
+      "stem": "ZXT-SC-M-A8-1_R2_C03",
+      "craq_pixels": 9451,
+      "crack_pixels": 4402,
+      "craq_max_prob": 0.9996717572212219,
+      "crack_max_prob": 0.9967836141586304,
+      "craq_mean_prob": 0.022253043949604034,
+      "crack_mean_prob": 0.010385936126112938
+    },
+    {
+      "stem": "ZXT-SC-M-A8-1_R2_C04",
+      "craq_pixels": 22359,
+      "crack_pixels": 8226,
+      "craq_max_prob": 0.9997265934944153,
+      "crack_max_prob": 0.9963385462760925,
+      "craq_mean_prob": 0.03880035877227783,
+      "crack_mean_prob": 0.019330931827425957
+    },
+    {
+      "stem": "ZXT-SC-M-A8-1_R2_C05",
+      "craq_pixels": 38617,
+      "crack_pixels": 19125,
+      "craq_max_prob": 0.9995145201683044,
+      "crack_max_prob": 0.9998410940170288,
+      "craq_mean_prob": 0.06014436110854149,
+      "crack_mean_prob": 0.03285417705774307
+    },
+    {
+      "stem": "ZXT-SC-M-A8-1_R2_C06",
+      "craq_pixels": 24046,
+      "crack_pixels": 13971,
+      "craq_max_prob": 0.9999541640281677,
+      "crack_max_prob": 0.9995123147964478,
+      "craq_mean_prob": 0.041112326085567474,
+      "crack_mean_prob": 0.022540990263223648
+    },
+    {
+      "stem": "ZXT-SC-M-A8-1_R3_C03",
+      "craq_pixels": 4082,
+      "crack_pixels": 16674,
+      "craq_max_prob": 0.9980554580688477,
+      "crack_max_prob": 0.9999601244926453,
+      "craq_mean_prob": 0.013465331867337227,
+      "crack_mean_prob": 0.023729002103209496
+    },
+    {
+      "stem": "ZXT-SC-M-A8-1_R3_C04",
+      "craq_pixels": 3870,
+      "crack_pixels": 13683,
+      "craq_max_prob": 0.9996344447135925,
+      "crack_max_prob": 0.9999712109565735,
+      "craq_mean_prob": 0.01368465181440115,
+      "crack_mean_prob": 0.022709239274263382
+    },
+    {
+      "stem": "ZXT-SC-M-A8-1_R3_C05",
+      "craq_pixels": 5065,
+      "crack_pixels": 4776,
+      "craq_max_prob": 0.997954249382019,
+      "crack_max_prob": 0.9998224377632141,
+      "craq_mean_prob": 0.01350486557930708,
+      "crack_mean_prob": 0.011251214891672134
+    },
+    {
+      "stem": "ZXT-SC-R-A8-2_R1_C03",
+      "craq_pixels": 5224,
+      "crack_pixels": 12358,
+      "craq_max_prob": 0.997320294380188,
+      "crack_max_prob": 0.9993830919265747,
+      "craq_mean_prob": 0.010388017632067204,
+      "crack_mean_prob": 0.01781087927520275
+    },
+    {
+      "stem": "ZXT-SC-R-A8-2_R1_C04",
+      "craq_pixels": 5292,
+      "crack_pixels": 12692,
+      "craq_max_prob": 0.9974892735481262,
+      "crack_max_prob": 0.9996761679649353,
+      "craq_mean_prob": 0.010945653542876244,
+      "crack_mean_prob": 0.019144047051668167
+    },
+    {
+      "stem": "ZXT-SC-R-A8-2_R1_C05",
+      "craq_pixels": 5749,
+      "crack_pixels": 15022,
+      "craq_max_prob": 0.9975244998931885,
+      "crack_max_prob": 0.9984586238861084,
+      "craq_mean_prob": 0.013803147710859776,
+      "crack_mean_prob": 0.022187933325767517
+    },
+    {
+      "stem": "ZXT-SC-R-A8-2_R2_C02",
+      "craq_pixels": 15656,
+      "crack_pixels": 7863,
+      "craq_max_prob": 0.9999517798423767,
+      "crack_max_prob": 0.999876081943512,
+      "craq_mean_prob": 0.02938367798924446,
+      "crack_mean_prob": 0.013421799056231976
+    },
+    {
+      "stem": "ZXT-SC-R-A8-2_R2_C03",
+      "craq_pixels": 9360,
+      "crack_pixels": 8580,
+      "craq_max_prob": 0.996310830116272,
+      "crack_max_prob": 0.9998047947883606,
+      "craq_mean_prob": 0.02008596993982792,
+      "crack_mean_prob": 0.015303057618439198
+    },
+    {
+      "stem": "ZXT-SC-R-A8-2_R2_C04",
+      "craq_pixels": 10322,
+      "crack_pixels": 13062,
+      "craq_max_prob": 0.9986884593963623,
+      "crack_max_prob": 0.9994847178459167,
+      "craq_mean_prob": 0.02319878153502941,
+      "crack_mean_prob": 0.02145424485206604
+    },
+    {
+      "stem": "ZXT-SC-R-A8-2_R2_C05",
+      "craq_pixels": 5836,
+      "crack_pixels": 9224,
+      "craq_max_prob": 0.9980341196060181,
+      "crack_max_prob": 0.998872697353363,
+      "craq_mean_prob": 0.013899815268814564,
+      "crack_mean_prob": 0.01809743233025074
+    },
+    {
+      "stem": "ZXT-SC-R-A8-2_R2_C06",
+      "craq_pixels": 13272,
+      "crack_pixels": 8892,
+      "craq_max_prob": 0.9995866417884827,
+      "crack_max_prob": 0.9994372129440308,
+      "craq_mean_prob": 0.024420123547315598,
+      "crack_mean_prob": 0.0146013293415308
+    }
+  ]
+}
