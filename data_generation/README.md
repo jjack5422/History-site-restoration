@@ -10,12 +10,11 @@
 目標指標:由下游偵測專案的 F1 / IoU 提升來驗證(尤其 crack 類的 recall)。
 
 ## 狀態 (Status)
-- 目前進度:專案已從 `/home/zzz90/data_generation` 遷入 research/;核心文獻已歸檔;真實資料已盤點(見 Data)。
-- 最近一次有效實驗:尚無(見 EXPERIMENTS.md)。
+- 目前進度:v0 合成器完成,已產出 `_data/synth_{crack,craq}_v0`(8:1);下一步:下游 real vs real+synth A/B 實驗。
+- 最近一次有效實驗:`runs/2026-06-02-synth-v0/`。
 - 已知問題 / TODO:
-  - 合成器尚未開工;需先做 brainstorming 定合成策略(程序式 Bézier vs GAN 風格遷移)。
+  - 下游 real vs real+synth A/B 實驗尚未進行。
   - 兩篇核心文獻聚焦繪畫 craquelure,需針對木材紋理/顏料干擾調整。
-  - crack vs craquelure 合成比例目標待定(對齊下游失衡問題)。
 
 ## 環境 (Environment)
 - venv:尚未建立(讀 PDF 暫用 `/tmp/pdfenv`,pymupdf)。
