@@ -21,9 +21,11 @@ __pycache__/
 
 # --- Datasets & generated outputs (large; live outside git) ---
 **/data/
+**/datasets/
 **/outputs/
 **/preds/
 **/checkpoints/
+*.cache
 
 # --- Generated images (predictions, overlays, visualizations) ---
 # Not versioned. Exception: figures curated for the paper under results/.

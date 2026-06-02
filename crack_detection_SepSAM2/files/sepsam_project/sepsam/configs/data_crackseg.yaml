@@ -1,9 +1,0 @@
-# Roboflow Crack-Seg（YOLO segmentation 格式）
-# 來源: https://universe.roboflow.com/university-bswxt/crack-bphdr
-# 下載後資料夾結構通常為 train/ valid/ test/，各含 images/ 與 labels/。
-path: datasets/crack_seg
-train: train/images
-val: valid/images
-test: test/images
-names:
-  0: crack

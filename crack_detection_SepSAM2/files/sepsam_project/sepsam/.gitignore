@@ -1,9 +1,0 @@
-__pycache__/
-*.pyc
-runs/
-outputs_infer/
-weights/*.pt
-weights/*.pth
-datasets/*/
-!datasets/.gitkeep
-!weights/.gitkeep

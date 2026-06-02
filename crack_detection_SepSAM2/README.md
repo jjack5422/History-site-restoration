@@ -2,8 +2,10 @@
 
 復現論文：Zhou et al., *"Self-evolving prompting segment anything model for crack segmentation through data-driven cyclic conversations"*, **Advanced Engineering Informatics 68 (2025) 103626**, DOI: 10.1016/j.aei.2025.103626。
 
-> **給 Claude Code 的話**：本 repo 已備好骨架與核心程式。請依本 README 與 `SPEC_復現規格書.md` 把專案跑起來並補完缺口。
-> - **詳細規格、演算法、超參數、注意事項全在 `SPEC_復現規格書.md`**（含附錄 C：SEA 整合；附錄 D：SAM2 變體）。
+> **工作區資訊（2026-06-02 整理）**：本專案已 flatten — 內容從原本的 `sepsam/` 子層移到專案根目錄；舊的重複骨架 `files/sepsam_project/` 已刪除；規格書與結果報告移到 `docs/`。venv：`/home/zzz90/research/SepSAM2_env`。實驗結果索引見 `EXPERIMENTS.md`。
+
+> **給 Claude Code 的話**：本 repo 已備好骨架與核心程式。請依本 README 與 `docs/SepSAM_復現規格書.md` 把專案跑起來並補完缺口。
+> - **詳細規格、演算法、超參數、注意事項全在 `docs/SepSAM_復現規格書.md`**（含附錄 C：SEA 整合；附錄 D：SAM2 變體）。
 > - 標 `[需推斷]` 之處請保留為可調參數、勿當論文事實。
 > - 原論文未公開官方程式碼，部分實作為依論文敘述之合理重建。
 
@@ -12,11 +14,12 @@
 ## 這是什麼
 SepSAM = 用一個**輕量 YOLOv8-Seg + SEA**（唯一需要訓練的 Agent）自動產生提示，引導一個**凍結的 SAM / SAM2**（大模型）做裂紋分割；兩者透過 **CMC（Cyclic Model Conversation）四輪流程**互相校正：沿裂紋中軸取點提示 → SAM 精修 → 用 Agent 信心過濾雜訊 → 衝突分析決定是否採用。SAM 全程不訓練。
 
-## 專案結構
+## 專案結構（已 flatten 至專案根）
 ```
-sepsam/
+crack_detection_SepSAM2/
 ├── README.md                     # 本檔
-├── SPEC_復現規格書.md            # 完整規格（必讀）
+├── EXPERIMENTS.md                # 實驗索引
+├── docs/SepSAM_復現規格書.md     # 完整規格（必讀）+ 復現結果報告
 ├── requirements.txt
 ├── sea_setup.py                  # 一鍵讓 ultralytics 認得 C2f_SEA（冪等、自動備份）
 ├── verify_sea.py                 # 驗證 SEA 整合
