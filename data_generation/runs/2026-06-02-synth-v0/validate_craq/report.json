@@ -1,0 +1,24 @@
+{
+  "type": "craq",
+  "real": {
+    "n": 228,
+    "fg_mean_pct": 3.771453991270902,
+    "fg_min_pct": 0.0,
+    "fg_max_pct": 11.285400390625
+  },
+  "synth": {
+    "n": 108,
+    "fg_mean_pct": 7.641075275562428,
+    "fg_min_pct": 6.16607666015625,
+    "fg_max_pct": 9.218215942382812
+  },
+  "compare": {
+    "real_mean_pct": 3.771453991270902,
+    "synth_mean_pct": 7.641075275562428,
+    "real_range_pct": [
+      0.0,
+      11.285400390625
+    ],
+    "synth_mean_within_real_minmax": true
+  }
+}

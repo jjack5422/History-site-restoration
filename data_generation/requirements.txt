@@ -1,0 +1,9 @@
+numpy
+scipy
+opencv-python-headless
+pillow
+pyyaml
+pytest
+tqdm
+torch  # crackseg_common.dataset.TileSegDataset imports torch at module level; CPU build sufficient for synth output verification
+-e /home/zzz90/research/_lib
