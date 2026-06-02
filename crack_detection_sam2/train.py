@@ -2,7 +2,7 @@
 
 Example:
     python train.py \\
-        --tiles_root data/tiles_512 \\
+        --tiles_root /home/zzz90/research/_data/labeled32_craq_v3/tiles_512 \\
         --split data/tiles_512/group_split_stem.json \\
         --fold 0 \\
         --variant small \\
@@ -140,8 +140,8 @@ def train_one_epoch(model, loader, optimizer, scaler, criterion, device,
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument("--tiles_root", default="../_data/tiles_512")
-    parser.add_argument("--split", default="../_data/tiles_512/group_split_stem.json")
+    parser.add_argument("--tiles_root", default="/home/zzz90/research/_data/labeled32_craq_v3/tiles_512")
+    parser.add_argument("--split", default="/home/zzz90/research/_data/labeled32_craq_v3/tiles_512/group_split_stem.json")
     parser.add_argument("--fold", type=int, default=0)
     parser.add_argument("--variant", default="small",
                         choices=["tiny", "small", "base", "large"])

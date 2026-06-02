@@ -47,7 +47,7 @@ def main():
     parser.add_argument("--mask_dir", default=os.path.join(
         PROJECT_ROOT, "merged_4class_mask_semantic/masks"))
     parser.add_argument("--out_dir", default=os.path.join(
-        os.path.dirname(PROJECT_ROOT), "_data/tiles_512"))
+        os.path.dirname(PROJECT_ROOT), "_data/labeled32_craq_v3/tiles_512"))
     parser.add_argument("--size", type=int, default=512)
     parser.add_argument("--stride", type=int, default=256)
     parser.add_argument("--num_classes", type=int, default=5,

@@ -127,8 +127,8 @@ def train_one_epoch(model, loader, optimizer, scaler, criterion, device,
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument("--tiles_root", default="/home/zzz90/research/_data/tiles_512_craq_v2")
-    parser.add_argument("--split", default="/home/zzz90/research/_data/tiles_512_craq_v2/group_split_stem.json")
+    parser.add_argument("--tiles_root", default="/home/zzz90/research/_data/labeled32_crack_v3/tiles_512")
+    parser.add_argument("--split", default="/home/zzz90/research/_data/labeled32_crack_v3/tiles_512/group_split_stem.json")
     parser.add_argument("--fold", type=int, default=0)
     parser.add_argument("--encoder", default="resnet50",
                         help="smp encoder name, e.g. resnet18/34/50/101")
