@@ -6,8 +6,7 @@ from scipy.spatial import Voronoi
 def generate(size, params, rng):
     """以 Voronoi cell 邊界生成 craquelure 網狀 mask, 回傳 (size,size) uint8 {0,1}。
 
-    edge_w 設定 cv2.line 繪製寬度;之後施加 1px gap-closing dilation 以接合
-    Voronoi 頂點處的對角縫隙,故有效線寬約為 edge_w+1。
+    edge_w 設定 cv2.line 繪製寬度;之後施加 2×2 dilation(右/下各加 1px)接合 Voronoi 頂點對角縫隙,故有效線寬約 edge_w+1。
     """
     clo, chi = params["cell_px"]
     cell = float(rng.uniform(clo, chi))

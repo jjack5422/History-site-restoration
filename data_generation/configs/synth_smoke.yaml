@@ -2,8 +2,7 @@ seed: 42
 tile_size: 512
 stride: 256
 slice_size: 1024
-ratio: {crack: 8, craq: 1}
-target_tiles: {crack: 16, craq: 2}
+target_tiles: {crack: 16, craq: 2}   # 8:1 (smoke 小量)
 output:
   crack: /home/zzz90/research/_data/synth_crack_smoke
   craq: /home/zzz90/research/_data/synth_craq_smoke
@@ -17,3 +16,4 @@ craq:  {cell_px: [32, 60], jitter: 0.3, edge_w: 1, break_p: 0.1, target_fg: [0.5
 appearance: {profile_dir: data/appearance, min_contrast: 12, erosion: 2, blur_sigma: 2}
 keep_negative_ratio: 0.1
 max_regen_fail: 50
+max_attempts: 50000

@@ -23,6 +23,8 @@ ENGINES = {"crack": crack_eng.generate, "craq": craq_eng.generate}
 
 def _load_base(slices_dir, name):
     bgr = cv2.imread(os.path.join(slices_dir, name))
+    if bgr is None:
+        raise FileNotFoundError(os.path.join(slices_dir, name))
     return cv2.cvtColor(bgr, cv2.COLOR_BGR2RGB)
 
 
@@ -45,7 +47,15 @@ def synth_type(typ, cfg, rng):
     items, n_target, reuse = [], cfg["target_tiles"][typ], 0
     base_idx = 0
     sample_id = 0
+    attempts = 0
+    max_attempts = cfg.get("max_attempts", n_target * 50)
     while sum(1 for it in items if it["has_fg"]) < n_target:
+        attempts += 1
+        if attempts > max_attempts:
+            n_fg = sum(1 for it in items if it["has_fg"])
+            raise RuntimeError(
+                f"{typ}: 無法達到 target_fg,已嘗試 {attempts} 次,"
+                f"目前 fg tiles={n_fg}/{n_target};請檢查 {typ}.target_fg 或 geometry 參數")
         name = bases[base_idx % len(bases)]
         if base_idx >= len(bases):
             reuse = base_idx // len(bases)
