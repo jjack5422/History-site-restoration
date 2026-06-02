@@ -1057,7 +1057,7 @@ base:
   allow_reuse: true
   max_reuse: 20
 crack: {n_curves: [2, 6], taper_alpha: 2.0, taper_sigma: 0.5, branch_p: [0.3, 0.5], target_fg: [0.05, 2.0]}
-craq:  {cell_px: [25, 60], jitter: 0.3, edge_w: 1, break_p: 0.1, target_fg: [0.5, 9.0]}
+craq:  {cell_px: [32, 60], jitter: 0.3, edge_w: 1, break_p: 0.1, target_fg: [0.5, 9.0]}
 appearance: {profile_dir: data/appearance, min_contrast: 12, erosion: 2, blur_sigma: 2}
 keep_negative_ratio: 0.1
 max_regen_fail: 50
@@ -1225,7 +1225,7 @@ base:
   allow_reuse: true
   max_reuse: 50
 crack: {n_curves: [2, 6], taper_alpha: 2.0, taper_sigma: 0.5, branch_p: [0.3, 0.5], target_fg: [0.05, 2.0]}
-craq:  {cell_px: [25, 60], jitter: 0.3, edge_w: 1, break_p: 0.1, target_fg: [0.5, 9.0]}
+craq:  {cell_px: [32, 60], jitter: 0.3, edge_w: 1, break_p: 0.1, target_fg: [0.5, 9.0]}
 appearance: {profile_dir: data/appearance, min_contrast: 12, erosion: 2, blur_sigma: 2}
 keep_negative_ratio: 0.1
 max_regen_fail: 50
