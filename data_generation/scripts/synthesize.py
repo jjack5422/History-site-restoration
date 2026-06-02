@@ -37,9 +37,14 @@ def synth_type(typ, cfg, rng):
     manifest = json.load(open(os.path.join(ROOT, cfg["base"]["manifest"])))
     bases = manifest["clean"] or [s["name"] for s in
                                    sorted(manifest["scores"], key=lambda s: s["score"])[:30]]
+    if not bases:
+        raise ValueError(f"{typ}: manifest 無可用底圖 (clean 與 scores 皆空): "
+                         f"{cfg['base']['manifest']}")
     profile = load_profile(os.path.join(ROOT, cfg["appearance"]["profile_dir"],
                                         f"appearance_profile_{typ}.json"))
-    slices_dir = cfg["base"]["slices_dir"]
+    # 底圖目錄以 manifest 的 slices_dir 為準(手動挑選模式指向使用者資料夾),
+    # 沒有才退回 config 設定。
+    slices_dir = manifest.get("slices_dir") or cfg["base"]["slices_dir"]
     size = cfg["slice_size"]
     fg_lo, fg_hi = cfg[typ]["target_fg"]
     gen = ENGINES[typ]
