@@ -4,11 +4,13 @@ from scipy.spatial import Voronoi
 
 
 def generate(size, params, rng):
-    """以 Voronoi cell 邊界生成 craquelure 網狀 mask, 回傳 (size,size) uint8 {0,1}。"""
+    """以 Voronoi cell 邊界生成 craquelure 網狀 mask, 回傳 (size,size) uint8 {0,1}。
+
+    edge_w 設定 cv2.line 繪製寬度;之後施加 1px gap-closing dilation 以接合
+    Voronoi 頂點處的對角縫隙,故有效線寬約為 edge_w+1。
+    """
     clo, chi = params["cell_px"]
-    # Sample cell size; enforce practical minimum of 32 px so cells are well-formed
-    # and fg density stays in realistic craquelure range (~2-12 %).
-    cell = max(32.0, float(rng.uniform(clo, chi)))
+    cell = float(rng.uniform(clo, chi))
     jitter = params["jitter"]
     edge_w = int(params["edge_w"])
     break_p = params["break_p"]

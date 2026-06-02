@@ -2,7 +2,7 @@ import numpy as np
 import cv2
 from synthgen.geometry.craquelure import generate
 
-PARAMS = {"cell_px": [25, 60], "jitter": 0.3, "edge_w": 1, "break_p": 0.1}
+PARAMS = {"cell_px": [32, 60], "jitter": 0.3, "edge_w": 1, "break_p": 0.1}
 
 
 def test_shape_dtype_binary():
