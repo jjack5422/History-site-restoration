@@ -17,8 +17,9 @@
   - 兩篇核心文獻聚焦繪畫 craquelure,需針對木材紋理/顏料干擾調整。
 
 ## 環境 (Environment)
-- venv:尚未建立(讀 PDF 暫用 `/tmp/pdfenv`,pymupdf)。
+- venv:`/home/zzz90/research/datagen_env`(啟用:`source datagen_env/bin/activate`)。依賴見 `requirements.txt`(numpy/scipy/opencv/pillow/pyyaml/pytest/torch + editable `_lib`)。
 - 共用程式:`research/_lib/crackseg_common`(editable install);共用資料:`research/_data`。
+- 進入點:`scripts/select_bases.py`(篩底圖)、`fit_appearance_profile.py`(擬合外觀)、`synthesize.py --config configs/synth_v0.yaml`(合成)、`validate_synth.py`(驗收)。
 
 ## 進入點 (Entry points)
 | 用途 | 指令 |
