@@ -14,17 +14,13 @@ import torch
 import torch.nn as nn
 from torch.utils.data import DataLoader
 
-# reuse SAM2 project's helpers
-SAM2_ROOT = "/home/zzz90/research/crack_detection_sam2"
-if SAM2_ROOT not in sys.path:
-    sys.path.insert(0, SAM2_ROOT)
 
-from augment import train_transforms, val_transforms  # noqa: E402
-import dataset as _dataset  # noqa: E402
-from dataset import (TileSegDataset, compute_class_weights, load_tile_index,  # noqa: E402
+from crackseg_common.augment import train_transforms, val_transforms  # noqa: E402
+import crackseg_common.dataset as _dataset  # noqa: E402
+from crackseg_common.dataset import (TileSegDataset, compute_class_weights, load_tile_index,  # noqa: E402
                      set_class_names)
-from losses import CEDiceLoss  # noqa: E402
-from metrics import ConfusionMeter, format_metrics  # noqa: E402
+from crackseg_common.losses import CEDiceLoss  # noqa: E402
+from crackseg_common.metrics import ConfusionMeter, format_metrics  # noqa: E402
 
 from unet_model import build_resunet, count_params, param_groups
 
@@ -131,8 +127,8 @@ def train_one_epoch(model, loader, optimizer, scaler, criterion, device,
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument("--tiles_root", default="/home/zzz90/research/crack_detection_sam2/data/tiles_512_craq_v2")
-    parser.add_argument("--split", default="/home/zzz90/research/crack_detection_sam2/data/tiles_512_craq_v2/group_split_stem.json")
+    parser.add_argument("--tiles_root", default="/home/zzz90/research/_data/tiles_512_craq_v2")
+    parser.add_argument("--split", default="/home/zzz90/research/_data/tiles_512_craq_v2/group_split_stem.json")
     parser.add_argument("--fold", type=int, default=0)
     parser.add_argument("--encoder", default="resnet50",
                         help="smp encoder name, e.g. resnet18/34/50/101")

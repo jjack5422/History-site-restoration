@@ -2,8 +2,8 @@
 
 跑法（從 sepsam/）:
     /home/zzz90/research/SepSAM2_env/bin/python scripts/m2_medial_axis.py \
-        --image /home/zzz90/research/crack_detection_sam2/data/labeled32_crack_v3/images/KJTHT-SC-L-1RB1-1_R2_C04.jpg \
-        --mask  /home/zzz90/research/crack_detection_sam2/data/labeled32_crack_v3/masks/KJTHT-SC-L-1RB1-1_R2_C04.png \
+        --image /home/zzz90/research/_data/labeled32_crack_v3/images/KJTHT-SC-L-1RB1-1_R2_C04.jpg \
+        --mask  /home/zzz90/research/_data/labeled32_crack_v3/masks/KJTHT-SC-L-1RB1-1_R2_C04.png \
         --points_divisor 50
 """
 from __future__ import annotations

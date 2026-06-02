@@ -2,7 +2,7 @@
 
 跑法（從 sepsam/ 目錄）:
     /home/zzz90/research/SepSAM2_env/bin/python scripts/m1_sam2_smoke.py \
-        --image /home/zzz90/research/crack_detection_sam2/data/selected_slices/MGLST-RH-M-A1-2_R1_C02.jpg \
+        --image /home/zzz90/research/_data/selected_slices/MGLST-RH-M-A1-2_R1_C02.jpg \
         --cfg configs/sam2.1/sam2.1_hiera_b+.yaml \
         --ckpt weights/sam2.1_hiera_base_plus.pt
 """

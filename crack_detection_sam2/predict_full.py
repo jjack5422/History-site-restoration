@@ -22,10 +22,10 @@ import torch.nn.functional as F
 from PIL import Image
 from tqdm import tqdm
 
-from augment import IMAGENET_MEAN, IMAGENET_STD
-import dataset as _dataset
-from dataset import set_class_names
-from metrics import ConfusionMeter, format_metrics
+from crackseg_common.augment import IMAGENET_MEAN, IMAGENET_STD
+import crackseg_common.dataset as _dataset
+from crackseg_common.dataset import set_class_names
+from crackseg_common.metrics import ConfusionMeter, format_metrics
 from model_seg import SAM2SemSeg
 
 

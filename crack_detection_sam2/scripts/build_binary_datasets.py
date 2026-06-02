@@ -28,7 +28,7 @@ from tqdm import tqdm
 
 PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, PROJECT_ROOT)
-from data_utils import tile_image  # noqa: E402
+from crackseg_common.data_utils import tile_image  # noqa: E402
 
 
 PALETTE = {
@@ -230,15 +230,15 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument(
         "--seg_dir",
-        default=os.path.join(PROJECT_ROOT, "data/1-31test/SegmentationClass"),
+        default=os.path.join(os.path.dirname(PROJECT_ROOT), "_data/1-31test/SegmentationClass"),
     )
     parser.add_argument(
         "--image_dir",
-        default=os.path.join(PROJECT_ROOT, "data/selected_slices"),
+        default=os.path.join(os.path.dirname(PROJECT_ROOT), "_data/selected_slices"),
     )
     parser.add_argument(
         "--out_root_template",
-        default=os.path.join(PROJECT_ROOT, "data/labeled32_{class}_v3"),
+        default=os.path.join(os.path.dirname(PROJECT_ROOT), "_data/labeled32_{class}_v3"),
         help="{class} 會替換為 crack/craq",
     )
     parser.add_argument("--classes", nargs="+", default=["crack", "craquelure"])

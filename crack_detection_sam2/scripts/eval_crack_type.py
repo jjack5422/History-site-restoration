@@ -29,8 +29,8 @@ sys.path.insert(0, PROJECT_ROOT)
 UNET_ROOT = os.path.join(os.path.dirname(PROJECT_ROOT), "crack_detection_unet", "src")
 sys.path.insert(0, UNET_ROOT)
 
-from augment import IMAGENET_MEAN, IMAGENET_STD  # noqa: E402
-from metrics import ConfusionMeter, format_metrics  # noqa: E402
+from crackseg_common.augment import IMAGENET_MEAN, IMAGENET_STD  # noqa: E402
+from crackseg_common.metrics import ConfusionMeter, format_metrics  # noqa: E402
 
 CRACK_RGB = (255, 24, 3)
 CRAQ_RGB = (102, 255, 102)
@@ -170,9 +170,9 @@ def overlay_binary(img, mask, color=(255, 80, 80), alpha=0.5):
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--image_dir",
-                        default=os.path.join(PROJECT_ROOT, "data/selected_slices"))
+                        default=os.path.join(os.path.dirname(PROJECT_ROOT), "_data/selected_slices"))
     parser.add_argument("--seg_dir",
-                        default=os.path.join(PROJECT_ROOT, "data/1-31test/SegmentationClass"))
+                        default=os.path.join(os.path.dirname(PROJECT_ROOT), "_data/1-31test/SegmentationClass"))
     parser.add_argument("--craq_ckpt_pattern",
                         default=os.path.join(PROJECT_ROOT,
                                              "outputs/expert_craq_v3_fold{fold}_small/best.pt"))

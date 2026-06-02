@@ -21,6 +21,7 @@ __pycache__/
 
 # --- Datasets & generated outputs (large; live outside git) ---
 **/data/
+_data/
 **/datasets/
 **/outputs/
 **/preds/

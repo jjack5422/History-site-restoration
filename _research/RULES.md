@@ -16,6 +16,9 @@ research/
 │  ├─ RULES.md                 本檔
 │  ├─ plans/                   任務計畫  YYYY-MM-DD-<task-slug>.md
 │  └─ decisions/               決策/結論日誌  YYYY-MM-DD-<topic>.md
+├─ _lib/                       共用程式套件（editable install，見 §4.5）
+│  └─ crackseg_common/         dataset/augment/losses/metrics/data_utils
+├─ _data/                      共用資料樞紐（跨專案資料集；勿放各專案內）
 └─ <project>/                  各專案自包
    ├─ README.md                專案卡：目標/狀態/venv/進入點
    ├─ EXPERIMENTS.md           實驗索引表，每次 run 一列
@@ -52,6 +55,13 @@ research/
 - 產出的權重/預測放這裡或在 manifest 註明外部路徑
 
 跑完在 `EXPERIMENTS.md` 補一列：日期 | slug | 目的 | 關鍵指標 | 結論 | run 路徑。
+
+## 4.5 跨專案共用：禁止 sys.path hack
+
+- **禁止**任何專案用 `sys.path.insert(別人的專案根目錄)` 去 import 其他專案的散檔。曾因此產生 regression。
+- 共用**程式**走套件 `research/_lib/crackseg_common/`（editable install：各 venv `pip install -e _lib`），一律 `from crackseg_common.X import …`。
+- 共用**資料**放頂層 `research/_data/`；新 model 專案只指向 `_data`，不得撈其他專案的 `data/`。
+- 唯一例外：跨 expert 評估腳本（如 `eval_crack_type.py`）需同時用兩專案的 model，保留並在檔內註記。
 
 ## 5. 分工（哪個 skill 管什麼）
 

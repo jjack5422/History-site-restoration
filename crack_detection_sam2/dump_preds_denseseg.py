@@ -2,8 +2,8 @@
 存 preds/denseseg/fold{k}/{stem}.png。CLAHE 只是 train aug,val 不套。"""
 import argparse, glob, os
 import cv2, numpy as np, torch
-from dataset import set_class_names
-from augment import val_transforms
+from crackseg_common.dataset import set_class_names
+from crackseg_common.augment import val_transforms
 from model_seg import SAM2SemSeg
 
 TILES = "data/labeled32_craq_v3/tiles_512"

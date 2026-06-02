@@ -24,9 +24,9 @@ import torch.nn as nn
 import torch.nn.functional as F
 from torch.utils.data import DataLoader
 
-from augment import train_transforms, val_transforms
-import dataset as _dataset
-from dataset import TileSegDataset, compute_class_weights, load_tile_index, set_class_names
+from crackseg_common.augment import train_transforms, val_transforms
+import crackseg_common.dataset as _dataset
+from crackseg_common.dataset import TileSegDataset, compute_class_weights, load_tile_index, set_class_names
 from model_prompt_seg import SAM2PromptSeg, count_params
 
 

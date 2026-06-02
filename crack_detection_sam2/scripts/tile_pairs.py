@@ -9,7 +9,7 @@ from tqdm import tqdm
 PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, PROJECT_ROOT)
 
-from data_utils import tile_image
+from crackseg_common.data_utils import tile_image
 
 
 IMG_EXTS = (".jpg", ".jpeg", ".png", ".bmp", ".tif", ".tiff")
@@ -47,7 +47,7 @@ def main():
     parser.add_argument("--mask_dir", default=os.path.join(
         PROJECT_ROOT, "merged_4class_mask_semantic/masks"))
     parser.add_argument("--out_dir", default=os.path.join(
-        PROJECT_ROOT, "data/tiles_512"))
+        os.path.dirname(PROJECT_ROOT), "_data/tiles_512"))
     parser.add_argument("--size", type=int, default=512)
     parser.add_argument("--stride", type=int, default=256)
     parser.add_argument("--num_classes", type=int, default=5,

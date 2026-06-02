@@ -9,7 +9,7 @@ import numpy as np
 PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, PROJECT_ROOT)
 
-from dataset import load_tile_index
+from crackseg_common.dataset import load_tile_index
 
 
 PANEL_RE = re.compile(r"_R\d+_C\d+$")
@@ -37,8 +37,8 @@ def kfold_groups(groups, n_splits=4, seed=42):
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument("--tiles_root", default=os.path.join(PROJECT_ROOT, "data/tiles_512"))
-    parser.add_argument("--out", default=os.path.join(PROJECT_ROOT, "data/tiles_512/group_split.json"))
+    parser.add_argument("--tiles_root", default=os.path.join(os.path.dirname(PROJECT_ROOT), "_data/tiles_512"))
+    parser.add_argument("--out", default=os.path.join(os.path.dirname(PROJECT_ROOT), "_data/tiles_512/group_split.json"))
     parser.add_argument("--n_splits", type=int, default=4)
     parser.add_argument("--seed", type=int, default=42)
     parser.add_argument("--group_by", choices=["panel", "stem"], default="panel",

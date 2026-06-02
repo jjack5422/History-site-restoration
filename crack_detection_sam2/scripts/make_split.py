@@ -7,14 +7,14 @@ import yaml
 PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, PROJECT_ROOT)
 
-from data_utils import list_images, split_train_val
+from crackseg_common.data_utils import list_images, split_train_val
 
 
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--config", default=os.path.join(PROJECT_ROOT, "configs/default.yaml"))
     parser.add_argument("--src", default=None)
-    parser.add_argument("--out", default=os.path.join(PROJECT_ROOT, "data/split.json"))
+    parser.add_argument("--out", default=os.path.join(os.path.dirname(PROJECT_ROOT), "_data/split.json"))
     parser.add_argument("--val_ratio", type=float, default=None)
     parser.add_argument("--seed", type=int, default=None)
     args = parser.parse_args()

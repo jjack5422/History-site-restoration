@@ -26,12 +26,12 @@ import torch
 import torch.nn as nn
 from torch.utils.data import DataLoader
 
-from augment import train_transforms, val_transforms
-import dataset as _dataset
-from dataset import (TileSegDataset, compute_class_weights, load_tile_index,
+from crackseg_common.augment import train_transforms, val_transforms
+import crackseg_common.dataset as _dataset
+from crackseg_common.dataset import (TileSegDataset, compute_class_weights, load_tile_index,
                      set_class_names)
-from losses import CEDiceLoss
-from metrics import ConfusionMeter, format_metrics
+from crackseg_common.losses import CEDiceLoss
+from crackseg_common.metrics import ConfusionMeter, format_metrics
 from model_seg import SAM2SemSeg, count_params
 from model_seg_full_fpn import SAM2SemSegFullFPN
 
@@ -140,8 +140,8 @@ def train_one_epoch(model, loader, optimizer, scaler, criterion, device,
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument("--tiles_root", default="data/tiles_512")
-    parser.add_argument("--split", default="data/tiles_512/group_split_stem.json")
+    parser.add_argument("--tiles_root", default="../_data/tiles_512")
+    parser.add_argument("--split", default="../_data/tiles_512/group_split_stem.json")
     parser.add_argument("--fold", type=int, default=0)
     parser.add_argument("--variant", default="small",
                         choices=["tiny", "small", "base", "large"])

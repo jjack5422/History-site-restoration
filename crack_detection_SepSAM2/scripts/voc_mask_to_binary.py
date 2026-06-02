@@ -3,8 +3,8 @@ voc_mask_to_binary.py — 把 Pascal-VOC 樣式的彩色 SegmentationClass 過�
 
 範例（1-31test 只留 crack+craquelure）：
     python scripts/voc_mask_to_binary.py \
-        --src_masks  /home/zzz90/research/crack_detection_sam2/data/1-31test/SegmentationClass \
-        --src_images /home/zzz90/research/crack_detection_sam2/data/selected_slices \
+        --src_masks  /home/zzz90/research/_data/1-31test/SegmentationClass \
+        --src_images /home/zzz90/research/_data/selected_slices \
         --out_masks  datasets/heritage_1_31test/masks \
         --out_images datasets/heritage_1_31test/images \
         --keep crack:255,24,3 craquelure:102,255,102

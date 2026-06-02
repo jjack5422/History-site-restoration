@@ -15,14 +15,11 @@ import torch.nn.functional as F
 from PIL import Image
 from tqdm import tqdm
 
-SAM2_ROOT = "/home/zzz90/research/crack_detection_sam2"
-if SAM2_ROOT not in sys.path:
-    sys.path.insert(0, SAM2_ROOT)
 
-from augment import IMAGENET_MEAN, IMAGENET_STD  # noqa: E402
-import dataset as _dataset  # noqa: E402
-from dataset import set_class_names  # noqa: E402
-from metrics import ConfusionMeter, format_metrics  # noqa: E402
+from crackseg_common.augment import IMAGENET_MEAN, IMAGENET_STD  # noqa: E402
+import crackseg_common.dataset as _dataset  # noqa: E402
+from crackseg_common.dataset import set_class_names  # noqa: E402
+from crackseg_common.metrics import ConfusionMeter, format_metrics  # noqa: E402
 
 from unet_model import build_resunet
 

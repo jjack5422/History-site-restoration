@@ -20,8 +20,8 @@ import torch
 import torch.nn.functional as F
 from PIL import Image
 
-from augment import val_transforms
-from dataset import TileSegDataset, load_tile_index, set_class_names
+from crackseg_common.augment import val_transforms
+from crackseg_common.dataset import TileSegDataset, load_tile_index, set_class_names
 from model_prompt_seg import SAM2PromptSeg
 
 

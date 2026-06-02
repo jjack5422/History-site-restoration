@@ -3,7 +3,7 @@
 cmc_predict,報 YOLO-only / SAM-only / CMC 的 P/R/F1/IoU + SAM 採用率,並存每張 val tile 的 TP/FN/FP 疊圖。
 用法(SepSAM2_env / cwd=crack_detection_SepSAM2/sepsam):
   python scripts/eval_sepsam_cv_generic.py \
-    --tiles /home/zzz90/research/crack_detection_sam2/data/labeled32_crack_v3/tiles_512 \
+    --tiles /home/zzz90/research/_data/labeled32_crack_v3/tiles_512 \
     --agent_prefix sepsam_agent_realcrack_cv --save_dir outputs/sepsam_realcrack_cv --conf 0.10 --iou 0.5
 """
 import argparse, glob, os, sys

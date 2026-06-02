@@ -1,8 +1,8 @@
 project:
   root: /home/zzz90/research/crack_detection_sam2
   raw_image_dir: /home/zzz90/research/crack_detection/data/image
-  tiled_dir: /home/zzz90/research/crack_detection_sam2/data/tiles
-  mask_dir: /home/zzz90/research/crack_detection_sam2/data/masks
+  tiled_dir: /home/zzz90/research/_data/tiles
+  mask_dir: /home/zzz90/research/_data/masks
 
 tile:
   size: 1024
