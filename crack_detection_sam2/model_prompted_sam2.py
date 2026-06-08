@@ -32,21 +32,31 @@ class PromptedSAM2Seg(nn.Module):
             for p in self.sam_prompt_encoder.parameters():
                 p.requires_grad = False
 
-    def forward(self, x, point_coords, point_labels):
+    def encode_image(self, x):
         B, _, H, W = x.shape
-        bb = self.image_encoder(x)
+        enc_grad = any(p.requires_grad for p in self.image_encoder.parameters())
+        with torch.set_grad_enabled(enc_grad):
+            bb = self.image_encoder(x)
         fpn = bb["backbone_fpn"]
         high_res = ([self.sam_mask_decoder.conv_s0(fpn[0]),
                      self.sam_mask_decoder.conv_s1(fpn[1])] if self.use_high_res else None)
-        feat = fpn[-1]
+        return {"feat": fpn[-1], "high_res": high_res, "hw": (H, W)}
+
+    def decode(self, enc, point_coords, point_labels, prev_mask=None):
         sparse, dense = self.sam_prompt_encoder(
-            points=(point_coords, point_labels), boxes=None, masks=None)
+            points=(point_coords, point_labels), boxes=None, masks=prev_mask)
         low, _, _, _ = self.sam_mask_decoder(
-            image_embeddings=feat,
+            image_embeddings=enc["feat"],
             image_pe=self.sam_prompt_encoder.get_dense_pe(),
             sparse_prompt_embeddings=sparse, dense_prompt_embeddings=dense,
-            multimask_output=False, repeat_image=False, high_res_features=high_res)
-        return F.interpolate(low.float(), size=(H, W), mode="bilinear", align_corners=False)
+            multimask_output=False, repeat_image=False, high_res_features=enc["high_res"])
+        masks = F.interpolate(low.float(), size=enc["hw"], mode="bilinear", align_corners=False)
+        return masks, low
+
+    def forward(self, x, point_coords, point_labels, prev_mask=None):
+        enc = self.encode_image(x)
+        masks, _ = self.decode(enc, point_coords, point_labels, prev_mask)
+        return masks
 
     def param_groups(self, base_lr, encoder_lr_mult=0.01):
         dec, enc = [], []
