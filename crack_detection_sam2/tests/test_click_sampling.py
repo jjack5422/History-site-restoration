@@ -35,12 +35,19 @@ def test_correction_false_positive_is_negative():
     gt = np.zeros((20, 20), bool)
     pred = np.zeros((20, 20), bool); pred[5:15, 5:15] = True   # all FP
     (r, c), lbl = sample_correction_point(pred, gt, np.random.default_rng(0))
-    assert lbl == 0 and pred[r, c]
+    assert lbl == 0 and pred[r, c] and not gt[r, c]
 
 
 def test_correction_none_when_perfect():
     gt = np.zeros((20, 20), bool); gt[5:10, 5:10] = True
     assert sample_correction_point(gt, gt, np.random.default_rng(0)) is None
+
+
+def test_correction_prefers_fn_when_tied():
+    gt = np.zeros((20, 20), bool); gt[5:10, 5:10] = True      # 25 px
+    pred = np.zeros((20, 20), bool); pred[8:13, 8:13] = True  # overlap 4, fn 21, fp 21
+    (r, c), lbl = sample_correction_point(pred, gt, np.random.default_rng(0))
+    assert lbl == 1 and gt[r, c]   # fn == fp -> fn branch wins -> positive click inside gt
 
 
 if __name__ == "__main__":

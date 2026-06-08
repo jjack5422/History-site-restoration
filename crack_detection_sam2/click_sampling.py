@@ -23,7 +23,7 @@ def _largest_component_point(mask: np.ndarray):
     if mask.sum() == 0:
         return None
     lab, n = ndimage.label(mask)
-    if n == 0:
+    if n == 0:  # defensive: unreachable given the sum() checks above
         return None
     sizes = ndimage.sum(np.ones_like(lab), lab, index=np.arange(1, n + 1))
     big = int(np.argmax(sizes)) + 1
@@ -35,7 +35,12 @@ def _largest_component_point(mask: np.ndarray):
 
 def sample_initial_point(gt: np.ndarray, rng):
     """First click. Positive at the center of GT's largest component; if GT is empty,
-    a negative click at image center. Returns ((row, col), label)."""
+    a negative click at image center. Returns ((row, col), label).
+
+    Args:
+        gt:  Boolean ground-truth mask.
+        rng: Reserved for future stochastic tie-breaking; currently unused.
+    """
     gt = gt.astype(bool)
     if gt.sum() == 0:
         h, w = gt.shape
@@ -45,7 +50,13 @@ def sample_initial_point(gt: np.ndarray, rng):
 
 def sample_correction_point(pred: np.ndarray, gt: np.ndarray, rng):
     """Correction click from the larger error region. False-negative (missed GT) -> positive(1);
-    false-positive -> negative(0). Returns ((row, col), label) or None if pred == gt."""
+    false-positive -> negative(0). Returns ((row, col), label) or None if pred == gt.
+
+    Args:
+        pred: Boolean predicted mask.
+        gt:   Boolean ground-truth mask.
+        rng:  Reserved for future stochastic tie-breaking; currently unused.
+    """
     pred = pred.astype(bool); gt = gt.astype(bool)
     fn = np.logical_and(gt, ~pred)
     fp = np.logical_and(pred, ~gt)
@@ -55,6 +66,6 @@ def sample_correction_point(pred: np.ndarray, gt: np.ndarray, rng):
         p = _largest_component_point(fn); lbl = 1
     else:
         p = _largest_component_point(fp); lbl = 0
-    if p is None:
+    if p is None:  # defensive: unreachable given the sum() checks above
         return None
     return p, lbl
