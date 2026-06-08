@@ -18,11 +18,17 @@ def test_batch_point_tensors_xy_order():
 def test_aggregate_click_metrics():
     # 2 samples, n_clicks=3. per_click_iou[k] holds the IoU of each sample after click k+1.
     per_click_iou = [[0.5, 0.2], [0.85, 0.4], [0.9, 0.82]]
-    noc = [2, 3]   # sample A reached 0.8 at click 2, sample B at click 3
-    m = aggregate_click_metrics(per_click_iou, noc, n_clicks=3, iou_target=0.8)
+    reached = [2, 3]   # both reached target (sample B exactly on the last click) -> not capped
+    m = aggregate_click_metrics(per_click_iou, reached, n_clicks=3, iou_target=0.8)
     assert abs(m["iou@1"] - 0.35) < 1e-6
     assert abs(m["iou@3"] - 0.86) < 1e-6
     assert abs(m["noc@0.8"] - 2.5) < 1e-6
+    assert m["cap_rate"] == 0.0          # last-click success must NOT count as capped
+
+    # a never-reached sample (None) counts as capped and contributes n_clicks to NoC
+    m2 = aggregate_click_metrics(per_click_iou, [2, None], n_clicks=3)
+    assert abs(m2["noc@0.8"] - 2.5) < 1e-6   # (2 + 3) / 2
+    assert m2["cap_rate"] == 0.5
     print("OK test_click_metrics")
 
 

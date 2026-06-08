@@ -17,7 +17,6 @@ from __future__ import annotations
 
 import argparse
 import json
-import math
 import random
 import time
 from pathlib import Path
@@ -80,20 +79,23 @@ def clicks_train_loss(model, img, gt, n_clicks, rng, criterion):
         total = total + loss
         prev = low.detach()
         if k < n_clicks - 1:
-            pred_np = (masks.detach().squeeze(1) > 0).cpu().numpy()
+            pred_np = (masks.detach().squeeze(1) > 0).cpu().numpy()  # CPU sync each click: scipy click sampling needs numpy
             _append_correction(pts, labs, pred_np, gt_np, rng)
     return total / n_clicks
 
 
-def aggregate_click_metrics(per_click_iou, noc, n_clicks, iou_target=0.8):
+def aggregate_click_metrics(per_click_iou, reached, n_clicks, iou_target=0.8):
+    """reached: per-sample click count at which IoU first reached iou_target, or None if never.
+    Keys are labeled for the default iou_target=0.8 (the only value the trainer uses)."""
     def at(k):
         k = min(k, n_clicks)
         vals = per_click_iou[k - 1]
         return float(np.mean(vals)) if vals else 0.0
+    noc = [(r if r is not None else n_clicks) for r in reached]
     return {
         "iou@1": at(1), "iou@3": at(3), "iou@5": at(5),
         "noc@0.8": float(np.mean(noc)) if noc else float(n_clicks),
-        "cap_rate": float(np.mean([r >= n_clicks for r in noc])) if noc else 1.0,
+        "cap_rate": float(np.mean([r is None for r in reached])) if reached else 1.0,
     }
 
 
@@ -102,7 +104,7 @@ def evaluate_clicks(model, loader, device, n_clicks, iou_target=0.8, seed=0):
     model.eval()
     rng = np.random.default_rng(seed)
     per_click_iou = [[] for _ in range(n_clicks)]
-    noc = []
+    reached_all = []
     for batch in loader:
         img = batch["image"].to(device, non_blocking=True)
         gt = batch["mask"].to(device, non_blocking=True)
@@ -124,9 +126,8 @@ def evaluate_clicks(model, loader, device, n_clicks, iou_target=0.8, seed=0):
                     reached[b] = k + 1
             if k < n_clicks - 1:
                 _append_correction(pts, labs, pred_np, gt_np, rng)
-        for b in range(B):
-            noc.append(reached[b] if reached[b] is not None else n_clicks)
-    return aggregate_click_metrics(per_click_iou, noc, n_clicks, iou_target)
+        reached_all.extend(reached)
+    return aggregate_click_metrics(per_click_iou, reached_all, n_clicks, iou_target)
 
 
 def main():
