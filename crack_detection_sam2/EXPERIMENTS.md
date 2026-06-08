@@ -48,7 +48,25 @@
 | promptsam2_craq_fold0 | 0.428 / 0.599 (@32) | 0.368 / 0.538 | |
 | promptsam2_craq_fold2 | 0.108 / 0.195 (@59) | 0.088 / 0.161 | 退化（但比其他家族 fold2 好） |
 
+## E. decoder-only no-prompt (`model_decoder_seg.py`, `SAM2DecoderSeg`)
+> 捨棄 prompt encoder，只借 SAM2 預訓練 mask decoder 當 seg head（sparse=空、dense=learnable 全域 param、image_pe 借 pe_layer）。`train_decoder.py`，`--dense_mode learnable --num_queries 0`，trainable 4.48M。run 目錄：`runs/2026-06-06-decoder-craq-4fold/`。
+>
+> 2-epoch smoke（fold0）：train loss 1.13→0.75、val IoU 0.177→0.264（確認可訓）。
+
+| run | best IoU / F1 (@ep) | final IoU / F1 | 註 |
+|---|---|---|---|
+| decoder_craq_fold0_small | 0.432 / 0.604 (@14) | 0.366 / 0.536 | 家族 E 最佳 |
+| decoder_craq_fold1_small | 0.379 / 0.550 (@51) | 0.361 / 0.531 | |
+| decoder_craq_fold2_small | 0.019 / 0.037 (@15) | 0.011 / 0.021 | 退化 |
+| decoder_craq_fold3_small | 0.382 / 0.553 (@59) | 0.356 / 0.525 | |
+> mean best IoU = 0.303（含 fold2）/ **0.398**（排除退化的 fold2）。non-fold2 與 prompt 家族 C（0.37-0.43）同級、略低於 dense-seg/full-FPN（0.43-0.49）。fold2 仍退化，與其他家族一致。
+
 ## 其他產出（非訓練 run）
+- **2026-06-08-prelabel-selected**：對 `_data/selected_slices` 284 張 1024-tile 跑 pre-label（同 final experts, tile512/stride256）→ 打包成 CVAT 'Segmentation mask 1.1' zip `runs/2026-06-08-prelabel-selected/cvat_segmask.zip`。284/284 產出且尺寸/色彩驗證通過。打包腳本 `scripts/package_cvat_segmask.py`。
+- **2026-06-08-prelabel-image**：對 `_data/image` 30 張全解析度原圖跑 pre-label（final experts: dense-seg craq + ResUNet-50 crack, tile512/stride256）→ CVAT VOC palette。30/30 產出且尺寸/色彩驗證通過；只含 crack+craq 兩類，餘三類待人工補。run 路徑 `runs/2026-06-08-prelabel-image/`（manifest + merged/voc_palette）。
+
+- **2026-06-08-cvat-agent**：把 final experts 包成 app.cvat.ai 本機輔助標註 AI agent（只產 craquelure+crack 兩類 mask）。專屬 venv `cvat_agent_env` + native function `crack_detection_sam2/cvat_agent/craq_crack_func.py` + register/run 腳本。離線 env/function smoke 皆通過；線上因免費方案鎖背景標註，改走 `cvat-cli task auto-annotate` 寫回 task 2282525（8 frames，附加模式）→ crack 731 + craquelure 585 mask，符合。run 路徑 `runs/2026-06-08-cvat-agent/manifest.md`。
+
 `runs/` 內另有 eval/可視化目錄：`eval_crack_type_4fold_clahe`、`eval_postproc_thr0.5_erode1`、`prompt_craq_fold*_overlay`、`promptsam2_craq_fold2_viz`、`pre_label_v3*`，以及未歸位的 `pre_label_v3_run.log`、`promptsam2_craq.log`（跨 fold 合併 log）。
 
 ## 小結
