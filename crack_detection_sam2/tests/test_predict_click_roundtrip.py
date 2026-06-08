@@ -12,18 +12,27 @@ def test_roundtrip():
     fd, path = tempfile.mkstemp(suffix=".pt"); os.close(fd)
     torch.save({"model": m.state_dict(), "args": {"variant": "small", "image_size": 512}}, path)
 
-    model, payload = load_model_from_ckpt(path, dev)
-    img = (np.random.rand(512, 512, 3) * 255).astype(np.uint8)
-    mask, low = predict_click(model, img, pos_points=[(256, 256)], neg_points=[],
-                              prev_mask=None, device=dev)
-    assert mask.shape == (512, 512) and mask.dtype == bool, (mask.shape, mask.dtype)
-    assert tuple(low.shape[-2:]) == (128, 128), low.shape
+    try:
+        model, payload = load_model_from_ckpt(path, dev)
+        img = (np.random.rand(512, 512, 3) * 255).astype(np.uint8)
+        mask, low = predict_click(model, img, pos_points=[(256, 256)], neg_points=[],
+                                  prev_mask=None, device=dev)
+        assert mask.shape == (512, 512) and mask.dtype == bool, (mask.shape, mask.dtype)
+        assert tuple(low.shape[-2:]) == (128, 128), low.shape
 
-    # refinement click reusing prev low-res logits
-    mask2, low2 = predict_click(model, img, pos_points=[(256, 256)], neg_points=[(10, 10)],
-                                prev_mask=low, device=dev)
-    assert mask2.shape == (512, 512)
-    os.remove(path)
+        # refinement click reusing prev low-res logits
+        mask2, low2 = predict_click(model, img, pos_points=[(256, 256)], neg_points=[(10, 10)],
+                                    prev_mask=low, device=dev)
+        assert mask2.shape == (512, 512)
+
+        # v0 guard: a non-working-resolution image must raise (coords are not rescaled)
+        try:
+            predict_click(model, np.zeros((400, 400, 3), np.uint8), [(1, 1)], [], None, dev)
+            assert False, "expected ValueError for non-512 image"
+        except ValueError:
+            pass
+    finally:
+        os.remove(path)
     print("OK test_predict_click_roundtrip")
 
 

@@ -28,14 +28,20 @@ def load_model_from_ckpt(ckpt, device):
 def predict_click(model, img, pos_points, neg_points, prev_mask, device, image_size=512):
     """img: HxWx3 uint8 RGB ndarray. pos/neg_points: lists of (x, y) in img pixel space.
     Returns (mask: bool HxW at working resolution, low_res_logits: tensor [1,1,128,128])."""
+    if img.shape[0] != image_size or img.shape[1] != image_size:
+        raise ValueError(
+            f"predict_click v0 expects a {image_size}x{image_size} tile; got {tuple(img.shape[:2])}. "
+            "Click coords are not rescaled, so a non-working-resolution image would mis-place points. "
+            "Arbitrary-frame resolution/coordinate mapping is sub-project 2.")
+
     tf = val_transforms(image_size=image_size)
     out = tf(image=img, mask=np.zeros(img.shape[:2], np.uint8))
     x = out["image"].unsqueeze(0).to(device)
 
-    pts = [(y, xx) for (xx, y) in pos_points] + [(y, xx) for (xx, y) in neg_points]   # -> (row, col)
+    all_pts = list(pos_points) + list(neg_points)   # each already (x, y)
     labs = [1] * len(pos_points) + [0] * len(neg_points)
-    if pts:
-        coords = torch.tensor([[[float(c), float(r)] for (r, c) in pts]], device=device)  # (x,y)
+    if all_pts:
+        coords = torch.tensor([[[float(x), float(y)] for (x, y) in all_pts]], device=device)  # (x, y)
         labels = torch.tensor([labs], dtype=torch.int32, device=device)
     else:
         coords = torch.zeros(1, 0, 2, device=device)
