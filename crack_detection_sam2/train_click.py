@@ -77,6 +77,8 @@ def clicks_train_loss(model, img, gt, n_clicks, rng, criterion):
         masks, low = model.decode(enc, coords, labels, prev_mask=prev)
         loss, _ = criterion(masks, gt)
         total = total + loss
+        # detach: truncated BPTT (SAM-style). Each click's loss backprops only through its own
+        # decode; gradients do not flow across clicks. Intentional -- do not remove the detach.
         prev = low.detach()
         if k < n_clicks - 1:
             pred_np = (masks.detach().squeeze(1) > 0).cpu().numpy()  # CPU sync each click: scipy click sampling needs numpy
