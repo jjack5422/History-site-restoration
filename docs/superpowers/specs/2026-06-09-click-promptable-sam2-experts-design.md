@@ -46,18 +46,22 @@ selects picks which expert/interactor is invoked.
 
 ## 2. Current assets reused (no logic duplication)
 
-- `crack_detection_sam2/model.py`: `build_sam2_model(variant, device, mode)` — builds the SAM2
-  stack and exposes `image_encoder`, `sam_prompt_encoder` (with `.pe_layer`), `sam_mask_decoder`,
-  `backbone_stride` (16), `hidden_dim`, `use_high_res_features_in_sam`, `image_size`.
-- `crack_detection_sam2/model_prompt_seg.py`: `SAM2PromptSeg` already wires
-  image_encoder -> sam_prompt_encoder -> sam_mask_decoder for non-1024 input, including the
-  prompt-encoder size overrides (`input_image_size`, `image_embedding_size`, `mask_input_size`).
-  The new model copies that wiring but feeds **real** point coords/labels instead of learnable
-  tokens. `model_prompt_seg.py` is left unchanged.
-- `crack_detection_sam2/train_prompt.py`: training loop, BCE+Dice loss, dataset/augment wiring,
-  checkpoint save. The new trainer reuses these and adds only point sampling + the iterative loop.
-- `crackseg_common`: `dataset` (`TileSegDataset`, `load_tile_index`, `set_class_names`,
-  `compute_class_weights`), `augment` (`train_transforms`, `val_transforms`).
+- `crack_detection_sam2/model_prompted_sam2.py`: **`PromptedSAM2Seg` already is the
+  click-promptable model** — `forward(x, point_coords, point_labels)` drives image_encoder
+  (frozen) -> real sam_prompt_encoder -> sam_mask_decoder, with the non-1024 size overrides and a
+  `param_groups(base_lr)` helper. Labels: 1=positive, 0=negative, -1=padding (see existing
+  `tests/test_prompted_sam2_forward.py`). Sub-project 1 **extends this file** (does NOT create a
+  new model module): add an optional `prev_mask` dense-prompt input and split `forward` into
+  `encode_image(x)` + `decode(enc, coords, labels, prev_mask)` so iterative clicks reuse the
+  frozen backbone features. `forward(x, coords, labels)` stays backward-compatible.
+- `crack_detection_sam2/model.py`: `build_sam2_model(variant, device, mode)` (used transitively).
+- `crack_detection_sam2/train_prompt.py`: `BinaryCEDiceLoss`, `cosine_with_warmup`, data loading,
+  optimizer/AMP/save scaffolding. The new trainer reuses these and adds only point sampling + the
+  iterative loop + click-based eval.
+- `crackseg_common` (at `/home/zzz90/research/_lib/crackseg_common`): `dataset` (`TileSegDataset`
+  returns `{"image":[3,H,W], "mask":[H,W] in {0,1}}`, `load_tile_index`, `set_class_names`,
+  `compute_class_weights`), `augment` (`val_transforms`/`train_transforms`; ImageNet mean/std,
+  `val_transforms` = LongestMaxSize+PadIfNeeded+Normalize+ToTensorV2).
 
 ## 3. Data
 
@@ -69,22 +73,19 @@ selects picks which expert/interactor is invoked.
 
 ## 4. Components
 
-### 4.1 `crack_detection_sam2/model_click_seg.py` (new)
-`SAM2ClickSeg(nn.Module)`:
-- `__init__(variant="small", image_size=512, freeze_image_encoder=True, device=None)` —
-  build via `build_sam2_model`, keep `image_encoder` (frozen), `sam_prompt_encoder`,
-  `sam_mask_decoder`; apply the same non-1024 size overrides as `SAM2PromptSeg`.
-- `forward(image, point_coords, point_labels, prev_mask=None) -> logits [B,1,H,W]`:
-  1. `feats = image_encoder(image)` (no grad).
-  2. `sparse, dense = sam_prompt_encoder(points=(point_coords, point_labels), boxes=None,
-     masks=prev_mask)` — `prev_mask` is the previous low-res logits (dense prompt) or None.
-  3. `low_res_logits, iou_pred = sam_mask_decoder(image_embeddings=feats.embed,
-     image_pe=sam_prompt_encoder.get_dense_pe(), sparse_prompt_embeddings=sparse,
-     dense_prompt_embeddings=dense, multimask_output=False, ...)` (high-res feats passed when
-     `use_high_res_features_in_sam`, mirroring `model_prompt_seg.py`).
-  4. upsample `low_res_logits` to `[B,1,H,W]`. Also return the low-res logits for the next
-     iteration's `prev_mask`.
-- `count_params()` helper (parity with sibling model modules).
+### 4.1 Extend `crack_detection_sam2/model_prompted_sam2.py` (`PromptedSAM2Seg`)
+Add (keeping `forward(x, coords, labels)` backward-compatible — existing test must still pass):
+- `encode_image(x) -> {"feat": fpn[-1], "high_res": [conv_s0(fpn0), conv_s1(fpn1)] or None,
+  "hw": (H, W)}`. The `image_encoder` call runs under `torch.no_grad()` (it is frozen); the
+  `conv_s0/conv_s1` high-res projections (which live in `sam_mask_decoder` and ARE trainable) are
+  computed once here with grad and reused across click iterations.
+- `decode(enc, point_coords, point_labels, prev_mask=None) -> (masks[B,1,H,W], low[B,1,4e,4e])`:
+  `sparse, dense = sam_prompt_encoder(points=(coords, labels), boxes=None, masks=prev_mask)`;
+  `low, _, _, _ = sam_mask_decoder(image_embeddings=enc["feat"],
+  image_pe=sam_prompt_encoder.get_dense_pe(), sparse_prompt_embeddings=sparse,
+  dense_prompt_embeddings=dense, multimask_output=False, repeat_image=False,
+  high_res_features=enc["high_res"])`; `masks = F.interpolate(low.float(), size=enc["hw"], ...)`.
+- `forward(x, point_coords, point_labels, prev_mask=None)` = `decode(encode_image(x), ...)[0]`.
 - v0: `multimask_output=False` (single mask). Multimask + IoU-token selection deferred.
 
 ### 4.2 `crack_detection_sam2/train_click.py` (new)
@@ -105,11 +106,13 @@ SAM-style interactive training; per tile run `n_clicks` (default 8) iterations:
 
 ### 4.3 `crack_detection_sam2/predict_click.py` (new — consumed by sub-project 2)
 - `load_model_from_ckpt(ckpt, device) -> (model, payload)` (same contract name as the existing
-  `predict_full.py` modules).
+  `predict_full.py` modules): rebuild `PromptedSAM2Seg` from `payload["args"]`, load weights, eval.
 - `predict_click(model, img, pos_points, neg_points, prev_mask, device) -> (mask, low_res_logits)`:
-  build point_coords/labels tensors, forward once, threshold to bool mask, return mask plus
-  low-res logits so the caller can pass them back as `prev_mask` for the next click. No training
-  deps. This is the single inference entry the Nuclio interactor will call.
+  preprocess `img` with `val_transforms(image_size)` (ImageNet norm), build point_coords/labels
+  tensors (pos=1, neg=0), call `model.decode(model.encode_image(x), ...)` once under no_grad,
+  threshold logits>0 to bool mask, return mask plus low-res logits so the caller can pass them
+  back as `prev_mask` for the next click. No training deps. Single inference entry the Nuclio
+  interactor (sub-project 2) will call.
 
 ## 5. Evaluation (interactive-segmentation metrics)
 
@@ -154,9 +157,9 @@ Per the experiment-tracking convention:
   "path 1") instead of a promptable model — sub-project 2 can mix the two.
 - Quality is an accelerator for human labeling, not ground truth; the user reviews every mask.
 
-## 9. Open items to confirm before implementation
+## 9. Open items (resolved during planning)
 
-- Exact SAM2 mask-decoder call signature for high-res features in this repo's vendored SAM-2
-  (read `model_prompt_seg.py`'s decoder call and reuse verbatim).
-- Whether `n_clicks=8` and per-iteration loss averaging are kept, or only final-iteration loss
-  (decide during plan; default = average over iterations).
+- Decoder/prompt-encoder call signature: reuse `PromptedSAM2Seg.forward` verbatim (already in repo).
+- `n_clicks=8` with loss averaged over iterations (default). Adjustable via CLI `--n_clicks`.
+- Training env: `/home/zzz90/research/sam2_env` (torch 2.11.0+cu128; scipy present). No system
+  `python` on PATH — invoke `/home/zzz90/research/sam2_env/bin/python` directly.
