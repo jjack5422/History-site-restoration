@@ -50,7 +50,8 @@ class PromptedSAM2Seg(nn.Module):
             image_pe=self.sam_prompt_encoder.get_dense_pe(),
             sparse_prompt_embeddings=sparse, dense_prompt_embeddings=dense,
             multimask_output=False, repeat_image=False, high_res_features=enc["high_res"])
-        masks = F.interpolate(low.float(), size=enc["hw"], mode="bilinear", align_corners=False)
+        low = low.float()
+        masks = F.interpolate(low, size=enc["hw"], mode="bilinear", align_corners=False)
         return masks, low
 
     def forward(self, x, point_coords, point_labels, prev_mask=None):

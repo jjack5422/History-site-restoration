@@ -23,6 +23,10 @@ def test_encode_decode_prev_mask_and_backcompat():
     masks2, low2 = m.decode(enc, coords2, labels2, prev_mask=low)
     assert masks2.shape == (2, 1, 512, 512)
 
+    # gradients must flow through the refinement (prev_mask) path into the mask decoder
+    low2.sum().backward()
+    assert any(p.grad is not None for p in m.sam_mask_decoder.parameters())
+
     # backward-compatible forward (existing test_prompted_sam2_forward relies on this)
     y = m(x, coords, labels)
     assert y.shape == (2, 1, 512, 512)
