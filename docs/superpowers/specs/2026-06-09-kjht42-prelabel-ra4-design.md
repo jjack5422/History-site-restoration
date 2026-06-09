@@ -82,6 +82,11 @@ tracking convention (manifest + commands + git SHA).
   freeze_trunk, median_freq; crack epochs 50, base_lr 3e-4, batch 8, resnet50/imagenet,
   median_freq. AMP on.
 - **Thresholds** for merge: craq 0.5 / crack 0.5 (pipeline default).
+- **Two classes stay distinct in the output**: `merge_pre_label.py` writes a VOC palette mask that
+  keeps craquelure (green 102,255,102) and crack (red 255,24,3) as **separate** classes — it does
+  NOT collapse them into one. Overlap is resolved by `--priority craq_over_crack` (craquelure
+  overrides crack where both fire). It also emits per-class `binary_craq/` and `binary_crack/`
+  masks. So in CVAT the import shows two distinct labels.
 
 ## 6. Verification (cheap, between phases)
 
