@@ -2,3 +2,7 @@ craq_raw/
 crack_raw/
 combined_voc/
 combined_cvat_import/
+override_voc/
+override_craq_raw/
+override_crack_raw/
+override_cvat_import/
