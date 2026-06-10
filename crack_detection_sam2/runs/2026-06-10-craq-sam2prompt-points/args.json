@@ -1,0 +1,14 @@
+{
+  "tiles_root": "/home/zzz90/research/_data/craq_0-94_v1/tiles_512",
+  "split": "/home/zzz90/research/_data/craq_0-94_v1/tiles_512/group_split_stem.json",
+  "fold": 0,
+  "prob_dir": "/home/zzz90/research/_data/craq_0-94_v1/tiles_512/resunet_prob",
+  "prompt_mode": "points",
+  "variant": "small",
+  "image_size": 512,
+  "epochs": 60,
+  "batch_size": 4,
+  "base_lr": 0.0002,
+  "num_workers": 4,
+  "output_dir": "runs/2026-06-10-craq-sam2prompt-points"
+}
