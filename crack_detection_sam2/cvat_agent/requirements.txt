@@ -1,9 +1,0 @@
-# Torch matched to the working sam2 build (cu128). Install torch separately (see Step 2).
-segmentation-models-pytorch
-timm
-scipy
-pillow
-numpy
-albumentations  # transitive: crackseg_common.augment (imported by predict_full)
-cvat-sdk
-cvat-cli
