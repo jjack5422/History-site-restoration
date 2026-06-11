@@ -35,6 +35,7 @@ def sweep(ckpt, tiles_root, split, fold, prob_dir, dino_dir, thresholds):
         from model_fused_sam2 import FusedPromptedSAM2Seg
         model = FusedPromptedSAM2Seg(variant=ck["args"]["variant"], image_size=ck["args"]["image_size"],
                                      dino_dim=ck["args"].get("dino_dim", 384),
+                                     fusion_type=ck["args"].get("fusion_type", "concat"),
                                      mask_prompt_size=ck["args"].get("mask_prompt_size"), device=dev).to(dev)
     else:
         model = PromptedSAM2Seg(variant=ck["args"]["variant"], image_size=ck["args"]["image_size"],

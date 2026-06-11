@@ -1,0 +1,75 @@
+== 5-fold aggregate (logit>0, train-time metric) ==
+craq-base-c0: {
+  "n": 5,
+  "iou": [
+    0.43987318136107156,
+    0.12408996112430108
+  ],
+  "precision": [
+    0.5444766083340309,
+    0.12054904059857618
+  ],
+  "recall": [
+    0.6726631286105095,
+    0.14568282395397816
+  ]
+}
+craq-fused-e1: {
+  "n": 5,
+  "iou": [
+    0.44443260813522417,
+    0.12754496065041515
+  ],
+  "precision": [
+    0.5384700847285405,
+    0.12983266748348019
+  ],
+  "recall": [
+    0.6900427518783511,
+    0.1282990307595151
+  ]
+}
+craq-fused-e2film: {
+  "n": 5,
+  "iou": [
+    0.44019391352481796,
+    0.1270706420323287
+  ],
+  "precision": [
+    0.5340033555267623,
+    0.1340782732452601
+  ],
+  "recall": [
+    0.6892257283405347,
+    0.12789662564259938
+  ]
+}
+== threshold sweep craq-base-c0 (per-fold) ==
+  fold0 best_thr=0.5 iou=0.5700 P=0.696 R=0.759
+  fold1 best_thr=0.5 iou=0.2430 P=0.346 R=0.450
+  fold2 best_thr=0.5 iou=0.5325 P=0.623 R=0.786
+  fold3 best_thr=0.5 iou=0.5065 P=0.569 R=0.821
+  fold4 best_thr=0.4 iou=0.3483 P=0.466 R=0.580
+== threshold sweep craq-fused-e1 (per-fold) ==
+  fold0 best_thr=0.5 iou=0.5677 P=0.678 R=0.777
+  fold1 best_thr=0.5 iou=0.2427 P=0.325 R=0.489
+  fold2 best_thr=0.5 iou=0.5532 P=0.622 R=0.834
+  fold3 best_thr=0.5 iou=0.5100 P=0.615 R=0.750
+  fold4 best_thr=0.5 iou=0.3491 P=0.450 R=0.609
+== threshold sweep craq-fused-e2film (per-fold) ==
+  fold0 best_thr=0.5 iou=0.5738 P=0.705 R=0.755
+  fold1 best_thr=0.5 iou=0.2442 P=0.337 R=0.470
+  fold2 best_thr=0.5 iou=0.5341 P=0.606 R=0.819
+  fold3 best_thr=0.5 iou=0.5099 P=0.598 R=0.776
+  fold4 best_thr=0.5 iou=0.3405 P=0.426 R=0.629
+
+== 3-way verdict: BOTH fusions fail; E2 FiLM negative too ==
+5-fold aggregate IoU: C0 0.440 / E1 0.444 / E2 0.440. Precision: C0 0.544 / E1 0.538 /
+E2 0.534 (E2 lowest). FiLM gate was meant to SUPPRESS 彩繪 FP -> raise precision on
+mural folds; instead precision DROPPED on murals (fold2 .623->.606, fold4 .466->.426).
+Only fold0 (least painterly) looked best (P .705) - irrelevant to the hypothesis.
+Conclusion: additive (E1) AND suppression-suited multiplicative gate (E2) both fail ->
+bottleneck is the SIGNAL not the wiring. Frozen DINOv2 @32x32 on this small/heterogeneous
+data carries no actionable 彩繪-vs-craquelure discrimination the light head can exploit.
+If ever revisited, the lever must change: adapt DINOv2 (LoRA) / higher-res inject /
+explicit 彩繪 background-class supervision (needs annotation). Recommend stopping.
