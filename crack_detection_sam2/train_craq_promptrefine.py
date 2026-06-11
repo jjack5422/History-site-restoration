@@ -34,10 +34,11 @@ IMAGENET_STD = (0.229, 0.224, 0.225)
 
 
 class PromptTileDS(Dataset):
-    def __init__(self, tiles_root, prob_dir, names, train=False):
+    def __init__(self, tiles_root, prob_dir, names, train=False, dino_dir=None):
         self.timg = Path(tiles_root) / "images"
         self.tmsk = Path(tiles_root) / "masks"
         self.prob = Path(prob_dir) / "prob"
+        self.dino = Path(dino_dir) if dino_dir else None
         self.names = names
         self.train = train
 
@@ -49,13 +50,22 @@ class PromptTileDS(Dataset):
         img = np.array(Image.open(self.timg / n).convert("RGB"))
         msk = (np.array(Image.open(self.tmsk / n)) > 0).astype(np.float32)
         prob = np.load(self.prob / (Path(n).stem + ".npy"))[1].astype(np.float32)  # craq channel
-        if self.train and np.random.rand() < 0.5:
+        dino = None
+        if self.dino is not None:
+            dino = np.load(self.dino / (Path(n).stem + ".npy")).astype(np.float32)  # [C,gh,gw]
+        flip = self.train and np.random.rand() < 0.5
+        if flip:
             img = img[:, ::-1].copy(); msk = msk[:, ::-1].copy(); prob = prob[:, ::-1].copy()
+            if dino is not None:
+                dino = dino[..., ::-1].copy()  # flip width
         x = torch.from_numpy(img).float().div_(255).permute(2, 0, 1)
         m = torch.tensor(IMAGENET_MEAN).view(3, 1, 1)
         s = torch.tensor(IMAGENET_STD).view(3, 1, 1)
-        return {"image": (x - m) / s, "mask": torch.from_numpy(msk),
-                "prob": torch.from_numpy(prob), "name": n}
+        out = {"image": (x - m) / s, "mask": torch.from_numpy(msk),
+               "prob": torch.from_numpy(prob), "name": n}
+        if dino is not None:
+            out["dino"] = torch.from_numpy(dino)
+        return out
 
 
 def build_prompts(batch, mode, device, mask_hw, size=512):
@@ -79,14 +89,21 @@ def build_prompts(batch, mode, device, mask_hw, size=512):
     return torch.stack(cs).to(device), torch.stack(ls).to(device), None
 
 
-def dice_bce_loss(logits, target):
-    # logits (B,1,H,W), target (B,H,W) float 0/1
+def dice_bce_loss(logits, target, alpha=0.5, beta=0.5):
+    # logits (B,1,H,W), target (B,H,W) float 0/1.
+    # alpha=beta=0.5 -> Dice (symmetric). alpha<beta -> Tversky penalising FN
+    # more (recall-leaning). loss = 0.5*BCE + 0.5*(1 - Tversky).
     bce = F.binary_cross_entropy_with_logits(logits.squeeze(1), target)
     p = torch.sigmoid(logits.squeeze(1))
-    num = 2 * (p * target).sum((1, 2)) + 1.0
-    den = p.sum((1, 2)) + target.sum((1, 2)) + 1.0
-    dice = (1 - num / den).mean()
-    return 0.5 * bce + 0.5 * dice
+    tp = (p * target).sum((1, 2))
+    fp = (p * (1 - target)).sum((1, 2))
+    fn = ((1 - p) * target).sum((1, 2))
+    tversky = (tp + 1.0) / (tp + alpha * fp + beta * fn + 1.0)
+    return 0.5 * bce + 0.5 * (1 - tversky).mean()
+
+
+def run_model(model, img, dino, c, l, pm):
+    return model(img, dino, c, l, pm) if dino is not None else model(img, c, l, pm)
 
 
 @torch.no_grad()
@@ -96,8 +113,9 @@ def evaluate(model, loader, mode, device, mask_hw):
     for batch in loader:
         img = batch["image"].to(device)
         gt = (batch["mask"] > 0.5).to(device)
+        dino = batch["dino"].to(device) if "dino" in batch else None
         c, l, pm = build_prompts(batch, mode, device, mask_hw)
-        logits = model(img, c, l, pm)
+        logits = run_model(model, img, dino, c, l, pm)
         pred = logits.squeeze(1) > 0
         tp += int((pred & gt).sum()); fp += int((pred & ~gt).sum()); fn += int((~pred & gt).sum())
     prec = tp / max(tp + fp, 1); rec = tp / max(tp + fn, 1)
@@ -110,9 +128,17 @@ def load_split(path, fold):
     return fd["train"], fd["val"]
 
 
-def exists_only(tiles_root, prob_dir, names):
+def exists_only(tiles_root, prob_dir, names, dino_dir=None):
     img = Path(tiles_root) / "images"; prob = Path(prob_dir) / "prob"
-    return [n for n in names if (img / n).exists() and (prob / (Path(n).stem + ".npy")).exists()]
+    dino = Path(dino_dir) if dino_dir else None
+    keep = []
+    for n in names:
+        if not ((img / n).exists() and (prob / (Path(n).stem + ".npy")).exists()):
+            continue
+        if dino is not None and not (dino / (Path(n).stem + ".npy")).exists():
+            continue
+        keep.append(n)
+    return keep
 
 
 def main():
@@ -124,11 +150,19 @@ def main():
     ap.add_argument("--prompt_mode", choices=["mask", "points"], required=True)
     ap.add_argument("--variant", default="small")
     ap.add_argument("--image_size", type=int, default=512)
+    ap.add_argument("--mask_prompt_size", type=int, default=None,
+                    help="higher-res mask prompt (e.g. 256); default 4*embed=128")
+    ap.add_argument("--tversky_alpha", type=float, default=0.5,
+                    help="FP weight; <beta = recall-leaning (default 0.5 = Dice)")
+    ap.add_argument("--tversky_beta", type=float, default=0.5, help="FN weight")
     ap.add_argument("--epochs", type=int, default=60)
     ap.add_argument("--batch_size", type=int, default=4)
     ap.add_argument("--base_lr", type=float, default=2e-4)
     ap.add_argument("--num_workers", type=int, default=4)
     ap.add_argument("--output_dir", default="runs/sam2prompt")
+    ap.add_argument("--dino_feat_dir", default=None,
+                    help="給定則啟用 DINOv2 fusion (FusedPromptedSAM2Seg);不給為 baseline")
+    ap.add_argument("--dino_dim", type=int, default=384)
     args = ap.parse_args()
 
     device = "cuda" if torch.cuda.is_available() else "cpu"
@@ -136,18 +170,28 @@ def main():
     json.dump(vars(args), open(out / "args.json", "w"), indent=2)
 
     tr_names, va_names = load_split(args.split, args.fold)
-    tr_names = exists_only(args.tiles_root, args.prob_dir, tr_names)
-    va_names = exists_only(args.tiles_root, args.prob_dir, va_names)
-    print(f"mode={args.prompt_mode} train={len(tr_names)} val={len(va_names)}")
+    tr_names = exists_only(args.tiles_root, args.prob_dir, tr_names, args.dino_feat_dir)
+    va_names = exists_only(args.tiles_root, args.prob_dir, va_names, args.dino_feat_dir)
+    print(f"mode={args.prompt_mode} train={len(tr_names)} val={len(va_names)} "
+          f"dino={'on' if args.dino_feat_dir else 'off'}")
 
-    tr = DataLoader(PromptTileDS(args.tiles_root, args.prob_dir, tr_names, train=True),
+    tr = DataLoader(PromptTileDS(args.tiles_root, args.prob_dir, tr_names, train=True,
+                                 dino_dir=args.dino_feat_dir),
                     batch_size=args.batch_size, shuffle=True, num_workers=args.num_workers,
                     pin_memory=True, drop_last=True)
-    va = DataLoader(PromptTileDS(args.tiles_root, args.prob_dir, va_names, train=False),
+    va = DataLoader(PromptTileDS(args.tiles_root, args.prob_dir, va_names, train=False,
+                                 dino_dir=args.dino_feat_dir),
                     batch_size=args.batch_size, shuffle=False, num_workers=args.num_workers,
                     pin_memory=True)
 
-    model = PromptedSAM2Seg(variant=args.variant, image_size=args.image_size, device=device).to(device)
+    if args.dino_feat_dir:
+        from model_fused_sam2 import FusedPromptedSAM2Seg
+        model = FusedPromptedSAM2Seg(variant=args.variant, image_size=args.image_size,
+                                     dino_dim=args.dino_dim,
+                                     mask_prompt_size=args.mask_prompt_size, device=device).to(device)
+    else:
+        model = PromptedSAM2Seg(variant=args.variant, image_size=args.image_size,
+                                mask_prompt_size=args.mask_prompt_size, device=device).to(device)
     mask_hw = tuple(model.sam_prompt_encoder.mask_input_size)
     print(f"mask_input_size={mask_hw}")
     opt = torch.optim.AdamW(model.param_groups(args.base_lr, encoder_lr_mult=0.1), lr=args.base_lr,
@@ -169,18 +213,20 @@ def main():
                 g["lr"] = g["initial_lr"] * scale
             img = batch["image"].to(device)
             target = (batch["mask"] > 0.5).float().to(device)
+            dino = batch["dino"].to(device) if "dino" in batch else None
             c, l, pm = build_prompts(batch, args.prompt_mode, device, mask_hw)
             opt.zero_grad(set_to_none=True)
             if scaler is not None:
                 with torch.amp.autocast("cuda", dtype=torch.float16):
-                    logits = model(img, c, l, pm)
-                    loss = dice_bce_loss(logits.float(), target)
+                    logits = run_model(model, img, dino, c, l, pm)
+                    loss = dice_bce_loss(logits.float(), target,
+                                         alpha=args.tversky_alpha, beta=args.tversky_beta)
                 scaler.scale(loss).backward()
                 scaler.unscale_(opt)
                 torch.nn.utils.clip_grad_norm_([p for p in model.parameters() if p.requires_grad], 5.0)
                 scaler.step(opt); scaler.update()
             else:
-                logits = model(img, c, l, pm)
+                logits = run_model(model, img, dino, c, l, pm)
                 loss = dice_bce_loss(logits.float(), target)
                 loss.backward(); opt.step()
             run += float(loss.detach()); nb += 1
