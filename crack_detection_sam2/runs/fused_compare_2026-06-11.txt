@@ -1,0 +1,58 @@
+== 5-fold aggregate (logit>0, train-time metric) ==
+C0 baseline: {
+  "n": 5,
+  "iou": [
+    0.43987318136107156,
+    0.12408996112430108
+  ],
+  "precision": [
+    0.5444766083340309,
+    0.12054904059857618
+  ],
+  "recall": [
+    0.6726631286105095,
+    0.14568282395397816
+  ]
+}
+E1 fused   : {
+  "n": 5,
+  "iou": [
+    0.44443260813522417,
+    0.12754496065041515
+  ],
+  "precision": [
+    0.5384700847285405,
+    0.12983266748348019
+  ],
+  "recall": [
+    0.6900427518783511,
+    0.1282990307595151
+  ]
+}
+== threshold sweep craq-base-c0 (per-fold) ==
+  fold0 best_thr=0.5 iou=0.5700 P=0.696 R=0.759
+  fold1 best_thr=0.5 iou=0.2430 P=0.346 R=0.450
+  fold2 best_thr=0.5 iou=0.5325 P=0.623 R=0.786
+  fold3 best_thr=0.5 iou=0.5065 P=0.569 R=0.821
+  fold4 best_thr=0.4 iou=0.3483 P=0.466 R=0.580
+== threshold sweep craq-fused-e1 (per-fold) ==
+  fold0 best_thr=0.5 iou=0.5677 P=0.678 R=0.777
+  fold1 best_thr=0.5 iou=0.2427 P=0.325 R=0.489
+  fold2 best_thr=0.5 iou=0.5532 P=0.622 R=0.834
+  fold3 best_thr=0.5 iou=0.5100 P=0.615 R=0.750
+  fold4 best_thr=0.5 iou=0.3491 P=0.450 R=0.609
+
+== Gate 1 verdict: NOT PASSED (hypothesis not supported) ==
+- Aggregate WASH: IoU 0.440->0.444 (+0.004), P 0.544->0.538 (-0.006), R 0.673->0.690
+  (+0.017). All deltas << fold std (+-0.12). No meaningful aggregate change.
+- Hypothesised mechanism (DINOv2 suppresses 彩繪 FP -> precision up) DID NOT happen:
+  precision flat/slightly down everywhere.
+- Only fold2 (pure MGLST-DT murals, the cleanest 彩繪 test) shows a real but small gain
+  (+0.021 IoU), and via RECALL (0.786->0.834) at flat precision (0.623->0.622) - i.e.
+  DINOv2 helped FIND more craquelure on murals, NOT suppress FP. fold3 (also mural) went
+  the other way (P up, R down). No consistent FP-suppression story.
+- Conclusion: zero-init residual DINOv2 injection into feat adds ~nothing the decoder can
+  exploit on this small/heterogeneous data. Per spec decision rule, do not proceed to E2 /
+  background-subclass work on this evidence. Weak hint that semantic features aid recall on
+  the most painterly stems - if pursued, reframe as a recall lever on 彩繪 stems, not FP
+  suppression, and test a stronger fusion (FiLM gate / higher-res inject / B-14).
