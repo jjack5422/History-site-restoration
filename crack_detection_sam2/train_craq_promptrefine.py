@@ -227,7 +227,8 @@ def main():
                 scaler.step(opt); scaler.update()
             else:
                 logits = run_model(model, img, dino, c, l, pm)
-                loss = dice_bce_loss(logits.float(), target)
+                loss = dice_bce_loss(logits.float(), target,
+                                     alpha=args.tversky_alpha, beta=args.tversky_beta)
                 loss.backward(); opt.step()
             run += float(loss.detach()); nb += 1
         ev = evaluate(model, va, args.prompt_mode, device, mask_hw)
