@@ -79,12 +79,15 @@ def main():
     ap.add_argument("--split", required=True)
     ap.add_argument("--prob_dir", required=True)
     ap.add_argument("--dino_dir", required=True)
+    ap.add_argument("--prefixes", default="craq-base-c0,craq-fused-e1",
+                    help="comma-sep run-dir prefixes to aggregate+sweep")
     args = ap.parse_args()
+    prefixes = [p.strip() for p in args.prefixes.split(",") if p.strip()]
     print("== 5-fold aggregate (logit>0, train-time metric) ==")
-    print("C0 baseline:", json.dumps(agg("craq-base-c0"), indent=2))
-    print("E1 fused   :", json.dumps(agg("craq-fused-e1"), indent=2))
+    for prefix in prefixes:
+        print(f"{prefix}:", json.dumps(agg(prefix), indent=2))
     thr = [0.1, 0.2, 0.25, 0.3, 0.4, 0.5]
-    for prefix in ["craq-base-c0", "craq-fused-e1"]:
+    for prefix in prefixes:
         print(f"== threshold sweep {prefix} (per-fold) ==")
         for k in range(5):
             ck = Path(f"runs/{prefix}-fold{k}-2026-06-11/best.pt")

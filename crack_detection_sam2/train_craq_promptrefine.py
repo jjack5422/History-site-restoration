@@ -163,6 +163,8 @@ def main():
     ap.add_argument("--dino_feat_dir", default=None,
                     help="給定則啟用 DINOv2 fusion (FusedPromptedSAM2Seg);不給為 baseline")
     ap.add_argument("--dino_dim", type=int, default=384)
+    ap.add_argument("--fusion_type", choices=["concat", "film"], default="concat",
+                    help="DINOv2 融合方式:concat 殘差(E1) 或 film spatial gate(E2)")
     args = ap.parse_args()
 
     device = "cuda" if torch.cuda.is_available() else "cpu"
@@ -187,7 +189,7 @@ def main():
     if args.dino_feat_dir:
         from model_fused_sam2 import FusedPromptedSAM2Seg
         model = FusedPromptedSAM2Seg(variant=args.variant, image_size=args.image_size,
-                                     dino_dim=args.dino_dim,
+                                     dino_dim=args.dino_dim, fusion_type=args.fusion_type,
                                      mask_prompt_size=args.mask_prompt_size, device=device).to(device)
     else:
         model = PromptedSAM2Seg(variant=args.variant, image_size=args.image_size,
