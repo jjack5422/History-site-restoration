@@ -101,6 +101,8 @@ def main():
     gray = cv2.cvtColor(rgb, cv2.COLOR_RGB2GRAY).astype(np.float32) / 255.0
     print("computing multiscale ridge ...")
     ridge = ridge_response(gray, args.sigmas)
+    # persist the normalised ridge response so region_clip.py need not recompute
+    Image.fromarray((ridge * 255).astype(np.uint8)).save(str(out / "ridge_u8.png"))
     r_thr = np.percentile(ridge, args.ridge_pct)
     ridge_mask = ridge >= r_thr
 
