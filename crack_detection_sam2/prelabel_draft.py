@@ -81,6 +81,9 @@ def main():
     ap.add_argument("--p_thr", type=float, default=0.15, help="low model threshold -> high recall")
     ap.add_argument("--ridge_pct", type=float, default=96.0, help="percentile on ridge response for mask")
     ap.add_argument("--sigmas", type=float, nargs="+", default=[1.0, 1.5, 2.0, 2.5, 3.0])
+    ap.add_argument("--ridge_scale", type=float, default=1.0,
+                    help="<1 downsamples before the (slow) ridge filter then upsamples back; "
+                         "use ~0.5 on >50MP images to cut ridge time ~4x")
     ap.add_argument("--min_area", type=int, default=12, help="drop connected comps smaller than this (px)")
     ap.add_argument("--close", type=int, default=1, help="binary closing radius to link fragments")
     args = ap.parse_args()
@@ -100,7 +103,13 @@ def main():
 
     gray = cv2.cvtColor(rgb, cv2.COLOR_RGB2GRAY).astype(np.float32) / 255.0
     print("computing multiscale ridge ...")
-    ridge = ridge_response(gray, args.sigmas)
+    if args.ridge_scale < 1.0:
+        gs = cv2.resize(gray, None, fx=args.ridge_scale, fy=args.ridge_scale,
+                        interpolation=cv2.INTER_AREA)
+        ridge = ridge_response(gs, args.sigmas)
+        ridge = cv2.resize(ridge, (W, H), interpolation=cv2.INTER_LINEAR)
+    else:
+        ridge = ridge_response(gray, args.sigmas)
     # persist the normalised ridge response so region_clip.py need not recompute
     Image.fromarray((ridge * 255).astype(np.uint8)).save(str(out / "ridge_u8.png"))
     r_thr = np.percentile(ridge, args.ridge_pct)
