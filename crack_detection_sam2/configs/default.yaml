@@ -1,0 +1,24 @@
+project:
+  root: /home/zzz90/research/crack_detection_sam2
+  raw_image_dir: /home/zzz90/research/crack_detection/data/image
+  tiled_dir: /home/zzz90/research/_data/tiles
+  mask_dir: /home/zzz90/research/_data/masks
+
+tile:
+  size: 1024
+  stride: 512
+  pad_value: 0
+  drop_blank_threshold: 5.0
+
+split:
+  val_ratio: 0.2
+  seed: 42
+
+model:
+  variant: large
+  device: cuda
+
+predict:
+  multimask_output: true
+  score_threshold: 0.0
+  mask_threshold: 0.0
