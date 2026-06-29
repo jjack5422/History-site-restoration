@@ -16,6 +16,14 @@ Host 前提(實驗室機器已滿足):NVIDIA driver >= 570、`nvidia-container-t
 
 ---
 
+## Lab Safety: 不要污染實驗室環境
+
+禁止使用 `sudo pip install`。禁止把任何套件安裝到 system Python、base conda、或實驗室共用 conda/env。
+本流程只能使用 Docker image 或專案專屬 venv；若不用 Docker,所有 pip 指令都必須透過明確 venv
+Python 執行,例如 `/home/zzz90/research/sam2_env/bin/python -m pip ...`。
+
+---
+
 ## 0. 關鍵概念:容器內路徑固定為 `/home/zzz90/research`
 
 訓練腳本 `scripts/run_craq_fused.sh` 與 checkpoint symlink 都寫死絕對路徑

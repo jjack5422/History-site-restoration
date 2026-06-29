@@ -18,6 +18,11 @@
 ## 環境 (Environment)
 - venv：`/home/zzz90/research/sam2_env`（`source sam2_env/bin/activate`）
 
+## Lab Safety
+- 禁止使用 `sudo pip install`。
+- 禁止把套件安裝到 system Python、base conda、或實驗室共用環境。
+- 所有安裝都必須在專案 venv 或 Docker image 內執行；優先使用明確路徑如 `/home/zzz90/research/sam2_env/bin/python -m pip ...`。
+
 ## 進入點 (Entry points) — 一律從專案根目錄執行
 | 路線 | 訓練 | 模型檔 |
 |---|---|---|
