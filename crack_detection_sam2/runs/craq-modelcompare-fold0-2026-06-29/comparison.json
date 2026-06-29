@@ -30,12 +30,12 @@
     "note": "fold0 honest val, best ep68"
   },
   {
-    "model": "SAM2-refine(2-stage, CITED)",
-    "iou": 0.5982,
-    "precision": 0.6811,
-    "recall": 0.8309,
-    "f1": 0.7486,
+    "model": "SAM2-refine(2-stage, SAME-COND leak-free)",
+    "iou": 0.55,
+    "precision": 0.6736,
+    "recall": 0.7499,
+    "f1": 0.7097,
     "run": "(cited)",
-    "note": "CITED craq_0-94_v1 0-94GT fold0 @ep17; all-data prompt prob \u6d29\u6f0f\u504f\u6a02\u89c0; \u8cc7\u6599\u7248/split \u8207\u672c\u8868 craq_bin1027 \u4e0d\u540c, \u975e\u540c\u689d\u4ef6\u76f4\u63a5\u6bd4"
+    "note": "SAME craq_bin1027 fold0 leak-free fold0-ResUNet prompt @ep28 thr0.5 (\u76f4\u63a5\u53ef\u6bd4); \u820a\u5f15\u7528 0.598 \u662f 0-94\u8cc7\u6599+all-data prob\u6d29\u6f0f\u504f\u6a02\u89c0\u5df2\u6c70"
   }
 ]

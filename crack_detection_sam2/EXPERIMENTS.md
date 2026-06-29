@@ -55,3 +55,5 @@
 | 2026-06-29 | craq-modelcompare-fold0 | craquelure fold0 honest val 四模型彙整(DeepLabV3+/SegFormer vs ResUNet/SAM2-refine) | ResUNet 0.5335 / DeepLabV3+ 0.4443 / SegFormer 0.4070 (craq IoU);SAM2-refine 0.5982 引用(資料版不同 caveat) | 主流通用模型(DeepLabV3+/SegFormer)**未勝** 專案 ResUNet,差距在 precision(content-FP);訓練 run 在 `crack_detection_unet/runs/{unet,deeplabv3plus,segformer}-craqbin1027-fold0-2026-06-29` | `runs/craq-modelcompare-fold0-2026-06-29/` |
 
 結論:`_research/decisions/2026-06-29-craquelure-model-comparison.md`。新 venv `segbaseline_env`(torch cu128 + smp 0.5.0);model factory 一般化在 `crack_detection_unet/src/unet_model.py` build_model + train.py `--arch`。
+
+| 2026-06-29 | craq-refine-tversky28-aug-craqbin1027-fold0 | SAM2-refine **同條件**重跑(craq_bin1027 fold0,leak-free fold0-ResUNet prob),修掉舊引用 0.598 的資料版+洩漏問題 | IoU 0.5500 / P 0.6736 / R 0.7499 / F1 0.7097 @ep28 (thr0.5) | 四模型同條件下 IoU 最高:refine 0.550 > ResUNet 0.534 ≫ DeepLabV3+ 0.444 > SegFormer 0.407;refine 靠 precision、recall 反低(修剪器),增益僅 +0.016。誠實值 0.550<舊洩漏 0.598 | `runs/craq-refine-tversky28-aug-craqbin1027-fold0-2026-06-29/` |
