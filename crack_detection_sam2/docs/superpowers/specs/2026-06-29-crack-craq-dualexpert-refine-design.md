@@ -2,7 +2,8 @@
 
 - 日期: 2026-06-29
 - 分支: `exp/crack-craq-dualexpert-refine`
-- 狀態: design 已與使用者敲定，待寫實作計畫
+- 狀態: **延後**。使用者 2026-06-29 改先做 craquelure 的主流模型比較，見
+  `2026-06-29-craquelure-seg-model-comparison-design.md`；本 crack+craq dual-expert ceiling 為後續階段。
 
 ## 目標 / 研究問題
 
