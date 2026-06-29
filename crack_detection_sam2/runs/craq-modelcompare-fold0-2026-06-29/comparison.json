@@ -1,0 +1,41 @@
+[
+  {
+    "epoch": 48,
+    "precision": 0.6107006802468092,
+    "recall": 0.8083845028198896,
+    "iou": 0.5334760276075654,
+    "f1": 0.6957735471606762,
+    "model": "ResUNet(smp.Unet resnet50, 1-stage, 32.5M)",
+    "run": "crack_detection_unet/runs/unet-craqbin1027-fold0-2026-06-29",
+    "note": "fold0 honest val, best ep48"
+  },
+  {
+    "epoch": 49,
+    "precision": 0.4901560238413718,
+    "recall": 0.8261255995771576,
+    "iou": 0.44431877199703046,
+    "f1": 0.6152641378223482,
+    "model": "DeepLabV3+(smp resnet50, 1-stage, 26.7M)",
+    "run": "crack_detection_unet/runs/deeplabv3plus-craqbin1027-fold0-2026-06-29",
+    "note": "fold0 honest val, best ep49"
+  },
+  {
+    "epoch": 68,
+    "precision": 0.4399871181434105,
+    "recall": 0.8442416740991737,
+    "iou": 0.4069525791037202,
+    "f1": 0.5784879819654574,
+    "model": "SegFormer(smp mit_b0, 1-stage, 3.7M)",
+    "run": "crack_detection_unet/runs/segformer-craqbin1027-fold0-2026-06-29",
+    "note": "fold0 honest val, best ep68"
+  },
+  {
+    "model": "SAM2-refine(2-stage, CITED)",
+    "iou": 0.5982,
+    "precision": 0.6811,
+    "recall": 0.8309,
+    "f1": 0.7486,
+    "run": "(cited)",
+    "note": "CITED craq_0-94_v1 0-94GT fold0 @ep17; all-data prompt prob \u6d29\u6f0f\u504f\u6a02\u89c0; \u8cc7\u6599\u7248/split \u8207\u672c\u8868 craq_bin1027 \u4e0d\u540c, \u975e\u540c\u689d\u4ef6\u76f4\u63a5\u6bd4"
+  }
+]

@@ -1,0 +1,11 @@
+{
+  "model": "DeepLabV3+ (smp resnet50)",
+  "arch": "deeplabv3plus",
+  "epoch": 49,
+  "precision": 0.4901560238413718,
+  "recall": 0.8261255995771576,
+  "iou": 0.44431877199703046,
+  "f1": 0.6152641378223482,
+  "params_M": 26.7,
+  "stage": "1-stage"
+}

@@ -1,0 +1,11 @@
+{
+  "model": "SegFormer (smp mit_b0)",
+  "arch": "segformer",
+  "epoch": 68,
+  "precision": 0.4399871181434105,
+  "recall": 0.8442416740991737,
+  "iou": 0.4069525791037202,
+  "f1": 0.5784879819654574,
+  "params_M": 3.7,
+  "stage": "1-stage"
+}

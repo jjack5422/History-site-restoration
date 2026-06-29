@@ -22,7 +22,7 @@ from crackseg_common.dataset import (TileSegDataset, compute_class_weights, load
 from crackseg_common.losses import CEDiceLoss  # noqa: E402
 from crackseg_common.metrics import ConfusionMeter, format_metrics  # noqa: E402
 
-from unet_model import build_resunet, count_params, param_groups
+from unet_model import build_model, count_params, param_groups
 
 
 def set_seed(seed: int):
@@ -130,8 +130,12 @@ def main():
     parser.add_argument("--tiles_root", default="/home/zzz90/research/_data/labeled32_crack_v3/tiles_512")
     parser.add_argument("--split", default="/home/zzz90/research/_data/labeled32_crack_v3/tiles_512/group_split_stem.json")
     parser.add_argument("--fold", type=int, default=0)
-    parser.add_argument("--encoder", default="resnet50",
-                        help="smp encoder name, e.g. resnet18/34/50/101")
+    parser.add_argument("--arch", default="unet",
+                        choices=["unet", "deeplabv3plus", "segformer"],
+                        help="smp architecture")
+    parser.add_argument("--encoder", default="auto",
+                        help="smp encoder name; 'auto' = per-arch default "
+                             "(unet/deeplabv3plus=resnet50, segformer=mit_b0)")
     parser.add_argument("--encoder_weights", default="imagenet")
     parser.add_argument("--image_size", type=int, default=512)
     parser.add_argument("--batch_size", type=int, default=8)
@@ -200,11 +204,12 @@ def main():
         print(f"class pixel counts (train): {counts.tolist()}")
         print(f"class weights ({args.class_weight_mode}): {[round(float(v),4) for v in cw]}")
 
-    model = build_resunet(encoder=args.encoder,
-                          encoder_weights=args.encoder_weights,
-                          num_classes=NUM_CLASSES).to(device)
+    model = build_model(arch=args.arch,
+                        encoder=args.encoder,
+                        encoder_weights=args.encoder_weights,
+                        num_classes=NUM_CLASSES).to(device)
     total, trainable = count_params(model)
-    print(f"ResUNet encoder={args.encoder} weights={args.encoder_weights} "
+    print(f"arch={args.arch} encoder={args.encoder} weights={args.encoder_weights} "
           f"total={total/1e6:.1f}M trainable={trainable/1e6:.2f}M")
 
     groups = param_groups(model, base_lr=args.base_lr,
