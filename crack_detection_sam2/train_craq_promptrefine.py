@@ -18,6 +18,7 @@ import sys
 import time
 from pathlib import Path
 
+import cv2
 import numpy as np
 import torch
 import torch.nn as nn
@@ -33,14 +34,72 @@ IMAGENET_MEAN = (0.485, 0.456, 0.406)
 IMAGENET_STD = (0.229, 0.224, 0.225)
 
 
+def _photometric_jitter(img):
+    """Mild colour/brightness jitter on a uint8 HWC RGB image. Targets substrate-
+    colour invariance (cream / gold-leaf / green-paint / red-beam) — the failure axis
+    seen on R-A4-3. Image-only: does NOT touch the spatial prob prompt, so image<->prob
+    alignment is preserved."""
+    x = img.astype(np.float32)
+    x *= (1.0 + np.random.uniform(-0.12, 0.12))                       # brightness
+    mu = x.mean()
+    x = (x - mu) * (1.0 + np.random.uniform(-0.12, 0.12)) + mu        # contrast
+    x = np.clip(x, 0, 255).astype(np.uint8)
+    hsv = cv2.cvtColor(x, cv2.COLOR_RGB2HSV).astype(np.float32)
+    hsv[..., 0] = (hsv[..., 0] + np.random.uniform(-8, 8)) % 180      # hue (cv2 0..179)
+    hsv[..., 1] = np.clip(hsv[..., 1] * np.random.uniform(0.85, 1.15), 0, 255)  # sat
+    hsv[..., 2] = np.clip(hsv[..., 2] * np.random.uniform(0.85, 1.15), 0, 255)  # val
+    return cv2.cvtColor(hsv.astype(np.uint8), cv2.COLOR_HSV2RGB)
+
+
+def _prompt_cutout(prob, n_max=4, frac=(0.10, 0.30)):
+    """Randomly zero rectangles of the prob PROMPT (not the GT mask). Simulates
+    'stage-1 ResUNet missed this region' so the decoder is forced to recover
+    craquelure from IMAGE features instead of only trimming the prompt. Breaks the
+    prompt-recall ceiling. prob: (H,W) float in [0,1]."""
+    H, W = prob.shape
+    prob = prob.copy()
+    for _ in range(np.random.randint(1, n_max + 1)):
+        h = int(np.random.uniform(*frac) * H); w = int(np.random.uniform(*frac) * W)
+        y = np.random.randint(0, max(1, H - h)); x = np.random.randint(0, max(1, W - w))
+        prob[y:y + h, x:x + w] = 0.0
+    return prob
+
+
+def _geom_aug(img, msk, prob, fpw, dino):
+    """Lossless flips + rot90 applied IDENTICALLY to every spatial array (no
+    interpolation, so the continuous prob prompt is not degraded). dino spatial axes
+    are the last two (gh, gw)."""
+    if np.random.rand() < 0.5:                                        # h-flip (width)
+        img = img[:, ::-1]; msk = msk[:, ::-1]; prob = prob[:, ::-1]
+        if fpw is not None: fpw = fpw[:, ::-1]
+        if dino is not None: dino = dino[..., ::-1]
+    if np.random.rand() < 0.5:                                        # v-flip (height)
+        img = img[::-1]; msk = msk[::-1]; prob = prob[::-1]
+        if fpw is not None: fpw = fpw[::-1]
+        if dino is not None: dino = dino[..., ::-1, :]
+    k = np.random.randint(4)                                         # rot90 k times
+    if k:
+        img = np.rot90(img, k, (0, 1)); msk = np.rot90(msk, k, (0, 1)); prob = np.rot90(prob, k, (0, 1))
+        if fpw is not None: fpw = np.rot90(fpw, k, (0, 1))
+        if dino is not None: dino = np.rot90(dino, k, (-2, -1))
+    cc = np.ascontiguousarray
+    return (cc(img), cc(msk), cc(prob),
+            None if fpw is None else cc(fpw),
+            None if dino is None else cc(dino))
+
+
 class PromptTileDS(Dataset):
-    def __init__(self, tiles_root, prob_dir, names, train=False, dino_dir=None):
+    def __init__(self, tiles_root, prob_dir, names, train=False, dino_dir=None, fpw_dir=None, aug=False,
+                 prompt_dropout=0.0):
         self.timg = Path(tiles_root) / "images"
         self.tmsk = Path(tiles_root) / "masks"
         self.prob = Path(prob_dir) / "prob"
         self.dino = Path(dino_dir) if dino_dir else None
+        self.fpw = Path(fpw_dir) if fpw_dir else None
         self.names = names
         self.train = train
+        self.aug = aug
+        self.prompt_dropout = prompt_dropout
 
     def __len__(self):
         return len(self.names)
@@ -53,11 +112,21 @@ class PromptTileDS(Dataset):
         dino = None
         if self.dino is not None:
             dino = np.load(self.dino / (Path(n).stem + ".npy")).astype(np.float32)  # [C,gh,gw]
-        flip = self.train and np.random.rand() < 0.5
-        if flip:
+        fpw = None
+        if self.fpw is not None:
+            fpw = (np.array(Image.open(self.fpw / n)) > 0).astype(np.float32)
+        if self.train and self.aug:
+            img = _photometric_jitter(img)                       # colour/brightness (image-only)
+            img, msk, prob, fpw, dino = _geom_aug(img, msk, prob, fpw, dino)  # lossless flips+rot90
+        elif self.train and np.random.rand() < 0.5:
+            # legacy h-flip-only path (preserves prior no-aug runs bit-for-bit)
             img = img[:, ::-1].copy(); msk = msk[:, ::-1].copy(); prob = prob[:, ::-1].copy()
             if dino is not None:
                 dino = dino[..., ::-1].copy()  # flip width
+            if fpw is not None:
+                fpw = fpw[:, ::-1].copy()
+        if self.train and self.prompt_dropout > 0 and np.random.rand() < self.prompt_dropout:
+            prob = _prompt_cutout(prob)          # erase prompt regions; GT (msk) stays full
         x = torch.from_numpy(img).float().div_(255).permute(2, 0, 1)
         m = torch.tensor(IMAGENET_MEAN).view(3, 1, 1)
         s = torch.tensor(IMAGENET_STD).view(3, 1, 1)
@@ -65,6 +134,8 @@ class PromptTileDS(Dataset):
                "prob": torch.from_numpy(prob), "name": n}
         if dino is not None:
             out["dino"] = torch.from_numpy(dino)
+        if fpw is not None:
+            out["fpw"] = torch.from_numpy(fpw)
         return out
 
 
@@ -89,14 +160,21 @@ def build_prompts(batch, mode, device, mask_hw, size=512):
     return torch.stack(cs).to(device), torch.stack(ls).to(device), None
 
 
-def dice_bce_loss(logits, target, alpha=0.5, beta=0.5):
+def dice_bce_loss(logits, target, alpha=0.5, beta=0.5, wmap=None):
     # logits (B,1,H,W), target (B,H,W) float 0/1.
     # alpha=beta=0.5 -> Dice (symmetric). alpha<beta -> Tversky penalising FN
     # more (recall-leaning). loss = 0.5*BCE + 0.5*(1 - Tversky).
-    bce = F.binary_cross_entropy_with_logits(logits.squeeze(1), target)
-    p = torch.sigmoid(logits.squeeze(1))
+    # wmap (B,H,W): optional per-pixel weight (>1 on mined painted-content FP
+    # pixels) -> sharpens FP penalty in those regions only. None = unweighted.
+    lg = logits.squeeze(1)
+    if wmap is not None:
+        bce = F.binary_cross_entropy_with_logits(lg, target, weight=wmap)
+    else:
+        bce = F.binary_cross_entropy_with_logits(lg, target)
+    p = torch.sigmoid(lg)
     tp = (p * target).sum((1, 2))
-    fp = (p * (1 - target)).sum((1, 2))
+    fp_w = wmap if wmap is not None else 1.0
+    fp = (p * (1 - target) * fp_w).sum((1, 2))
     fn = ((1 - p) * target).sum((1, 2))
     tversky = (tp + 1.0) / (tp + alpha * fp + beta * fn + 1.0)
     return 0.5 * bce + 0.5 * (1 - tversky).mean()
@@ -165,6 +243,16 @@ def main():
     ap.add_argument("--dino_dim", type=int, default=384)
     ap.add_argument("--fusion_type", choices=["concat", "film"], default="concat",
                     help="DINOv2 融合方式:concat 殘差(E1) 或 film spatial gate(E2)")
+    ap.add_argument("--fp_weight_dir", default=None,
+                    help="per-tile mined FP mask dir (0/1 png); enables pixel-level FP weighting")
+    ap.add_argument("--fp_weight", type=float, default=3.0,
+                    help="loss weight applied to mined FP pixels (1.0 = no effect)")
+    ap.add_argument("--aug", action="store_true",
+                    help="enable mild photometric (HSV/brightness/contrast) + lossless "
+                         "geometric (flips+rot90) augmentation on the train set")
+    ap.add_argument("--prompt_dropout", type=float, default=0.0,
+                    help="fraction of train samples whose prob PROMPT gets random rectangles "
+                         "zeroed (GT kept) — teaches image-driven recovery beyond the prompt")
     args = ap.parse_args()
 
     device = "cuda" if torch.cuda.is_available() else "cpu"
@@ -178,7 +266,8 @@ def main():
           f"dino={'on' if args.dino_feat_dir else 'off'}")
 
     tr = DataLoader(PromptTileDS(args.tiles_root, args.prob_dir, tr_names, train=True,
-                                 dino_dir=args.dino_feat_dir),
+                                 dino_dir=args.dino_feat_dir, fpw_dir=args.fp_weight_dir,
+                                 aug=args.aug, prompt_dropout=args.prompt_dropout),
                     batch_size=args.batch_size, shuffle=True, num_workers=args.num_workers,
                     pin_memory=True, drop_last=True)
     va = DataLoader(PromptTileDS(args.tiles_root, args.prob_dir, va_names, train=False,
@@ -217,20 +306,23 @@ def main():
             target = (batch["mask"] > 0.5).float().to(device)
             dino = batch["dino"].to(device) if "dino" in batch else None
             c, l, pm = build_prompts(batch, args.prompt_mode, device, mask_hw)
+            wmap = None
+            if "fpw" in batch:
+                wmap = (1.0 + (args.fp_weight - 1.0) * batch["fpw"]).to(device)
             opt.zero_grad(set_to_none=True)
             if scaler is not None:
                 with torch.amp.autocast("cuda", dtype=torch.float16):
                     logits = run_model(model, img, dino, c, l, pm)
-                    loss = dice_bce_loss(logits.float(), target,
-                                         alpha=args.tversky_alpha, beta=args.tversky_beta)
+                    loss = dice_bce_loss(logits.float(), target, alpha=args.tversky_alpha,
+                                         beta=args.tversky_beta, wmap=wmap)
                 scaler.scale(loss).backward()
                 scaler.unscale_(opt)
                 torch.nn.utils.clip_grad_norm_([p for p in model.parameters() if p.requires_grad], 5.0)
                 scaler.step(opt); scaler.update()
             else:
                 logits = run_model(model, img, dino, c, l, pm)
-                loss = dice_bce_loss(logits.float(), target,
-                                     alpha=args.tversky_alpha, beta=args.tversky_beta)
+                loss = dice_bce_loss(logits.float(), target, alpha=args.tversky_alpha,
+                                     beta=args.tversky_beta, wmap=wmap)
                 loss.backward(); opt.step()
             run += float(loss.detach()); nb += 1
         ev = evaluate(model, va, args.prompt_mode, device, mask_hw)

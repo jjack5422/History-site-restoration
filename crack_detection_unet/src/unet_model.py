@@ -25,8 +25,12 @@ def build_model(arch: str = "unet",
                 num_classes: int = 2,
                 in_channels: int = 3) -> nn.Module:
     arch = arch.lower()
+    if arch == "rfpanet":
+        from rfpanet import build_rfpanet
+        return build_rfpanet(num_classes=num_classes, encoder_weights=encoder_weights,
+                             in_channels=in_channels)
     if arch not in _ARCH:
-        raise ValueError(f"unknown arch '{arch}', choose from {list(_ARCH)}")
+        raise ValueError(f"unknown arch '{arch}', choose from {list(_ARCH) + ['rfpanet']}")
     ctor, default_enc = _ARCH[arch]
     enc = default_enc if encoder == "auto" else encoder
     return ctor(

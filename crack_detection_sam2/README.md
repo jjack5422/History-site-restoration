@@ -18,6 +18,11 @@
 ## 環境 (Environment)
 - venv：`/home/zzz90/research/sam2_env`（`source sam2_env/bin/activate`）
 
+## Lab Safety
+- 禁止使用 `sudo pip install`。
+- 禁止把套件安裝到 system Python、base conda、或實驗室共用環境。
+- 所有安裝都必須在專案 venv 或 Docker image 內執行；優先使用明確路徑如 `/home/zzz90/research/sam2_env/bin/python -m pip ...`。
+
 ## 進入點 (Entry points) — 一律從專案根目錄執行
 | 路線 | 訓練 | 模型檔 |
 |---|---|---|
@@ -25,6 +30,7 @@
 | full-FPN | `python train.py ... (full_fpn)` | `model_seg_full_fpn.py` |
 | learnable prompt | `python train_prompt.py ...` | `model_prompt_seg.py` |
 | prompted frozen SAM2 | `python train_promptsam2_craq.py ...` | `model_prompted_sam2.py` |
+| decoder-only SAM2 | （待補 train 入口） | `model_decoder_seg.py` |
 
 預測/評估：`predict_full.py`、`predict_prompt_overlay.py`、`eval_lineproc_craq.py`、`dump_preds_denseseg.py`。
 
@@ -46,3 +52,9 @@ promptsam2 的歷史實驗結果仍記錄在 `EXPERIMENTS.md` 家族 D（`runs/p
 - `runs/`（原 `outputs/`）：每個實驗一資料夾，含 `args.json` `log.json` `train.log` `best.pt`。小檔進 git，`*.pt` 不進。
 - `preds/`、`checkpoints/`：gitignored。
 - `docs/`：`TRAINING_NOTES.md` 及各路線 summary。
+
+## Notion 索引 (架構筆記)
+| 頁面 | 內容 | 對應檔 |
+|---|---|---|
+| [SAM2PromptSeg 架構詳圖](https://app.notion.com/p/376283855a37811bba40f825afc815df) | learnable-prompt 路線 code-faithful 詳圖：forward 逐步張量 trace、frozen/trainable、param_groups | `model_prompt_seg.py` |
+| [Model Architectures: SAM2+FPN / SAM2+Prompt / ResUNet](https://app.notion.com/p/36e283855a37817eb9d5ef97cfb67a84) | 三種模型架構 overview 對照（FPN head / prompt decoder / ResUNet） | `model_seg.py`, `model_prompt_seg.py` |

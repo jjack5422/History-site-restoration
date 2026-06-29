@@ -1,0 +1,51 @@
+# ResUNet crack-prob generator - reproducible image for RTX 5090 (Blackwell sm_120)
+#
+# 階段1 環境:跑 crack_detection_unet/src/predict_full.py 產生 prompt 機率圖,
+# 再餵給 SAM2 refine 訓練(階段2,見 Dockerfile)。
+#
+# 與 SAM2 image 分開,因為 torch 版本不同(unet_env 是 nightly 2.12.0.dev)。
+# 兩個 image 不能合併。
+#
+# Build(context 必須是 research root,_lib/ 才看得到):
+#   docker build -f crack_detection_sam2/docker/Dockerfile.unet -t craq-unet:cu128 .
+
+FROM nvidia/cuda:12.8.0-runtime-ubuntu24.04
+
+ENV DEBIAN_FRONTEND=noninteractive \
+    PIP_NO_CACHE_DIR=1 \
+    PYTHONUNBUFFERED=1
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+        python3.12 python3.12-venv python3-pip \
+        git libgl1 libglib2.0-0 ca-certificates \
+    && rm -rf /var/lib/apt/lists/*
+
+RUN python3.12 -m venv /opt/venv
+ENV PATH=/opt/venv/bin:$PATH
+RUN pip install --upgrade pip setuptools wheel
+
+# torch trio 是 nightly,要從 nightly/cu128 index 裝。
+# 注意:nightly wheel 會被定期清除,日後若這個 dev 日期版抓不到,改用
+#   pip install --pre torch torchvision torchaudio --index-url https://download.pytorch.org/whl/nightly/cu128
+# 抓最新 nightly(再用 python -c "import torch;print(torch.__version__)" 對一下)。
+RUN pip install --pre \
+        torch==2.12.0.dev20260407+cu128 \
+        torchvision==0.27.0.dev20260407+cu128 \
+        torchaudio==2.11.0.dev20260407+cu128 \
+        --index-url https://download.pytorch.org/whl/nightly/cu128
+
+# 其餘套件;torch 已滿足。PyPI + nightly fallback。
+COPY crack_detection_sam2/docker/requirements.unet.lock.txt /tmp/requirements.unet.lock.txt
+RUN pip install -r /tmp/requirements.unet.lock.txt \
+        --extra-index-url https://download.pytorch.org/whl/nightly/cu128
+
+# 共用的 crackseg_common(無 remote,從 vendored 原始碼 editable 裝)。
+COPY _lib /opt/src/_lib
+RUN pip install -e /opt/src/_lib
+
+COPY crack_detection_sam2/docker/entrypoint.unet.sh /usr/local/bin/entrypoint.unet.sh
+RUN chmod +x /usr/local/bin/entrypoint.unet.sh
+
+WORKDIR /home/zzz90/research/crack_detection_unet
+ENTRYPOINT ["/usr/local/bin/entrypoint.unet.sh"]
+CMD ["bash"]

@@ -131,8 +131,8 @@ def main():
     parser.add_argument("--split", default="/home/zzz90/research/_data/labeled32_crack_v3/tiles_512/group_split_stem.json")
     parser.add_argument("--fold", type=int, default=0)
     parser.add_argument("--arch", default="unet",
-                        choices=["unet", "deeplabv3plus", "segformer"],
-                        help="smp architecture")
+                        choices=["unet", "deeplabv3plus", "segformer", "rfpanet"],
+                        help="model architecture")
     parser.add_argument("--encoder", default="auto",
                         help="smp encoder name; 'auto' = per-arch default "
                              "(unet/deeplabv3plus=resnet50, segformer=mit_b0)")

@@ -13,7 +13,17 @@ import numpy as np
 import torch
 import torch.nn.functional as F
 from PIL import Image
+import cv2
 from tqdm import tqdm
+
+_USE_CLAHE = False  # set by --clahe; matches train aug A.CLAHE(LAB L-channel, grid 8x8)
+
+
+def clahe_tile(tile_uint8, clip=2.0, grid=(8, 8)):
+    lab = cv2.cvtColor(tile_uint8, cv2.COLOR_RGB2LAB)
+    cl = cv2.createCLAHE(clipLimit=clip, tileGridSize=grid)
+    lab[..., 0] = cl.apply(lab[..., 0])
+    return cv2.cvtColor(lab, cv2.COLOR_LAB2RGB)
 
 
 from crackseg_common.augment import IMAGENET_MEAN, IMAGENET_STD  # noqa: E402
@@ -47,6 +57,7 @@ NUM_CLASSES = _dataset.NUM_CLASSES
 CLASS_RGB = build_class_rgb(CLASS_NAMES)
 
 
+Image.MAX_IMAGE_PIXELS = None  # heritage scans can exceed PIL's bomb limit
 def load_image_rgb(path): return np.array(Image.open(path).convert("RGB"))
 def load_label(path):
     arr = np.array(Image.open(path))
@@ -132,7 +143,10 @@ def predict_full(model, img, device, tile=512, stride=384,
         buffer_tiles.clear(); buffer_pos.clear()
 
     for (y, x) in coords:
-        buffer_tiles.append(normalize_tile(img_p[y:y + tile, x:x + tile]))
+        t = img_p[y:y + tile, x:x + tile]
+        if _USE_CLAHE:
+            t = clahe_tile(t)
+        buffer_tiles.append(normalize_tile(t))
         buffer_pos.append((y, x))
         if len(buffer_tiles) >= batch_size:
             flush()
@@ -189,7 +203,11 @@ def main():
     parser.add_argument("--tta_flip", action="store_true")
     parser.add_argument("--no_amp", action="store_true")
     parser.add_argument("--save_prob", action="store_true")
+    parser.add_argument("--clahe", action="store_true",
+                        help="test-time CLAHE per tile (matches train aug)")
     args = parser.parse_args()
+    global _USE_CLAHE
+    _USE_CLAHE = args.clahe
 
     if (args.image is None) == (args.image_dir is None):
         raise SystemExit("請指定 --image 或 --image_dir 其中之一")

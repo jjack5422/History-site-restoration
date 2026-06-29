@@ -1,12 +1,18 @@
-"""Train SAM2 with learnable prompts + native mask decoder (binary segmentation).
+"""Train SAM2 decoder-only (no prompt) for binary segmentation.
 
-Example (craquelure expert):
-    python train_prompt.py \
+Uses SAM2DecoderSeg (model_decoder_seg.py): drops the prompt encoder entirely
+and reuses the pretrained SAM2 mask decoder as a segmentation head. Same output
+口徑 as train_prompt.py ([B,1,H,W] binary logits + BCE+Dice), so the loss / loop /
+checkpoint logic is identical; only the model build + a couple of args differ.
+
+Example (craquelure expert, no prompt):
+    python train_decoder.py \
         --tiles_root data/labeled32_craq_v3/tiles_512 \
         --split data/labeled32_craq_v3/tiles_512/group_split_stem.json \
         --fold 0 --variant small --epochs 80 --batch_size 4 \
+        --dense_mode learnable --num_queries 0 \
         --class_names background,craquelure \
-        --output_dir outputs/prompt_craq_fold0_small
+        --output_dir outputs/decoder_craq_fold0_small
 """
 
 from __future__ import annotations
@@ -14,20 +20,18 @@ from __future__ import annotations
 import argparse
 import json
 import math
-import os
 import time
 from pathlib import Path
 
 import numpy as np
 import torch
 import torch.nn as nn
-import torch.nn.functional as F
 from torch.utils.data import DataLoader
 
 from crackseg_common.augment import train_transforms, val_transforms
 import crackseg_common.dataset as _dataset
 from crackseg_common.dataset import TileSegDataset, compute_class_weights, load_tile_index, set_class_names
-from model_prompt_seg import SAM2PromptSeg, count_params
+from model_decoder_seg import SAM2DecoderSeg, count_params
 
 
 # --------------- loss ---------------
@@ -137,12 +141,10 @@ def train_one_epoch(model, loader, optimizer, scaler, criterion, device,
 
         if (it + 1) % log_interval == 0 or (it + 1) == len(loader):
             n = running["n"]
-            coords = model.prompt_coords.data
             print(f"  ep{epoch+1}/{total_epochs} it{it+1}/{len(loader)} "
                   f"lr={optimizer.param_groups[0]['lr']:.2e} "
                   f"loss={running['loss']/n:.4f} ce={running['ce']/n:.4f} "
                   f"dice={running['dice']/n:.4f} "
-                  f"pts=[{coords.min().item():.0f},{coords.max().item():.0f}] "
                   f"{(time.time()-t0):.1f}s", flush=True)
     n = max(1, running["n"])
     return {"loss": running["loss"]/n, "ce": running["ce"]/n, "dice": running["dice"]/n}
@@ -155,10 +157,11 @@ def main():
     parser.add_argument("--fold", type=int, default=0)
     parser.add_argument("--variant", default="small")
     parser.add_argument("--image_size", type=int, default=512)
-    parser.add_argument("--num_points", type=int, default=8,
-                        help="random-init 點數 (grid_size 未設時生效)")
-    parser.add_argument("--grid_size", type=int, default=None,
-                        help="設定後改用 grid_size x grid_size 網格初始化 (num_points=grid_size**2),點仍可學習")
+    parser.add_argument("--num_queries", type=int, default=0,
+                        help="變體 B:>0 加 learnable query tokens 當 sparse;0 = 純空 prompt")
+    parser.add_argument("--dense_mode", default="learnable",
+                        choices=["zero", "learnable", "image"],
+                        help="dense_prompt 來源:zero / learnable 全域 param / image-conditioned conv")
     parser.add_argument("--batch_size", type=int, default=4)
     parser.add_argument("--num_workers", type=int, default=4)
     parser.add_argument("--epochs", type=int, default=80)
@@ -171,7 +174,7 @@ def main():
                         choices=["median_freq", "inv_sqrt", "none"])
     parser.add_argument("--no_amp", action="store_true")
     parser.add_argument("--seed", type=int, default=42)
-    parser.add_argument("--output_dir", default="outputs/prompt_run")
+    parser.add_argument("--output_dir", default="outputs/decoder_run")
     parser.add_argument("--log_interval", type=int, default=20)
     parser.add_argument("--class_names", default=None)
     args = parser.parse_args()
@@ -227,13 +230,13 @@ def main():
         print(f"pixel counts: {counts.tolist()}, pos_weight={pos_weight}")
 
     # model
-    model = SAM2PromptSeg(
+    model = SAM2DecoderSeg(
         variant=args.variant, image_size=args.image_size,
-        num_points=args.num_points, grid_size=args.grid_size, device=device,
+        num_queries=args.num_queries, dense_mode=args.dense_mode, device=device,
     ).to(device)
     total, trainable = count_params(model)
-    print(f"SAM2PromptSeg variant={args.variant} pts={model.num_points} "
-          f"grid_size={model.grid_size} "
+    print(f"SAM2DecoderSeg variant={args.variant} num_queries={args.num_queries} "
+          f"dense_mode={args.dense_mode} "
           f"total={total/1e6:.1f}M trainable={trainable/1e6:.2f}M")
 
     groups = model.param_groups(base_lr=args.base_lr)

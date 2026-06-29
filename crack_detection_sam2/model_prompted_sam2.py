@@ -11,7 +11,7 @@ from model import build_sam2_model
 class PromptedSAM2Seg(nn.Module):
     def __init__(self, variant="small", image_size=512,
                  freeze_image_encoder=True, freeze_prompt_encoder=False,
-                 device: Optional[str] = None):
+                 mask_prompt_size=None, device: Optional[str] = None):
         super().__init__()
         sam2 = build_sam2_model(variant=variant, device=device, mode="train")
         embed = image_size // sam2.backbone_stride
@@ -25,6 +25,22 @@ class PromptedSAM2Seg(nn.Module):
         self.sam_mask_decoder = sam2.sam_mask_decoder
         self.use_high_res = sam2.use_high_res_features_in_sam
         del sam2
+        # optional higher-res mask prompt: accept mask_prompt_size (>4*embed, power-of-2
+        # multiple), prepend learnable stride-2 convs so it pools back to 4*embed before
+        # the (frozen-geometry) stride-4 mask_downscaling. recovers thin-crack detail lost
+        # in the default 512->128 prob resize.
+        if mask_prompt_size and mask_prompt_size != 4 * embed:
+            import math
+            ratio = mask_prompt_size / (4 * embed)
+            n = int(round(math.log2(ratio)))
+            assert 4 * embed * (2 ** n) == mask_prompt_size, "mask_prompt_size must be 4*embed * 2^n"
+            dev = next(self.sam_prompt_encoder.parameters()).device
+            pre = []
+            for _ in range(n):
+                pre.append(nn.Conv2d(1, 1, kernel_size=2, stride=2))
+            self.sam_prompt_encoder.mask_downscaling = nn.Sequential(
+                *pre, *self.sam_prompt_encoder.mask_downscaling).to(dev)
+            self.sam_prompt_encoder.mask_input_size = (mask_prompt_size, mask_prompt_size)
         if freeze_image_encoder:
             for p in self.image_encoder.parameters():
                 p.requires_grad = False

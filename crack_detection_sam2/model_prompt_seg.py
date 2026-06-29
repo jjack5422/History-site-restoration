@@ -4,7 +4,8 @@ Instead of stripping SAM2 to backbone-only (model_seg.py),
 uses the full pipeline: image_encoder -> prompt_encoder -> mask_decoder.
 
 Learnable point prompts replace manual point/box annotations.
-Mask decoder outputs [B, 1, H, W] binary logits.
+Points init randomly (num_points) or on a regular grid (grid_size, mode B:
+grid-initialised but still learnable). Mask decoder outputs [B, 1, H, W] logits.
 """
 
 from __future__ import annotations
@@ -24,6 +25,7 @@ class SAM2PromptSeg(nn.Module):
         variant: str = "small",
         image_size: int = 512,
         num_points: int = 8,
+        grid_size: Optional[int] = None,
         freeze_image_encoder: bool = True,
         freeze_prompt_encoder: bool = False,
         device: Optional[str] = None,
@@ -51,10 +53,19 @@ class SAM2PromptSeg(nn.Module):
 
         del sam2
 
-        # Learnable prompt points: coords in [0, image_size] space
-        self.prompt_coords = nn.Parameter(
-            torch.rand(1, num_points, 2) * image_size
-        )
+        # Learnable prompt points: coords in [0, image_size] space.
+        # grid_size set  -> init on a regular grid_size x grid_size grid
+        #                   (num_points = grid_size**2) for even coverage,
+        #                   then let the points move during training.
+        # grid_size None -> random init with num_points (original behaviour).
+        if grid_size is not None and grid_size > 0:
+            init_coords = self._grid_coords(grid_size, image_size)  # [1, g*g, 2]
+            num_points = grid_size * grid_size
+        else:
+            init_coords = torch.rand(1, num_points, 2) * image_size
+        self.grid_size = grid_size
+        self.num_points = num_points
+        self.prompt_coords = nn.Parameter(init_coords)
         # Labels: 1=positive (not learnable -- discrete)
         self.register_buffer(
             "prompt_labels",
@@ -67,6 +78,17 @@ class SAM2PromptSeg(nn.Module):
         if freeze_prompt_encoder:
             for p in self.sam_prompt_encoder.parameters():
                 p.requires_grad = False
+
+    @staticmethod
+    def _grid_coords(grid_size: int, image_size: int) -> torch.Tensor:
+        """Regular grid_size x grid_size points at cell centres, (x, y) order.
+
+        Returns [1, grid_size**2, 2] in [0, image_size] coordinate space.
+        """
+        centers = (torch.arange(grid_size, dtype=torch.float32) + 0.5) / grid_size * image_size
+        yy, xx = torch.meshgrid(centers, centers, indexing="ij")
+        coords = torch.stack([xx.reshape(-1), yy.reshape(-1)], dim=-1)  # [g*g, 2]
+        return coords.unsqueeze(0)  # [1, g*g, 2]
 
     def forward(self, x: torch.Tensor) -> torch.Tensor:
         B, _, H, W = x.shape
@@ -151,13 +173,16 @@ def count_params(model: nn.Module):
 
 if __name__ == "__main__":
     device = "cuda" if torch.cuda.is_available() else "cpu"
-    model = SAM2PromptSeg(variant="small", image_size=512, num_points=8, device=device).to(device)
+    # grid-initialised (mode B): grid_size=4 -> 16 learnable points on a 4x4 grid
+    model = SAM2PromptSeg(variant="small", image_size=512, grid_size=4, device=device).to(device)
     total, trainable = count_params(model)
     print(f"total={total/1e6:.1f}M  trainable={trainable/1e6:.2f}M")
+    print(f"grid_size={model.grid_size} num_points={model.num_points}")
 
     x = torch.randn(2, 3, 512, 512, device=device)
     with torch.no_grad():
         y = model(x)
     print(f"output shape={tuple(y.shape)} dtype={y.dtype}")
-    print(f"prompt_coords shape={tuple(model.prompt_coords.shape)}")
+    print(f"prompt_coords shape={tuple(model.prompt_coords.shape)} "
+          f"requires_grad={model.prompt_coords.requires_grad}")
     print(f"prompt_coords range: {model.prompt_coords.min().item():.1f} ~ {model.prompt_coords.max().item():.1f}")
